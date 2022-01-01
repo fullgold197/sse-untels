@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="DgJGD2Z8KYouB74sM3zjhZHWcwoaQ3GinV6eUMGN">
     <title>Egresado</title>
-        <link rel="stylesheet" href="https://127.0.0.1:8000/vendor/fontawesome-free/css/all.min.css">
-        <link rel="stylesheet" href="https://127.0.0.1:8000/vendor/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css')}} ">
 
-        <link rel="stylesheet" href="https://127.0.0.1:8000/vendor/adminlte/dist/css/adminlte.min.css">
+        <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css')}} ">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
         <link rel="stylesheet" href="/css/admin_custom.css">
