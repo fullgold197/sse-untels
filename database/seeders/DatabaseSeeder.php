@@ -36,14 +36,15 @@ class DatabaseSeeder extends Seeder
 
     function truncatetables(array $tables){
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;'); //deshabilitar la revision de claves foráneas
+       /*  DB::statement('SET FOREIGN_KEY_CHECKS=0;'); */ //deshabilitar la revision de claves foráneas
        /*  DB::table('egresado')->truncate(); */ //para vaciar las tablas antes de  volver a ejecutar los registros nuevamente
 
-        foreach ($tables as $table){
+       /*  foreach ($tables as $table){
             DB::table($table)->truncate(); //para vaciar las tablas antes de  volver a ejecutar los registros nuevamente
 
-        }
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;'); //habilitar la revision de claves foráneas
+        } */
+        /* DB::statement('SET FOREIGN_KEY_CHECKS=1;'); */ //habilitar la revision de claves foráneas
+
 
     }
 
