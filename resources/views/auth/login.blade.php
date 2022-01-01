@@ -21,9 +21,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/letras.css')}}">
     
 </head>
-<link rel="stylesheet" href="{{asset('css/letras.css')}}">
+
 <body style="background-color:#004A98">
 
 
