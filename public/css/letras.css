@@ -1,0 +1,33 @@
+
+h5 {
+    font-weight: 600;
+
+    color:#1B2430;
+}
+td {
+    padding: 0 50px 0 50px;
+}
+
+#derecha{
+    background-color: aqua;
+}
+#azul{
+    color: #004A98;
+}
+#amarillo{
+    color: #F5B335;
+}
+
+.imgRedonda {
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+}
+
+.fa-user-graduate {
+    font-size: 48px;
+}
+#espacio {
+    margin: 0;
+    font-size: 35px;
+}
