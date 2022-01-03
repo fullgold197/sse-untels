@@ -44,7 +44,7 @@
 
             <div class="form-group">
                 <label for="email">Correo electronico</label>
-                <input type="text" class="form-control" id="email" name="email" required maxlength="50"
+                <input type="email" class="form-control" id="email" name="email" required maxlength="50"
                 @if($errors->any())
                 value="{{old('email')}}">
                 {{$errors->first('email')}}

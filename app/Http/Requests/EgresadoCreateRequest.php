@@ -15,7 +15,7 @@ class EgresadoCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; //activar a true, por defecto es false
+        return true; //activar a true para que pase a la sgte funcion(sino no ejecutara el metodo rules()), por defecto es false
     }
 
     /**

@@ -31,8 +31,9 @@
 
 
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Guardar">
+                        <input type="submit" class="btn btn-success" value="Guardar">
                         <input type="reset" class="btn btn-primary" value="Cancelar">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
 
                     </div>
           </div>

@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\AdminAdministradorEditRequest;
+use App\Http\Requests\AdminAdministradorCreateRequest;
 
 class UsuariosAdministradoresController extends Controller
 {
@@ -52,7 +54,7 @@ class UsuariosAdministradoresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminAdministradorCreateRequest $request)
     {
         $usuarios = new User();
         $usuarios->name = $request->input('name');
@@ -94,7 +96,7 @@ class UsuariosAdministradoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminAdministradorEditRequest $request, $id)
     {
         $usuario = User::findOrFail($id);
         if (trim($request->password) == '') {

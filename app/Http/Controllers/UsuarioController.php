@@ -8,6 +8,10 @@ use App\Http\Requests\EgresadoEditRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\AdminEgresadoEditRequest;
+use App\Http\Requests\AdminEgresadoCreateRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 class UsuarioController extends Controller
 {
     /**
@@ -52,7 +56,7 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminEgresadoCreateRequest $request)
     {
         $usuarios = new User;
         $usuarios->name = $request->input('name');
@@ -96,9 +100,10 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(AdminEgresadoEditRequest $request,$id)
     {
         $usuario = User::findOrFail($id);
+
         if(trim($request->password) == ''){
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
