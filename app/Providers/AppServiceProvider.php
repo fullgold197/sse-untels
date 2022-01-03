@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Schema;
 use Log;
 
 Use Illuminate\Support\Facades\URL;
-
+use Laravel\Fortify\Fortify;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,10 +35,11 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         //Sirve para convertir http en https
-       
         if (config('app.env') === 'production') {
             \URL::forceScheme('https');
         }
+
+        
 
 
 

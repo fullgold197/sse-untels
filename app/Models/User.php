@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\MyResetPassword;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -60,5 +61,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function adminlte_profile_url()
     {
         return '/datospersonales';
+    }
+    //plantilla de mensaje por correo restablecer contraseña. MyResetPassword viene de la carpeta Notificactions/MyResetPassword.php
+     
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MyResetPassword($token));
     }
 }
