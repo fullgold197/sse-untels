@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<body style="background-color:#004A98">
-<link rel="stylesheet" href="{{asset('css/letras.css')}}">
+<title>Actualizar contraseña</title>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-4">
+        <div class="col-md-4" style="margin:70px;align=center">
             <div class="card">
                 <div class="card-header" id="amarillo">{{ __('Restablecer contraseña') }}</div>
 
@@ -75,5 +74,5 @@
         </div>
     </div>
 </div>
-</body>
+
 @endsection

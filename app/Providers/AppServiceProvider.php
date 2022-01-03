@@ -9,7 +9,8 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Log;
 
-
+Use Illuminate\Support\Facades\URL;
+use Laravel\Fortify\Fortify;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,11 +35,15 @@ class AppServiceProvider extends ServiceProvider
         //
         Paginator::useBootstrap();
 
-        if (env('APP_ENV') !== 'local') {
-            $this->app['request']->server->set('HTTPS', true);
+        //Sirve para convertir http en https
+        if (config('app.env') === 'production') {
+            \URL::forceScheme('https');
         }
 
-        Schema::defaultStringLength(191);
+        
+
+
+
 
 
 

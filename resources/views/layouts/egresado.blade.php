@@ -80,7 +80,7 @@
 
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="http://127.0.0.1:8000/home"
+            <a href="{{route('home')}}"
             class="brand-link ">
 
 
@@ -191,13 +191,13 @@
     </div>
 
 
-            <script src="http://127.0.0.1:8000/vendor/jquery/jquery.min.js"></script>
-        <script src="http://127.0.0.1:8000/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="http://127.0.0.1:8000/vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+            <script src="{{ asset('vendor/jquery/jquery.min.js')}} "></script>
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
 
 
-        <script src="http://127.0.0.1:8000/vendor/adminlte/dist/js/adminlte.min.js"></script>
+        <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 

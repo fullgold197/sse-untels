@@ -40,9 +40,9 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        
+
         'api' => [
-            'driver' => 'token', 
+            'driver' => 'token',
             'provider' => 'users',
         ],
     ],
@@ -95,7 +95,7 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
-            'expire' => 60,
+            'expire' => 5, //tiempo de validacion de restablecer contraseña
             'throttle' => 60,
         ],
     ],
