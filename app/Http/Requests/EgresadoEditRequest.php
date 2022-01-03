@@ -13,7 +13,7 @@ class EgresadoEditRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return true;//activar a true para que pase a la sgte funcion(sino no ejecutara el metodo rules()), por defecto es false
     }
 
     /**

@@ -87,7 +87,7 @@
 
                     <div class="form-group">
                         <label for="dni">DNI</label>
-                        <input type="text" class="form-control" id="dni" name="dni" value="{{ old('dni')}}"   maxlength="9">
+                        <input type="text" class="form-control" id="dni" name="dni" value="{{ old('dni')}}"   maxlength="8">
                         {{$errors->first('dni')}}
                     </div>
 
@@ -153,7 +153,7 @@
                         {{$errors->first('linkedin')}}
                     </div>
 
-                    
+
                     <div class="form-group">
                         <button  class="btn btn-primary" id="ajaxSubmit" value="Guardar">Guardar</button>
                         <button type="reset" class="btn btn-primary" value="Cancelar">Cancelar</button>

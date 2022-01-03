@@ -18,6 +18,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var string[]
      */
     //el filizable permite guardar los datos a la bd
+    public $table = "users"; // hace referencia a la tabla users de la bd
+    public $primaryKey = "id";
+    public $timestamps = false;
     protected $fillable = [
         'name',
         'email',
@@ -36,6 +39,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
         'api_token',
     ];
+
+
 
     /**
      * The attributes that should be cast.
