@@ -64,7 +64,7 @@ class EgresadosAdminController extends Controller
         $egresados->telefono = $request->input('telefono');
         $egresados->id_academico = $request->input('telefono');
         $egresados->save();
-
+        
 
         /* return $egresados; */
         return redirect()->route('egresado.index');

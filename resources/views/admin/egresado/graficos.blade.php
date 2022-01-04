@@ -39,7 +39,7 @@ Highcharts.chart('container', {
         type: 'pie'
     },
     title: {
-        text: 'Grafico para egresados'
+        text: 'Porcentaje de los estudios postgrados de los egresados'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

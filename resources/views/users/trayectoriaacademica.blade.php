@@ -49,6 +49,7 @@
                         <th>FECHA DE EGRESO</th>
                         <td>{{$egresado->semestre_egreso}}</td>
                         </tr>
+
                         @endforeach
 
                     </tbody>
@@ -98,6 +99,7 @@
                                     <td>{{$egresado->maestria_fecha_final}}</td>
 
                                 </tr>
+
                                 </tbody>
                                 </table>
                                 <div align="right">
@@ -160,7 +162,7 @@
                                 <td>{{$egresado->doctorado_fecha_final}}</td>
 
                             </tr>
-                            <tr>
+                             
                                 <td colspan="2" align="right">
 
                                 </td>

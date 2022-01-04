@@ -1,4 +1,4 @@
-50<!-- Modal -->
+<!-- Modal -->
 <form action="#" method="POST">
     @csrf
     <div class="modal fade" id="modal-administradores-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -24,7 +24,7 @@
                         <label for="password">Contraseña</label>
                         <input type="password" class="form-control" id="password" name="password" required maxlength="20" >
                     </div>
-                    
+            
                     <div class="form-group">
                         <label for="estado">Estado</label>
                         <select name="estado" class="form-control"  id="estado" required>

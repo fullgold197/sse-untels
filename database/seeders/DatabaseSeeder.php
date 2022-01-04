@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
 
         // \App\Models\User::factory(10)->create();
-        
+
         $this->call(AcademicoSeeder::class);
 
 
@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MaestriaSeeder::class);
         $this->call(ProfesionSeeder::class);
         $this->call(UsuarioSeeder::class); //invocar al seeder de usuarios(tabla que depende de egresados mediante la llave foranea egresado_matricula)
+        $this->call(PorcentajeSeeder::class);
     }
 
 

@@ -28,17 +28,19 @@ class TrayectoriaAcademicaController extends Controller
         $egresados1 = DB::table('egresado')
             ->join('doctorado', 'egresado.matricula', '=', 'doctorado.matricula')
             ->join('academico', 'egresado.id_academico', '=', 'academico.id_academico')
-            ->select('egresado.matricula', 'academico.id_academico','academico.carr_profesional','doctorado.id_doctorado', 'doctorado.grado_academico as doctorado_grado_academico', 'doctorado.pais as doctorado_pais', 'doctorado.institución as doctorado_institución', 'doctorado.fecha_inicial as doctorado_fecha_inicial', 'doctorado.fecha_final as doctorado_fecha_final')
+            ->select('egresado.matricula','egresado.cant_doctorados', 'academico.id_academico','academico.carr_profesional','doctorado.id_doctorado', 'doctorado.grado_academico as doctorado_grado_academico', 'doctorado.pais as doctorado_pais', 'doctorado.institución as doctorado_institución', 'doctorado.fecha_inicial as doctorado_fecha_inicial', 'doctorado.fecha_final as doctorado_fecha_final')
             ->where('egresado.matricula', Auth::user()->egresado_matricula)
             ->get();
 
         $egresados= DB::table('maestria')
             ->join('egresado', 'egresado.matricula', '=', 'maestria.matricula')
             ->join('academico', 'egresado.id_academico', '=', 'academico.id_academico')
-            ->select('egresado.matricula', 'academico.id_academico', 'academico.carr_profesional', 'maestria.id_maestria', 'maestria.grado_academico as maestria_grado_academico', 'maestria.pais as maestria_pais', 'maestria.institución as maestria_institución', 'maestria.fecha_inicial as maestria_fecha_inicial', 'maestria.fecha_final as maestria_fecha_final')
+            ->select('egresado.matricula', 'egresado.cant_maestrias', 'academico.id_academico', 'academico.carr_profesional', 'maestria.id_maestria', 'maestria.grado_academico as maestria_grado_academico', 'maestria.pais as maestria_pais', 'maestria.institución as maestria_institución', 'maestria.fecha_inicial as maestria_fecha_inicial', 'maestria.fecha_final as maestria_fecha_final')
             ->where('egresado.matricula', Auth::user()->egresado_matricula)
             ->get();
-        /* return $egresados; */
+
+        $count = Maestria::where('matricula', 2016200241)->count();
+        /* return $count; */
         return view('users.trayectoriaacademica', compact('egresados0','egresados','egresados1'));
     }
 
@@ -60,6 +62,10 @@ class TrayectoriaAcademicaController extends Controller
      */
     public function store(Request $request)
     {
+        $maestria = Maestria::where('matricula', Auth::user()->egresado_matricula)->count(); //cuentas las cantidad de matricula con el id de la matricula
+
+        $doctorado = Doctorado::where('matricula', Auth::user()->egresado_matricula)->count(); //cuentas las cantidad de matricula con el id de la matricula
+
         $prueba = $request->input('grado_academico');
 
         if ($prueba == 'Maestro') {
@@ -71,6 +77,12 @@ class TrayectoriaAcademicaController extends Controller
             $egresados->fecha_final = $request->input('fecha_final');
             $egresados->matricula = Auth::user()->egresado_matricula;
             $egresados->save();
+
+            //para agregar la cantidad de maestrias es necesario usar el findOrFail junto con el Auth::user
+            $egresados = Egresado::findOrFail(Auth::user()->egresado_matricula);
+            $egresados->cant_maestrias = ++$maestria; //suma la cantidad de maestrias más 1
+            $egresados->save();
+
             //return $egresados;
             return redirect()->route('trayectoria-academica.index');
         } else {
@@ -82,6 +94,11 @@ class TrayectoriaAcademicaController extends Controller
                 $egresados->fecha_inicial = $request->input('fecha_inicial');
                 $egresados->fecha_final = $request->input('fecha_final');
                 $egresados->matricula = Auth::user()->egresado_matricula;
+                $egresados->save();
+
+                //para agregar la cantidad de maestrias es necesario usar el findOrFail junto con el Auth::user
+                $egresados = Egresado::findOrFail(Auth::user()->egresado_matricula);
+                $egresados->cant_doctorados = ++$doctorado; //suma la cantidad de doc más 1
                 $egresados->save();
                 /* return $egresados; */
                 return redirect()->route('trayectoria-academica.index');
