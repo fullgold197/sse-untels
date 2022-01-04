@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form action="{{route('usuario.destroy', $usuario->id)}}" method="POST">
+<form action="{{route('administradores.destroy', $usuario->id)}}" method="POST">
     @csrf
     @method('DELETE')
 

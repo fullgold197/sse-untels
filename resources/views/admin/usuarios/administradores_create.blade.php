@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form action="{{route('usuario.store')}}" method="POST">
+<form action="{{route('administradores.store')}}" method="POST">
     @csrf
     <div class="modal fade" id="modal-administradores-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">

@@ -56,18 +56,18 @@ class UsuariosAdministradoresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminAdministradorCreateRequest $request)
     {
         $usuarios = new User();
         $usuarios->name = $request->input('name');
         $usuarios->email = $request->input('email');
         $usuarios->password = Hash::make($request->input('password'));
         /* $usuarios->egresado_matricula = $request->input('egresado_matricula'); */
-       /*  $usuarios->role_as = 1;
+        $usuarios->role_as = 1;
         $usuarios->estado = $request->input('estado');
-        $usuarios->save(); */
+        $usuarios->save();
       /*   return $usuarios; */
-        return redirect()->route('usuario.index');
+        return redirect()->route('administradores.index');
     }
 
     /**

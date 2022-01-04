@@ -62,9 +62,11 @@ class UsuarioController extends Controller
         $usuarios->name = $request->input('name');
         $usuarios->email = $request->input('email');
         $usuarios->password = Hash::make($request->input('password'));
-        $usuarios->egresado_matricula = $request->input('egresado_matricula');
+        /* $usuarios->egresado_matricula = $request->input('egresado_matricula'); */
         /* $usuarios->role_as = $request->input('role_as'); */
+        $usuarios->estado = $request->input('estado');
         $usuarios->save();
+        return $usuarios;
         return redirect()->route('usuario.index');
     }
 
