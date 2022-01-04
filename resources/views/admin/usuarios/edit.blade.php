@@ -38,6 +38,13 @@
                         <option value="1" {{$usuario->role_as=="1" ? 'selected' : '' }}>Administrador</option>
                     </select>
             </div>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                    <select name="estado" class="form-control" id="estado" >
+                        <option value="0" {{$usuario->estado=="0" ? 'selected' : '' }}>Deshabilitado</option>
+                        <option value="1" {{$usuario->estado=="1" ? 'selected' : '' }}>Habilitado</option>
+                    </select>
+            </div>
             {{--  <div class="form-group">
                 <label for="id">ID</label>
                 <input type="text" class="form-control" id="id" name="id" required maxlength="20"

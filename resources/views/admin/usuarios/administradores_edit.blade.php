@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form action="{{route('administradores.update', $usuario->id)}}" method="POST">
+<form action="{{route('usuario.update', $usuario->id)}}" method="POST">
     @csrf
     @method('PUT')
     <div class="modal fade" id="modal-administradores-edit-{{$usuario->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

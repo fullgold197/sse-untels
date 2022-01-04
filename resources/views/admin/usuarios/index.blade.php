@@ -45,6 +45,7 @@
                                 <th>Usuario</th>
                                 <th>Correo</th>
                                 <th>Nivel de acceso</th>
+                                <th>Estado</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
@@ -69,6 +70,11 @@
                                 <td>Administrador</td>
                                 @else
                                 <td>Usuario</td>
+                                @endif
+                                 @if ($usuario->estado==1)
+                                <td>Habilitado</td>
+                                @else
+                                <td>Deshabilitado</td>
                                 @endif
 
 

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AdminAdministradorEditRequest;
 use App\Http\Requests\AdminAdministradorCreateRequest;
+use App\Http\Requests\AdminEgresadoCreateRequest;
+use App\Http\Requests\AdminEgresadoEditRequest;
 
 class UsuariosAdministradoresController extends Controller
 {
@@ -54,18 +56,18 @@ class UsuariosAdministradoresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AdminAdministradorCreateRequest $request)
+    public function store(Request $request)
     {
         $usuarios = new User();
         $usuarios->name = $request->input('name');
         $usuarios->email = $request->input('email');
         $usuarios->password = Hash::make($request->input('password'));
-        $usuarios->egresado_matricula = $request->input('egresado_matricula');
-        $usuarios->role_as = 1;
+        /* $usuarios->egresado_matricula = $request->input('egresado_matricula'); */
+       /*  $usuarios->role_as = 1;
         $usuarios->estado = $request->input('estado');
-        /* $usuarios->role_as = $request->input('role_as'); */
-        $usuarios->save();
-        return redirect()->route('administradores.index');
+        $usuarios->save(); */
+      /*   return $usuarios; */
+        return redirect()->route('usuario.index');
     }
 
     /**
@@ -129,5 +131,6 @@ class UsuariosAdministradoresController extends Controller
         $usuarios = User::findOrFail($id);
         $usuarios->delete();
         return redirect()->route('administradores.index');
+
     }
 }

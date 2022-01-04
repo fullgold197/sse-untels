@@ -32,7 +32,7 @@ class AdminAdministradorEditRequest extends FormRequest
                 /* 'email' => 'required|unique:users,email,'.$this->user.',id', */
                 /* 'email' => 'unique:users,email,'.$this->users, */
                 /* 'email' => 'unique:users,email,'.$this->users.',email', */
-                'email' => 'required|unique:users,email,'.$this->administradores.',id',
+                'email' => 'required|unique:users,email,'.$this->usuario.',id',
                  'role_as' => 'required',
                  'name' => 'required|required|regex:/^[a-zA-Z0-9,.!? ]*$/',
             ];
@@ -41,7 +41,7 @@ class AdminAdministradorEditRequest extends FormRequest
     public function messages(){
 
         return [
-            'email.unique' => 'El correo ya existe, por favor eliga otro',
+            'email.unique' => 'Este correo ya existe, por favor eliga otro',
             'name.regex' => 'Formato no valido, solo letras,numeros o espacios entre ellas',
 
                     ];

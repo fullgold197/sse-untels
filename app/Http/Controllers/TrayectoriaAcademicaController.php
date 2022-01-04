@@ -100,6 +100,8 @@ class TrayectoriaAcademicaController extends Controller
                 $egresados = Egresado::findOrFail(Auth::user()->egresado_matricula);
                 $egresados->cant_doctorados = ++$doctorado; //suma la cantidad de doc más 1
                 $egresados->save();
+
+                
                 /* return $egresados; */
                 return redirect()->route('trayectoria-academica.index');
             }

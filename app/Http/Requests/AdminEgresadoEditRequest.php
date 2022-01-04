@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 
-class AdminEgresadoEditRequest extends FormRequest
+class  AdminEgresadoEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -41,7 +41,7 @@ class AdminEgresadoEditRequest extends FormRequest
 
         return [
             'email.unique' => 'El correo ya existe, por favor eliga otro',
-            'name.regex' => 'Formato no valido, solo letras,numeros o espacios entre ellas',
+            'name.regex' => 'Formato no valido, solo letras, números o espacios entre ellas',
 
                     ];
 

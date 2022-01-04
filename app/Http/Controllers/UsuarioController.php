@@ -30,7 +30,7 @@ class UsuarioController extends Controller
         //trae de la tabla $egresados todo los campos
         $usuarios = DB::table('users')
         ->join('egresado','users.egresado_matricula','=','egresado.matricula')
-        ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula')
+        ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula')
         ->where('name', 'LIKE', '%' . $texto . '%')
         ->orWhere('email', 'LIKE', '%' . $texto . '%')
         ->orWhere('role_as', 'LIKE', '%' . $texto . '%')
@@ -102,23 +102,30 @@ class UsuarioController extends Controller
      */
     public function update(AdminEgresadoEditRequest $request,$id)
     {
+        $role_as = $request->input('role_as');
         $usuario = User::findOrFail($id);
 
         if(trim($request->password) == ''){
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
             $usuario->role_as = $request->input('role_as');
+            $usuario->estado = $request->input('estado');
             $usuario->save();
         }
         else{
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
             $usuario->role_as = $request->input('role_as');
+            $usuario->estado = $request->input('estado');
             $usuario->password = Hash::make($request->input('password'));
             $usuario->save();
         }
 
-        return redirect()->route('usuario.index');
+        if ($role_as == '0') {
+            return redirect()->route('usuario.index');
+        } else if ($role_as == '1') {
+            return redirect()->route('administradores.index');
+        }
 
 
     }
