@@ -28,9 +28,15 @@ class HomeController extends Controller
           if(Auth::user()->role_as == '1') //1 = Admin Login
         {
             return redirect('/admin');
+
+        } else if (Auth::user()->role_as == '0' and Auth::user()->estado =='1') {
+            return view('home');
+        }
+        else{
+            return redirect('/login');
         }
 
-        return view('home');
+       /*  return view('home'); */
     }
 
 }

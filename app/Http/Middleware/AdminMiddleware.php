@@ -19,18 +19,25 @@ class AdminMiddleware
     {
         if(Auth::check())
         {
-            if(Auth::user()->role_as == '1')
+            //si se cumple la condicion te redirecciona hacia la vista del admin
+            if(Auth::user()->role_as == '1' and Auth::user()->estado == '1')
             {
                 return $next($request);
-            }
-            else
+
+            } else
             {
-                return redirect('/home');
+                //caso contrario te regresa a la vista login
+                return redirect('/login');
             }
+            //si se cumple la condicion te redirecciona hacia la vista del admin
+
+
         }
-        else
+        /* else
         {
             return redirect('/home');
         }
+         */
     }
 }
+//else if (Auth::user()->role_as == '0' and Auth::user()->estado == '1')

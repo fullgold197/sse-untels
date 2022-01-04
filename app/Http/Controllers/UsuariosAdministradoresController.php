@@ -26,7 +26,7 @@ class UsuariosAdministradoresController extends Controller
         $texto = $request->get('texto');
         //trae de la tabla $egresados todo los campos
         $usuarios = DB::table('users')
-        ->select('id', 'name', 'email', 'role_as', 'password',)
+        ->select('id', 'name', 'email', 'role_as', 'password','estado')
 
         /* ->orWhere('name', 'LIKE', '%' . $texto . '%')
         ->orWhere('email', 'LIKE', '%' . $texto . '%')
@@ -62,6 +62,7 @@ class UsuariosAdministradoresController extends Controller
         $usuarios->password = Hash::make($request->input('password'));
         $usuarios->egresado_matricula = $request->input('egresado_matricula');
         $usuarios->role_as = 1;
+        $usuarios->estado = $request->input('estado');
         /* $usuarios->role_as = $request->input('role_as'); */
         $usuarios->save();
         return redirect()->route('administradores.index');
@@ -103,11 +104,13 @@ class UsuariosAdministradoresController extends Controller
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
             $usuario->role_as = $request->input('role_as');
+            $usuario->estado = $request->input('estado');
             $usuario->save();
         } else {
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
             $usuario->role_as = $request->input('role_as');
+            $usuario->estado = $request->input('estado');
             $usuario->password = Hash::make($request->input('password'));
             $usuario->save();
         }

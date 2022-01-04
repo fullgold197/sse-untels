@@ -15,9 +15,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin', function () {
         return view('admin.home');
     });
-    /* Route::get('/admin', function () {
-        return view('admin.egresado.graficos');
-    }); */
+    
 });
 Route::resource('/admin/usuario', UsuarioController::class)->middleware('auth');
 

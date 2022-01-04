@@ -28,7 +28,7 @@ class AdminAdministradorCreateRequest extends FormRequest
 
               'email' => 'required|unique:users|email',
 
-              'name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'name' => 'required|required|regex:/^[a-zA-Z0-9,.!? ]*$/',
 
         ];
     }
@@ -37,7 +37,7 @@ class AdminAdministradorCreateRequest extends FormRequest
         return [
             'email.email' => 'Formato no valido para correo',
             'email.unique' => 'El correo ya existe, por favor eliga otro',
-            'name.regex' => 'Formato no valido, solo letras o espacios entre ellas'
+            'name.regex' => 'Formato no valido, solo letras, números o espacios entre ellas',
 
                     ];
 

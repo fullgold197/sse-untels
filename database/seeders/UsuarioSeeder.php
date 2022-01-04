@@ -52,7 +52,8 @@ class UsuarioSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'egresado_matricula'=> $egresadoID,
             'dni' => $egresadoDNI,
-            'role_as' => '0'
+            'role_as' => '0',
+            'estado' => '1'
 
         ]
         );
@@ -63,7 +64,8 @@ class UsuarioSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'egresado_matricula'=> $egresadoID2,
                 'dni' => $egresadoDNI2,
-                'role_as' => '0'
+                'role_as' => '0',
+                'estado' => '1'
 
             ]
             );
@@ -74,7 +76,8 @@ class UsuarioSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'egresado_matricula'=> $egresadoID3,
                 'dni' => $egresadoDNI3,
-                'role_as' => '0'
+                'role_as' => '0',
+                'estado' => '1'
 
             ]
             );
@@ -85,7 +88,8 @@ class UsuarioSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'egresado_matricula' => $egresadoID4,
                 'dni' => $egresadoDNI4,
-                'role_as' => '0'
+                'role_as' => '0',
+                'estado' => '1'
 
             ]
         );
@@ -96,7 +100,8 @@ class UsuarioSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'egresado_matricula' => $egresadoID5,
                 'dni' => $egresadoDNI5,
-                'role_as' => '0'
+                'role_as' => '0',
+                'estado' => '1'
 
             ]
         );
@@ -105,7 +110,8 @@ class UsuarioSeeder extends Seeder
                 'name' => 'Erika',
                 'email' => 'erika@gmail.com',
                 'password' => bcrypt('12345678'),
-                'role_as' => '1'
+                'role_as' => '1',
+                'estado' => '1'
 
             ]
         );

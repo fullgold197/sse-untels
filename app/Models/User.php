@@ -28,6 +28,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'egresado_matricula',
         'password',
         'url',
+        'role_as',
+        'estado',
+
     ];
     //protected $guarded =[];
     /**
@@ -68,7 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return '/datospersonales';
     }
     //plantilla de mensaje por correo restablecer contraseña. MyResetPassword viene de la carpeta Notificactions/MyResetPassword.php
-     
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new MyResetPassword($token));

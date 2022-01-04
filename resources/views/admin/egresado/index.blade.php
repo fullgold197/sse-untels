@@ -85,7 +85,7 @@
                                 <td>
                                     <li class="nav-link ">
                                     <img src="{{asset($egresado->url)}}"
-                                    alt="{{asset($egresado->url)}}"
+                                    
                                     class="brand-image img-circle elevation-4"
                                     style="opacity:.8" width="40">
                                     </li>

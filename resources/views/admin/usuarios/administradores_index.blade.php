@@ -42,6 +42,7 @@
                                 <th>Usuario</th>
                                 <th>Correo</th>
                                 <th>Nivel de acceso</th>
+                                <th>Estado</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
@@ -60,16 +61,22 @@
                                 <td>{{++$n}}</td>
                                 <td>{{$usuario->name}}</td>
                                 <td>{{$usuario->email}}</td>
+
                                 @if ($usuario->role_as==1)
                                 <td>Administrador</td>
                                 @else
                                 <td>Usuario</td>
                                 @endif
 
+                                @if ($usuario->estado==1)
+                                <td>Habilitado</td>
+                                @else
+                                <td>Desabilitado</td>
+                                @endif
 
+                           
 
-
-                                <td>
+                            <td>
                               <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-administradores-edit-{{$usuario->id}}">
                                 <i class="fas fa-edit"></i>

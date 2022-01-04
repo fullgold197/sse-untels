@@ -134,7 +134,7 @@ return [
     */
 
     'features' => [
-        Features::registration(),
+        /* Features::registration(), */ //es para registrar usuarios sin loguearse
         Features::resetPasswords(),
         Features::emailVerification(),
         Features::updateProfileInformation(),
