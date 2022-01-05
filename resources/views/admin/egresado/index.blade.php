@@ -85,7 +85,7 @@
                                 <td>
                                     <li class="nav-link ">
                                     <img src="{{asset($egresado->url)}}"
-                                    
+
                                     class="brand-image img-circle elevation-4"
                                     style="opacity:.8" width="40">
                                     </li>
@@ -108,14 +108,21 @@
                                 <i class="fa fa-eye" aria-hidden="true"></i>
 
                                 </button>
-                                <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}">
+
+                            <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}"
+                            <input type="hidden" name="url" value="{{$egresado->url}}">
                             </form>
 
                                 </a>
 
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->matricula}}">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->matricula}}">
                                 <i class="fas fa-edit"></i>
                                 </button>
+
+                                {{--  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-view-{{$egresado->matricula}}">
+                                <i class="fas fa-edit"></i>
+                                </button>  --}}
+
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-delete-{{$egresado->matricula}}">
                                 <i class="fas fa-trash-alt"></i>
                                 </button>
@@ -126,7 +133,7 @@
                             @include('admin.egresado.crear')
                             @include('admin.egresado.edit')
                             @include('admin.egresado.delete')
-                            @include('admin.egresado.trayectoriacademica')
+                            @include('admin.egresado.egresado_trayectoria_academica')
                             @endforeach
                             @endif
 

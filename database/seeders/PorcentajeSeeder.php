@@ -23,7 +23,7 @@ class PorcentajeSeeder extends Seeder
         );
         Porcentaje::create(
             [
-                'nombre' => 'Doctorado',
+                'nombre' => 'Sin maestria',
                 'porcentaje' => '69.1',
 
             ]

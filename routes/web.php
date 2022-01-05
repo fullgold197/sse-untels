@@ -53,7 +53,11 @@ Route::resource('/home/trayectoria-profesional', TrayectoriaProfesionalControlle
 
 Route::resource('/home/cambiar-contrasena', CambiarContrasenaController::class)->middleware('auth');
 
+//graficas de maestrias
 Route::get('/admin/egresado/GraficoVistaEgresados',[App\Http\Controllers\GraficosEgresadosAdminController::class,'index'])->name('egresados.graficos');
+
+//graficas de doctorados
+Route::get('/admin/egresado/GraficoVistaEgresadosDoctorados', [App\Http\Controllers\PorcentajeDoctoradoController::class, 'index'])->name('egresadosdoctorados.graficos');
 
 Route::get('/admin/egresado/VistaImportexcel',[App\Http\Controllers\ReporteAdminController::class,'VistaImportexcel'])->name('egresados.Import-excel');
 

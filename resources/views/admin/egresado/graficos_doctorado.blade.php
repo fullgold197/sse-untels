@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Maestría')
+@section('title', 'Doctorado')
 
 @section('content_header')
 
@@ -39,7 +39,7 @@ Highcharts.chart('container', {
         type: 'pie'
     },
     title: {
-        text: 'Porcentaje de egresados que tienen al menos una maestría'
+        text: 'Porcentaje de egresados que tienen al menos un doctorado'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

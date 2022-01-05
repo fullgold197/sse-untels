@@ -39,13 +39,15 @@ class EgresadosAdminController extends Controller
         $egresados=DB::table('egresado')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
         ->join('users', 'users.egresado_matricula', '=', 'egresado.matricula')
-        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero', 'egresado.fecha_nacimiento', 'egresado.semestre_ingreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin', 'users.url', 'academico.id_academico', 'academico.carr_profesional')
+        ->select('users.url', 'egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero', 'egresado.fecha_nacimiento', 'egresado.semestre_ingreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin', 'users.url', 'academico.id_academico', 'academico.carr_profesional')
         ->where('ap_paterno','LIKE','%'.$texto.'%')
         ->orWhere('nombres', 'LIKE', '%'.$texto.'%')
         ->orWhere('matricula', 'LIKE', '%'.$texto.'%')
         ->orderBy('ap_paterno','asc')
         ->paginate(5);
         /* return $egresados; */
+
+       /*  */
 
          return view('admin.egresado.index',compact('egresados','texto'),[ 'valor2' => $string ]);
 
@@ -64,7 +66,7 @@ class EgresadosAdminController extends Controller
         $egresados->telefono = $request->input('telefono');
         $egresados->id_academico = $request->input('telefono');
         $egresados->save();
-        
+
 
         /* return $egresados; */
         return redirect()->route('egresado.index');

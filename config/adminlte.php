@@ -260,10 +260,27 @@ return [
             'url'  => 'admin',
             'icon' => 'fas fa-fw fa-home',
         ],
-        [
+        /* [
             'text' => 'Datos estadísticos',
             'url'  => 'admin/egresado/GraficoVistaEgresados',
             'icon' => 'fas fa-table',
+        ], */
+        [
+            'text'    => 'Datos estadísticos',
+            'icon'    => 'fas fa-table',
+            'submenu' => [
+                [
+                    'text' => 'Maestrías',
+                    'url'  => 'admin/egresado/GraficoVistaEgresados',
+                    'icon' => 'fas fa-chart-pie',
+                ],
+
+                [
+                    'text' => 'Doctorados',
+                    'url'  => 'admin/egresado/GraficoVistaEgresadosDoctorados',
+                    'icon' => 'fas fa-chart-pie',
+                ],
+            ],
         ],
         [
             'text' => 'Egresados',

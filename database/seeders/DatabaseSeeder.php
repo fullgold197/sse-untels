@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfesionSeeder::class);
         $this->call(UsuarioSeeder::class); //invocar al seeder de usuarios(tabla que depende de egresados mediante la llave foranea egresado_matricula)
         $this->call(PorcentajeSeeder::class);
+        $this->call(PorcentajeDoctoradoSeeder::class);
     }
 
 

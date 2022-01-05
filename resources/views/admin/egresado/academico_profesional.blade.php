@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'qqr2')
+@section('title', 'Academico Profesional')
 
 @section('content_header')
 
@@ -11,14 +11,38 @@
     <div align="center">
              <div class="col-xl-6 my-2" >
                 <div class="table-responsive">
+                    {{--  @foreach ($egresados0 as $egresado)
+
+
                     <table class="table table-striped">
                         <thead >
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{$egresado->url}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @endforeach  --}}
+                    @foreach ($egresados0 as $egresado)
+                    <table class="table table-striped">
+                        <thead >
+
                         </thead>
                         <tbody>
                             <h5>DATOS PERSONALES</h5>
-                        <tr >
+                            
+                              <tr>
+                                <td colspan="2">
+                                    <img src="{{asset($egresado->url)}}" alt="{{$egresado->url}}" style="width:80%;max-height:400px" class="img-fluid img-thumbnail mx-auto d-block my-4 card-img-top" >
+                                </td>
+
+                            </tr>
+
+                        <tr>
                                 <th>NOMBRES</th>
-                                <td>{{$egresado->ap_paterno}} {{$egresado->ap_materno}} {{$egresado->nombres}}</td>
+                                <td>{{$egresado->ap_paterno}} {{$egresado->ap_materno}} {{$egresado->nombres}} </td>
                             </tr>
                             <tr>
                                 <th>GRADO ACADÉMICO</th>
@@ -79,9 +103,11 @@
                         </tbody>
 
                     </table>
+                    @endforeach
                     <h5>TRAYECTORIA ACADÉMICA</h5>
                     <h5 align="left">MAESTRÍAS</h5>
                     <br>
+
                     @foreach ($egresados1 as $egresado )
                     <table class="table table-striped">
                         <thead></thead>

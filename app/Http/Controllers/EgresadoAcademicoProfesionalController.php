@@ -19,7 +19,14 @@ class EgresadoAcademicoProfesionalController extends Controller
     public function index(Request $request)
     {
         $matricula_id = $request->input('matricula_id');
-        $egresado=Egresado::findOrFail($request->input('matricula_id'));
+    /*     $egresado=Egresado::findOrFail($request->input('matricula_id')); */
+        $egresados0 = DB::table('egresado')
+        ->join('users', 'users.egresado_matricula', '=', 'egresado.matricula')
+        ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
+        ->select('users.url','egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero', 'egresado.fecha_nacimiento', 'egresado.semestre_ingreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin', 'users.url', 'academico.id_academico', 'academico.carr_profesional')
+        ->where('matricula', $matricula_id)
+        ->get();
+
         $egresados1 = DB::table('maestria')
         ->select('grado_academico', 'pais', 'institución', 'fecha_inicial', 'fecha_final')
         ->where('matricula', $matricula_id)
@@ -35,8 +42,8 @@ class EgresadoAcademicoProfesionalController extends Controller
         ->where('matricula', $matricula_id)
         ->get();
 
-        /* return $egresado2; */
-        return view('admin.egresado.academico_profesional',compact('egresado', 'egresados1', 'egresados2', 'egresados3'));
+       /*  return $egresados0; */
+        return view('admin.egresado.academico_profesional',compact('egresados0', 'egresados1', 'egresados2', 'egresados3'));
 
 /* return $egresado; devuelve un arreglo(findOrfail) pero no de objetos asi que no necesita ser iterado en un forearch
  */}
