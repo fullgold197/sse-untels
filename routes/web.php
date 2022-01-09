@@ -35,56 +35,49 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+//En este grupo de funciones se hacen dos operaciones. Primero va hacia el middleware 'auth' para saber si el usuario está logueado, despues de esto va hacia el middleware 'isUser'. Aqui verifica si tiene el rol de user.
+Route::middleware(['auth', 'isUser'])->group(function () {
 
+    //Ruta para la vista de datos personales del egresado
+    Route::resource('/home/datos-personales', DatosPersonalesController::class);
+
+    //Ruta para la vista de trayectoria academica del egresado
+    Route::resource('/home/trayectoria-academica', TrayectoriaAcademicaController::class);
+
+    //Ruta para cambiar foto del egresado
+    Route::resource('/home/datos-personales/imagen', ImagenController::class);
+
+    //Ruta para la vista de trayectoria académica de su maastría del egresado
+    Route::resource('/home/trayectoria-academica/maestria', MaestriaController::class);
+
+    //Ruta para la vista de trayectoria académica de su docotorado del egresado
+    Route::resource('/home/trayectoria-academica/doctorado', DoctoradoController::class);
+
+    //Ruta para la vista de trayectoria profesional del egresado
+    Route::resource('/home/trayectoria-profesional', TrayectoriaProfesionalController::class);
+
+
+    //Ruta para lista de 5 en 5 cualquier lista
+    Route::resource('/permisos', App\Http\Controllers\PermissionController::class);
+
+    //Ruta para la vista de cambiar contraseña del egresado
+    Route::view('/home/password', 'users.password')->name('password');
+    });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('/home/datos-personales', DatosPersonalesController::class)->middleware('auth');
-
-Route::resource('/home/datos-personales/imagen', ImagenController::class)->middleware('auth');
-
-Route::resource('/home/trayectoria-academica', TrayectoriaAcademicaController::class)->middleware('auth');
-
-Route::resource('/home/trayectoria-academica/maestria', MaestriaController::class)->middleware('auth');
-
-Route::resource('/home/trayectoria-academica/doctorado', DoctoradoController::class)->middleware('auth');
-
-Route::resource('/home/trayectoria-profesional', TrayectoriaProfesionalController::class)->middleware('auth');
-
-Route::resource('/home/cambiar-contrasena', CambiarContrasenaController::class)->middleware('auth');
-
-//graficas de maestrias
-Route::get('/admin/egresado/GraficoVistaEgresados',[App\Http\Controllers\GraficosEgresadosAdminController::class,'index'])->name('egresados.graficos');
-
-//graficas de doctorados
-Route::get('/admin/egresado/GraficoVistaEgresadosDoctorados', [App\Http\Controllers\PorcentajeDoctoradoController::class, 'index'])->name('egresadosdoctorados.graficos');
-
-Route::get('/admin/egresado/VistaImportexcel',[App\Http\Controllers\ReporteAdminController::class,'VistaImportexcel'])->name('egresados.Import-excel');
-
-Route::post('admin/egresado/ImportExcel',[App\Http\Controllers\ReporteAdminController::class,'importExcel'])->name('admin/egresado/ImportExcel');
-
-Route::get('/admin/egresado/Exportexcel',[App\Http\Controllers\ReporteAdminController::class,'exportExcel'])->name('egresados.Export-excel');
-
-Route::get('/admin/egresado/pdf/{string}', [App\Http\Controllers\ReporteAdminController::class, 'showReporteEgresados'])->name('imprimir');
-
-Route::resource('/admin/egresado', EgresadosAdminController::class)->middleware('auth');
-
-Route::resource('/admin/academico-profesional', EgresadoAcademicoProfesionalController::class)->middleware('auth');
-
-Route::resource('/permisos', App\Http\Controllers\PermissionController::class);
-
-Route::view('/profile/edit', 'profile.edit')->middleware('auth');
-
-//password
-Route::view('/home/password', 'users.password')->middleware('auth')->name('password');
-
-Route::resource('/admin/administradores', UsuariosAdministradoresController::class)->middleware('auth');
 
 
-/* Route::middleware(['auth','isAdmin'])->group( function (){
 
-    Route::get('/admin', function () {
-        return view('admin.home');
 
- });
-}); */
+
+
+
+
+
+
+
+
+
+
+
