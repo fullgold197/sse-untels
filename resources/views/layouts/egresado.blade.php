@@ -14,6 +14,9 @@
 
         <link rel="stylesheet" href="/css/admin_custom.css">
         <link rel="stylesheet" href="{{ asset('css/letras.css') }}">
+
+
+
 </head>
 
 <body class="sidebar-mini" >
@@ -42,7 +45,7 @@
     @endphp
     <li class="">
         <img src="{{asset($url)}}"
-         alt="AdminLTE"
+         alt="{{asset($url)}}"
          class="brand-image img-circle elevation-4"
          style="opacity:.8" width="33">
     </li>
@@ -200,6 +203,25 @@
 
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <!-- JQuery -->
+        <!--Aquí se utiliza JQuery para permitir seleccionar la fecha de finalización del egresado o la opcion de estar laborando-->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!--libreria para utilizar JQuery-->
+        <!--Para la trayectoria profesional-->
+        <script>
+            $(document).ready(function(){
+                $('form input[type="submit"]').prop("disabled", false);
+                $(".agree").click(function(){
+                    if($(this).prop("checked") == true){
+                        $('form input[id="fecha_finalizacion"]').prop("disabled", true); //aqui estamos diciendo que el input que contenga un id="fecha de finalización automaticamente se desabilite la fecha de finalizacion de empleo del egresado"
+                    }
+                    else if($(this).prop("checked") == false){
+                        $('form input[id="fecha_finalizacion"]').prop("disabled", false);
+                    }
+                });
+            });
+        </script>
+
+       
 
 
 

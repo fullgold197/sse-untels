@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctorado;
+use App\Models\Egresado;
 use App\Models\Maestria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MaestriaController extends Controller
 {
@@ -83,7 +85,7 @@ class MaestriaController extends Controller
         $egresados->fecha_inicial = $request->input('maestria_fecha_inicial');
         $egresados->fecha_final = $request->input('maestria_fecha_final');
         $egresados->save();
-        //return $egresados; 
+        //return $egresados;
         return redirect()->route('trayectoria-academica.index');
     }
 
@@ -95,6 +97,12 @@ class MaestriaController extends Controller
      */
     public function destroy($id_maestria)
     {
+        $maestria = Maestria::where('matricula', Auth::user()->egresado_matricula)->count(); //cuentas las cantidad de matricula con el id de la matricula
+        //para agregar la cantidad de maestrias es necesario usar el findOrFail junto con el Auth::user
+        $egresados = Egresado::findOrFail(Auth::user()->egresado_matricula);
+        $egresados->cant_maestrias = --$maestria; //suma la cantidad de maestrias más 1
+        $egresados->save();
+
         $egresados = Maestria::findOrFail($id_maestria);
         $egresados->delete();
         return redirect()->route('trayectoria-academica.index');

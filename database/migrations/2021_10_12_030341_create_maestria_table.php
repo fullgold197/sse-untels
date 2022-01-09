@@ -16,9 +16,9 @@ class CreateMaestriaTable extends Migration
         Schema::create('maestria', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id_maestria');
-            $table->string('grado_academico', 50);
-            $table->string('pais', 50);
-            $table->string('institución', 50);
+            $table->string('grado_academico', 100);
+            $table->string('pais', 100);
+            $table->string('institución', 100);
             $table->date('fecha_inicial');
             $table->date('fecha_final');
             $table->string('matricula', 10)->nullable();

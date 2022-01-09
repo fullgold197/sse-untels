@@ -33,10 +33,7 @@
 
             <div class="form-group">
                 <label for="role_as">Rol</label>
-                    <select name="role_as" class="form-control" id="role_as" >
-                        <option value="0" {{$usuario->role_as=="0" ? 'selected' : '' }}>Usuario</option>
-                        <option value="1" {{$usuario->role_as=="1" ? 'selected' : '' }}>Administrador</option>
-                    </select>
+                <input type="text" class="form-control" id="role_as" role_as="role_as" required maxlength="20" value="Usuario" disabled>
             </div>
             <div class="form-group">
                 <label for="estado">Estado</label>
@@ -74,8 +71,10 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             <input type="submit" class="btn btn-danger" value="Editar">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <input type="hidden" name="role_as" value="0">
+
           </div>
         </div>
       </div>

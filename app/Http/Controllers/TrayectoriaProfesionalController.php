@@ -20,7 +20,7 @@ class TrayectoriaProfesionalController extends Controller
         /* $egresados = Profesion::all(); */
         /* return $users; */
         $egresados = DB::table('profesion')
-            ->select('id_profesion','empresa', 'actividad_empresa', 'actividad_empresa', 'puesto', 'nivel_experiencia', 'area_puesto', 'subarea', 'pais', 'fecha_inicio', 'fecha_finalizacion', 'descripcion_responsabilidades')
+            ->select('id_profesion','empresa', 'actividad_empresa', 'actividad_empresa', 'puesto', 'nivel_experiencia', 'area_puesto', 'subarea', 'pais', 'fecha_inicio', 'fecha_finalizacion', 'descripcion_responsabilidades','sueldo')
             ->where('matricula', Auth::user()->egresado_matricula)
             ->get();
         /* $egresados = DB::table('profesion')
@@ -62,6 +62,7 @@ class TrayectoriaProfesionalController extends Controller
         $egresados->fecha_finalizacion = $request->input('fecha_finalizacion');
         $egresados->descripcion_responsabilidades = $request->input('descripcion_responsabilidades');
         $egresados->matricula = Auth::user()->egresado_matricula;
+        $egresados->sueldo = $request->input('sueldo');
         $egresados->save();
         return redirect()->route('trayectoria-profesional.index');
         /* return $egresados; */
@@ -111,6 +112,7 @@ class TrayectoriaProfesionalController extends Controller
         $egresados->fecha_inicio = $request->input('fecha_inicio');
         $egresados->fecha_finalizacion = $request->input('fecha_finalizacion');
         $egresados->descripcion_responsabilidades = $request->input('descripcion_responsabilidades');
+        $egresados->sueldo = $request->input('sueldo');
         $egresados->save();
         return redirect()->route('trayectoria-profesional.index');
         //return $egresados;

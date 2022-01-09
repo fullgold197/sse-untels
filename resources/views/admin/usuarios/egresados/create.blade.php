@@ -11,7 +11,7 @@
           <div class="modal-body">
                     <div class="form-group">
                         <label for="Nombre">Nombre</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name')}}" required maxlength="12" >
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name')}}" required maxlength="30" >
                         {{$errors->first('name')}}
                     </div>
                     <div class="form-group">
@@ -29,11 +29,18 @@
                         <input type="password" class="form-control" id="password" name="password" required maxlength="20" >
                     </div>
 
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <select name="estado" class="form-control"  id="estado" required>
+                            <option selected disabled value="">Seleccione estado</option>
+                                <option value="1">Habilitado</option>
+                                <option value="0">Deshabilitado</option>
+                          </select>
+                    </div>
 
                     <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Guardar">
-                        <input type="reset" class="btn btn-primary" value="Cancelar">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <input type="submit" class="btn btn-primary" value="Guardar">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
 
                     </div>
           </div>

@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-
-
+use Facade\FlareClient\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use Log;
 
@@ -34,13 +34,13 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
-
+  
         //Sirve para convertir http en https
         if (config('app.env') === 'production') {
             \URL::forceScheme('https');
         }
 
-        
+
 
 
 

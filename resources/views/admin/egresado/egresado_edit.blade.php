@@ -6,7 +6,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar usuarios</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar egresadofa-spin</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -72,10 +72,8 @@
                     </div>
 
                     <div class="form-group">
-                        {{-- <input type="text" class="form-control" id="genero" name="genero" required maxlength="50" value="{{$egresado->genero}}"> --}}
                         <label for="genero">Genero</label>
                         <select name="genero" class="form-control" id="genero" >
-
                             <option value="Masculino" {{$egresado->genero=="Masculino" ? 'selected' : '' }}>Masculino</option>
                             <option value="Femenino" {{$egresado->genero=="Femenino" ? 'selected' : '' }}>Femenino</option>
                           </select>
@@ -92,26 +90,52 @@
                         @endif
                     </div>
 
-                    <div class="form-group">
-                        <label for="semestre_ingreso">Semestre de ingreso</label>
-                        <input type="text" class="form-control" id="semestre_ingreso" name="semestre_ingreso" maxlength="9"
-                        @if($errors->any())
-                        value="{{old('semestre_ingreso')}}">
-                        {{$errors->first('semestre_ingreso')}}
-                        @else
-                        value="{{$egresado->semestre_ingreso}}">
-                        @endif
-                    </div>
+                    <div>
+                        <div>
+                            <label for="semestre_ingreso">Ciclo de ingreso</label>
+                        </div>
+                        <div class="form-group">
+                            <div id="color_plomo">Año de ingreso</div>
+                            <input type="number"  name="año_ingreso" class="form-control" min="1900" max="2099" step="1"
+                            @if($errors->any())
+                            value="{{old('año_ingreso')}}">
+                            {{$errors->first('año_ingreso')}}
+                            @else
+                            value="{{$egresado->año_ingreso}}">
+                            @endif
 
-                    <div class="form-group">
-                        <label for="semestre_egreso">Semestre de egreso</label>
-                        <input type="text" class="form-control" id="semestre_egreso" name="semestre_egreso" maxlength="9"
-                        @if($errors->any())
-                        value="{{old('semestre_egreso')}}">
-                        {{$errors->first('semestre_egreso')}}
-                        @else
-                        value="{{$egresado->semestre_egreso}}">
-                        @endif
+                        </div>
+                        <div class="form-group">
+                            <div id="color_plomo">Semestre de ingreso</div>
+                            <select name="semestre_ingreso" class="form-control" id="semestre_ingreso" >
+                            <option value="1" {{$egresado->semestre_ingreso=="1" ? 'selected' : '' }}>1</option>
+                            <option value="2" {{$egresado->semestre_ingreso=="2" ? 'selected' : '' }}>2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div >
+                            <label for="semestre_ingreso">Ciclo de egreso</label>
+                        </div>
+
+                        <div class="form-group">
+                            <div id="color_plomo">Año de egreso</div>
+                            <input type="number" name="año_egreso"  class="form-control" min="1900" max="2099" step="1"
+                            @if($errors->any())
+                            value="{{old('año_egreso')}}">
+                            {{$errors->first('año_egreso')}}
+                            @else
+                            value="{{$egresado->año_egreso}}">
+                            @endif
+
+                        </div>
+                        <div class="form-group">
+                            <div id="color_plomo">Semestre de egreso</div>
+                            <select name="semestre_egreso" class="form-control" id="semestre_egreso" >
+                            <option value="1" {{$egresado->semestre_egreso=="1" ? 'selected' : '' }}>1</option>
+                            <option value="2" {{$egresado->semestre_egreso=="2" ? 'selected' : '' }}>2</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group">

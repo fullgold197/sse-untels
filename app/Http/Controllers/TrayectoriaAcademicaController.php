@@ -19,9 +19,11 @@ class TrayectoriaAcademicaController extends Controller
      */
     public function index(Request $request)
     {
+        $maestrias= Maestria::where('matricula', Auth::user()->egresado_matricula)->count(); //cuentas las cantidad de matricula con el id de la matricula
+        $doctorados = Doctorado::where('matricula', Auth::user()->egresado_matricula)->count(); //cuentas las cantidad de matricula con el id de la matricula
         $egresados0= DB::table('egresado')
         ->join('academico', 'egresado.id_academico', '=', 'academico.id_academico')
-        ->select('academico.carr_profesional','egresado.grado_academico', 'egresado.semestre_ingreso', 'egresado.semestre_egreso')
+        ->select('academico.carr_profesional','egresado.grado_academico','egresado.año_ingreso', 'egresado.semestre_ingreso','egresado.año_egreso', 'egresado.semestre_egreso')
         ->where('matricula', Auth::user()->egresado_matricula)
         ->get();
 
@@ -40,8 +42,9 @@ class TrayectoriaAcademicaController extends Controller
             ->get();
 
         $count = Maestria::where('matricula', 2016200241)->count();
-        /* return $count; */
-        return view('users.trayectoriaacademica', compact('egresados0','egresados','egresados1'));
+        /* return $maestrias; */
+        return view('users.trayectoriaacademica', compact('egresados0','egresados','egresados1','maestrias','doctorados'));
+
     }
 
     /**
@@ -97,11 +100,14 @@ class TrayectoriaAcademicaController extends Controller
                 $egresados->save();
 
                 //para agregar la cantidad de maestrias es necesario usar el findOrFail junto con el Auth::user
+
                 $egresados = Egresado::findOrFail(Auth::user()->egresado_matricula);
                 $egresados->cant_doctorados = ++$doctorado; //suma la cantidad de doc más 1
                 $egresados->save();
 
-                
+
+
+
                 /* return $egresados; */
                 return redirect()->route('trayectoria-academica.index');
             }
@@ -150,6 +156,6 @@ class TrayectoriaAcademicaController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

@@ -26,26 +26,27 @@ class EgresadosAdminController extends Controller
         if( $request->texto == "" ){
         $string = "empty";
 
-    }
+        }
         else{
         $string = $request->texto;
-
-
         }
 
-
         $texto=$request->get('texto');
+        $carrera = $request->get('carrera');
+
         //trae de la tabla egresa$egresados todo los campos
         $egresados=DB::table('egresado')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
-        ->join('users', 'users.egresado_matricula', '=', 'egresado.matricula')
-        ->select('users.url', 'egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero', 'egresado.fecha_nacimiento', 'egresado.semestre_ingreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin', 'users.url', 'academico.id_academico', 'academico.carr_profesional')
+        /* ->join('doctorado', 'doctorado.matricula', '=', 'egresado.matricula') */
+        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero','egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso','egresado.año_egreso' ,'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin','egresado.url', 'academico.id_academico', 'academico.carr_profesional')
         ->where('ap_paterno','LIKE','%'.$texto.'%')
         ->orWhere('nombres', 'LIKE', '%'.$texto.'%')
         ->orWhere('matricula', 'LIKE', '%'.$texto.'%')
+        ->orWhere('carr_profesional', 'LIKE', '%' . $texto . '%')
         ->orderBy('ap_paterno','asc')
         ->paginate(5);
-        /* return $egresados; */
+
+        /* return $carrera; */
 
        /*  */
 
@@ -106,7 +107,9 @@ class EgresadosAdminController extends Controller
         $egresados->genero = $request->input('genero');
         $egresados->fecha_nacimiento = $request->input('fecha_nacimiento');
 
+        $egresados->año_ingreso = $request->input('año_ingreso');
         $egresados->semestre_ingreso = $request->input('semestre_ingreso');
+        $egresados->año_egreso = $request->input('año_egreso');
         $egresados->semestre_egreso  = $request->input('semestre_egreso');
         $egresados->celular = $request->input('celular');
         $egresados->pais_origen = $request->input('pais_origen');
@@ -126,6 +129,8 @@ class EgresadosAdminController extends Controller
         $usuarios->email = $request->input('matricula').'@untels.edu.pe';
         $usuarios->egresado_matricula = $request->input('matricula');
         $usuarios->password = Hash::make($request->input('dni'));
+        $usuarios->estado = 0;
+        $usuarios->role_as = 0;
         $usuarios->save();
         /* return $egresados; */
         return redirect()->route('egresado.index');
@@ -186,7 +191,9 @@ class EgresadosAdminController extends Controller
         $egresados->genero = $request->input('genero');
         $egresados->fecha_nacimiento = $request->input('fecha_nacimiento');
 
+        $egresados->año_ingreso = $request->input('año_ingreso');
         $egresados->semestre_ingreso = $request->input('semestre_ingreso');
+        $egresados->año_egreso = $request->input('año_egreso');
         $egresados->semestre_egreso  = $request->input('semestre_egreso');
         $egresados->celular = $request->input('celular');
         $egresados->pais_origen = $request->input('pais_origen');

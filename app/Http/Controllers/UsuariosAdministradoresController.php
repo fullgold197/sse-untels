@@ -22,22 +22,30 @@ class UsuariosAdministradoresController extends Controller
     {
         if ($request->texto == "") {
             $string = "empty";
+            $texto = $request->get('texto');
+
         } else {
-            $string = $request->texto;
+            $string = '$request->texto';
         }
         $texto = $request->get('texto');
-        //trae de la tabla $egresados todo los campos
+        //trae de la tabla $egresados todo los campos. Debid
         $usuarios = DB::table('users')
         ->select('id', 'name', 'email', 'role_as', 'password','estado')
-
-        /* ->orWhere('name', 'LIKE', '%' . $texto . '%')
-        ->orWhere('email', 'LIKE', '%' . $texto . '%')
-        ->orWhere('role_as', 'LIKE', '%' . $texto . '%') */
         ->where('role_as', 1)
+       /*  ->where('name', 'LIKE', '%' . $texto . '%')
+        ->where('email', 'LIKE', '%' . $texto . '%')
+        ->where('role_as', 'LIKE', '%' . $texto . '%') */
+
         ->orderBy('name', 'asc')
         ->paginate(5);
+        /* if(){
+
+        }
+        else if(){
+
+        } */
          /* return $usuarios; */
-        return view('admin.usuarios.administradores_index', compact('usuarios', 'texto'), ['valor' => $string]);
+        return view('admin.usuarios.administradores.administradores_index', compact('usuarios','texto'), ['valor' => $string]);
     }
 
     /**

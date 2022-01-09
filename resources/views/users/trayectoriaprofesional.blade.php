@@ -75,6 +75,11 @@
 
                                 </td>
                             </tr>
+                            <tr>
+                                <th>SUELDO</th>
+                                <td>{{$egresado->sueldo}}</td>
+                            </tr>
+
                            {{--   <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-profesional-edit-{{$egresado->id_profesion}}">
                                 <i class="fas fa-edit"></i>
                             </button>  --}}

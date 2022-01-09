@@ -7,36 +7,71 @@
 @stop
 
 @section('content')
-    <body>
-    <div class="container">
-        <h4>Gestion de Egresados</h4>
-        <div class="row">
-            <div class="col-xl-12">
-                <form action="{{route('egresado.index')}}" method="GET">
+<link href="{{ asset('css/letras.css') }}" rel="stylesheet">
+<link href="{{ asset('css/espacio_div.css') }}" rel="stylesheet">
 
-                    <div class="form-row">
-                        <div class="col-sm-4 my-2">
-                            <input type="text" class="form-control" name="texto" value="{{$texto}}">
+    <body>
+    <div class="container" id="">
+        <h4 >Gestion de Egresados</h4>
+        <div class="row" >
+            {{--  class="col-xl-12" para indicar que se va a dividir en 12 columnas  --}}
+            <div class="col-xl-12" >
+                <form action="{{route('egresado.index')}}" method="GET">
+                    <div class="form-row" >
+                        {{--  class="col-sm-3 my-2" para indicar que va a tomar 3 columnas  --}}
+                        <div class="col-sm-3 my-2" >
+                            <input type="text" placeholder="Buscar" class="form-control" name="texto" value="{{$texto}}">
                         </div>
-                        <div class="col-sm-8 my-2">
+                        <div class="col-sm-3 my-2" >
                             <input type="submit" class="btn btn-dark"  value="Buscar">
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="col-auto my-2">
+                </form>
 
-                <button type="button" class="btn btn-primary" id="open" data-bs-toggle="modal" data-bs-target="#modal-create">
-                    <i class="fas fa-user"> Nuevo Egresado</i>
-                    </button>
-                        </div>
-
+            </div>
+        </div>
+        <div class="row" >
+            {{--  class="col-xl-12" para indicar que se va a dividir en 12 columnas  --}}
+            <div class="col-xl-12" >
+                <form action="{{route('egresado.index')}}" method="GET">
+                    <div class="form-row" >
+                    <div class="col-sm-3 my-2">
+                            <select name="texto" class="form-control"  id="texto" required>
+                            <option selected disabled value="">Seleccione filtro</option>
+                            <option value="">Mostrar todos</option>
+                            <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+                            <option value="Ingeniería Electrónica y Telecomunicaciones">Ingeniería Electrónica y Telecomunicaciones</option>
+                            <option value="Ingeniería Ambiental">Ingeniería Ambiental</option>
+                            <option value="Ingeniería Mecánica y Eléctrica">Ingeniería Mecánica y Eléctrica</option>
+                            <option value="Administración de Empresas">Administración de Empresas</option>
+                            </select>
+                    </div>
+                    <div class="col-sm-9 my-2">
+                            <input type="submit" class="btn btn-dark"  value="Filtrar">
+                    </div>
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="container">
+        <div class="row" >
+            <div class="col-xl-12" >
+                <button type="button" class="btn btn-primary" id="open" data-bs-toggle="modal" data-bs-target="#modal-create">
+                    <i class="fas fa-user"> Nuevo Egresado</i>
+                </button>
             </div>
         </div>
-            <div class="container">
+        </div>
+    </div>
+
+
+
+
+
+
+        <div class="container">
             <div class="col-xl-12">
                 <div class="row">
                     <div class="form-row">
@@ -66,8 +101,8 @@
                                 <th>Egresado</th>
                                 <th>Carrera</th>
                                 <th>Nombres</th>
-                                <th>Semestre de ingreso</th>
-                                <th>Semestre de egreso</th>
+                                <th>Ciclo de ingreso</th>
+                                <th>Ciclo de egreso</th>
                                 <th>Celular</th>
                                 <th>Opciones</th>
                             </tr>
@@ -93,8 +128,8 @@
 
                                 <td>{{$egresado->carr_profesional}}</td>
                                 <td class="text-capitalize">{{$egresado->ap_paterno}} {{$egresado->ap_materno}} {{$egresado->nombres}}</td>
-                                <td>{{$egresado->semestre_ingreso}}</td>
-                                <td>{{$egresado->semestre_egreso}}</td>
+                                <td>{{$egresado->año_ingreso}}-{{$egresado->semestre_ingreso}}</td>
+                                <td>{{$egresado->año_egreso}}-{{$egresado->semestre_egreso}}</td>
                                 {{--  <td>{{$egresado->genero}}</td>
                                 <td>{{$egresado->fecha_nacimiento}}</td>  --}}
                                 <td>{{$egresado->celular}}</td>
@@ -109,10 +144,9 @@
 
                                 </button>
 
-                            <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}"
-                            <input type="hidden" name="url" value="{{$egresado->url}}">
-                            </form>
-
+                                <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}"
+                                <input type="hidden" name="url" value="{{$egresado->matricula}}">
+                                </form>
                                 </a>
 
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->matricula}}">
@@ -129,11 +163,12 @@
                             </td>
 
                             </tr>
-                            {{-- Poner aquí los include. No sé porque aqui los leé. --}}
-                            @include('admin.egresado.crear')
-                            @include('admin.egresado.edit')
-                            @include('admin.egresado.delete')
-                            @include('admin.egresado.egresado_trayectoria_academica')
+                            {{-- Poner aquí los include.. --}}
+                            @include('admin.egresado.egresado_create')
+                            @include('admin.egresado.egresado_edit')
+                            @include('admin.egresado.egresado_delete')
+
+
                             @endforeach
                             @endif
 

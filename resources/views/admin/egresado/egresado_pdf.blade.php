@@ -38,13 +38,20 @@
     <thead>
 
         <tr class="text-center">
-            <th width="50px">Número</th>
-            <th width = "100px">Codigo Matricula</th>
-        {{--      <th>Carrera</th>  --}}
+            <th width="30px"> # </th>
+            <th width = "100px">Codigo de matricula</th>
             <th>Nombres</th>
-            <th>Semestre de ingreso</th>
-            <th>Semestre de egreso</th>
-            <th>Celular</th>
+            <th>Carrera</th>
+            <th>DNI</th>
+            <th>Fecha de nacimiento</th>
+            <th>Género</th>
+            <th>Ciclo de ingreso</th>
+            <th>Ciclo de egreso</th>
+            <th>País de residencia</th>
+            <th>Ciudad de residencia</th>
+            <th>Lugar de residencias</th>
+            <th>Linkendin</th>
+
         </tr>
     </thead>
     <tbody>
@@ -65,10 +72,18 @@
             {{--  <td>{{$egresado->carrera}}</td>  --}}
 
             <td class="text-capitalize">{{$egresado->ap_paterno}} {{$egresado->ap_materno}} {{$egresado->nombres}}</td>
-
-            <td>{{$egresado->semestre_ingreso}}</td>
-            <td>{{$egresado->semestre_egreso}}</td>
-            <td>{{$egresado->celular}}</td>
+            <td>{{$egresado->carr_profesional}}</td>
+            <td>{{$egresado->dni}}</td>
+            <td>{{$egresado->fecha_nacimiento}}</td>
+            <td>{{$egresado->genero}}</td>
+            <td>{{$egresado->año_ingreso}}-{{$egresado->semestre_ingreso}}</td>
+            <td>{{$egresado->año_egreso}}-{{$egresado->semestre_egreso}}</td>
+            <td>{{$egresado->pais_residencia}}</td>
+            <td>{{$egresado->ciudad_residencia}}</td>
+            <td>{{$egresado->lugar_residencia}}</td>
+            <td>{{$egresado->linkedin}}</td>
+            {{--  <td>{{$egresado->carr_profesional}}</td>
+            <td>{{$egresado->carr_profesional}}</td>  --}}
         </tr>
         @php
             $i++;

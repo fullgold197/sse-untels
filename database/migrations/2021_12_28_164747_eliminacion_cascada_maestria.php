@@ -18,7 +18,7 @@ class EliminacionCascadaMaestria extends Migration
 
            /*  $table->foreign('matricula')->references('matricula')->on('Egresado')->after('descripcion_responsabilidades'); */
 
-            $table->foreign('matricula')->references('matricula')->on('egresado')->after('fecha_final');
+            $table->foreign('matricula')->references('matricula')->on('egresado')->onDelete('cascade')->after('fecha_final');
         });
     }
 
@@ -32,7 +32,7 @@ class EliminacionCascadaMaestria extends Migration
         //
         Schema::table('egresado', function (Blueprint $table) {
 
-            $table->dropColumn('maestria');
+            /* $table->dropColumn('maestria'); */
             Schema::disableForeignKeyConstraints();
             Schema::enableForeignKeyConstraints();
         });

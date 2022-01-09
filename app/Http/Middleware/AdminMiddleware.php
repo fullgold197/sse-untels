@@ -19,14 +19,14 @@ class AdminMiddleware
     {
         if(Auth::check())
         {
-            //si se cumple la condicion te redirecciona hacia la vista del admin
+            //Verifica al usuario si inicia sesion y si se cumple la condicion te redirecciona hacia la vista del admin
             if(Auth::user()->role_as == '1' and Auth::user()->estado == '1')
             {
                 return $next($request);
 
             } else
             {
-                //caso contrario te regresa a la vista login
+                //caso contrario te regresa a la vista login si no se inicia sesion
                 return redirect('/login');
             }
             //si se cumple la condicion te redirecciona hacia la vista del admin

@@ -21,10 +21,9 @@
 
 
 
-                            <div class="card-header " {{-- style="background-color:teal" --}} >
+                            <div class="card-header" {{-- style="background-color:teal" --}} >
                              <h5 style="font-family:garamond;text-align:center;">PERFIL DEL EGRESADO</h5>
-{{--                         <h5 style="font-family:garamond;text-align:center">DATOS PERSONALES</h5>
- --}}                          </div>
+                       </div>
                         <div class="card-body">
                             <table align="left"  >
                         <tbody >
@@ -45,29 +44,11 @@
 
                             <tr>
                                 <td colspan="2" align="center">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-datos-personales-foto-edit-{{$egresado->id}}">
+                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-datos-personales-foto-edit-{{$egresado->matricula}}">
                                         Cambiar foto
                                     </button>
                                 </td>
                             </tr>
-
-
-{{--                             <tr>
- --}}                                {{-- <td align="center" colspan="2">
-                                    <div class="form-group">
-                                    <label for="file"> </label>
-                                        <input type="file" name="file" id="file" accept="image/*"><br>
-                                        @error('file')
-                                        <small class="text-danger">{{$message}}</small>
-                                        @enderror
-                                </div>
-                                </td> --}}
-{{--                             </tr>
- --}}                          {{--   <tr>
-                                <td align="center" colspan="2">
-                                    <button type="submit" class="btn btn-primary">Cambiar foto</button>
-                                </td>
-                            </tr> --}}
 
                             <tr colspan="2" class="bg-gray-light"  >
                                 <th style="padding-left:50px;padding-bottom: 5px;">NOMBRES</th>
@@ -90,6 +71,11 @@
                             <tr class="bg-gray-light" >
                                 <th style="padding-left:50px;padding-bottom: 5px;">GÉNERO</th>
                                 <td>{{$egresado->genero}} </td>
+                            </tr>
+
+                            <tr>
+                                <th style="padding-left:50px;padding-bottom: 5px;">EMAIL</th>
+                                <td>{{$egresado->email}} </td>
                             </tr>
 
 
@@ -115,8 +101,8 @@
 
                             <input type="hidden" class="form-control" id="matricula" name="matricula"
                              value="{{$egresado->matricula}}">
-                            @include('users.modalEgresados.datos_personales_edit')
-                            @include('users.modalEgresados.foto.datos_personales_foto_edit')
+                            @include('users.modalEgresados.datos_personales.datos_personales_edit')
+                            @include('users.modalEgresados.datos_personales.datos_personales_foto_edit')
                         @endforeach
                     </div>
                 </div>
@@ -125,6 +111,7 @@
                     </tbody>
                 </table>
                 </form>
+
     </div>
 </div>
 </div>

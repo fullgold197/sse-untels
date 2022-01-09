@@ -24,10 +24,10 @@ class UsuarioController extends Controller
         if ($request->texto == "") {
             $string = "empty";
         } else {
-            $string = $request->texto;
+            $string = '$request->texto';
         }
         $texto = $request->get('texto');
-        //trae de la tabla $egresados todo los campos
+        //Trae de la tabla $egresados todo los campos. Aqui se está filtrando y solo muestra los usuarios que contengan un codigo de egresado y su matricula,
         $usuarios = DB::table('users')
         ->join('egresado','users.egresado_matricula','=','egresado.matricula')
         ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula')
@@ -37,7 +37,7 @@ class UsuarioController extends Controller
         ->orderBy('name', 'asc')
         ->paginate(5);
        /*  return $usuarios; */
-        return view('admin.usuarios.index', compact('usuarios', 'texto'), ['valor' => $string]);
+        return view('admin.usuarios.egresados.index', compact('usuarios', 'texto'), ['valor' => $string]);
     }
 
     /**
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
         $usuarios->name = $request->input('name');
         $usuarios->email = $request->input('email');
         $usuarios->password = Hash::make($request->input('password'));
-        /* $usuarios->egresado_matricula = $request->input('egresado_matricula'); */
+        $usuarios->egresado_matricula = $request->input('egresado_matricula');
         /* $usuarios->role_as = $request->input('role_as'); */
         $usuarios->estado = $request->input('estado');
         $usuarios->save();

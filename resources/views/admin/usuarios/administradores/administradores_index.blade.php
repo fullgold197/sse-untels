@@ -13,14 +13,14 @@
         <h4>Gestion de Usuarios</h4>
         <div class="row">
             <div class="col-xl-12">
-                <form action="{{route('usuario.index')}}" method="POST">
+                <form action="{{route('administradores.index')}}" method="GET">
 
                     {{--  <div class="form-row">
                         <div class="col-sm-4 my-2">
-                            <input type="text" class="form-control" name="texto" value="{{$texto}}">
+                            <input type="text" class="form-control" placeholder="Buscar"  name="texto" value="{{$texto}}">
                         </div>
                         <div class="col-sm-8 my-2">
-                            <input type="submit" class="btn btn-dark"  value="Buscar">
+                            <input type="submit" class="btn btn-dark" value="Buscar">
                         </div>
                     </div>  --}}
                     <div class="form-row">
@@ -74,7 +74,7 @@
                                 <td>Desabilitado</td>
                                 @endif
 
-                           
+
 
                             <td>
                               <!-- Button trigger modal -->
@@ -94,9 +94,9 @@
 
                             </tr>
 
-                            @include('admin.usuarios.administradores_delete')
-                            @include('admin.usuarios.administradores_edit')
-                            @include('admin.usuarios.administradores_create')
+                            @include('admin.usuarios.administradores.administradores_delete')
+                            @include('admin.usuarios.administradores.administradores_edit')
+                            @include('admin.usuarios.administradores.administradores_create')
 
 
                             @endforeach

@@ -1,3 +1,5 @@
+
+
 <!-- Modal -->
 <form action="{{route('trayectoria-profesional.store')}}" method="POST">
     @csrf
@@ -9,6 +11,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+
                     <div class="form-group">
                         <label for="empresa">Empresa</label>
                         <input type="text" class="form-control" id="empresa" name="empresa" value="{{ old('empresa')}}" required maxlength="50" >
@@ -48,15 +51,31 @@
 
                     <div class="form-group">
                         <label for="fecha_inicio">Fecha de inicio</label>
-                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required maxlength="20" >
+                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required maxlength="20">
                     </div>
+
+                    {{--Campo fecha de finalización --}}
                     <div class="form-group">
-                        <label for="fecha_finalizacion">Fecha de finalizacion</label>
-                        <input type="date" class="form-control" id="fecha_finalizacion" name="fecha_finalizacion" required maxlength="20" >
+                        <label for="fecha_finalizacion">Fecha de finalización</label>
+                            <input type="date" class="form-control" id="fecha_finalizacion" name="fecha_finalizacion" required maxlength="20" min="1910-01-01" max="2100-12-31"  >
+                            {{-- La class="agree" permite desabilitar o habilitar la fecha de finalización. Este proviene de la función JQuery almacenada en view/layouts/egresado.blase.php --}}
+                            <label><input type="checkbox" class="agree" id="fecha_finalizacion_checkbox" value="Actualmente laborando" name="fecha_finalizacion">Actualmente laborando</label>
                     </div>
+
                     <div class="form-group">
                         <label for="descripcion_responsabilidades">Descripcion de responsabilidades</label>
                         <input type="text" class="form-control" id="descripcion_responsabilidades" name="descripcion_responsabilidades" required maxlength="50" >
+                    </div>
+
+                    <div class="form-group">
+                    <label for="sueldo">Sueldo mensual</label>
+                    <select name="sueldo" class="form-control" id="sueldo" required>
+                            <option selected disabled value="">Seleccione sueldo</option>
+                            <option value="Menos de 2000 soles">Menos de 2000 soles</option>
+                            <option value="Entre 2000 y 5000 soles">Entre 2000 y 5000 soles</option>
+                            <option value="Más de 5000 soles">Más de 5000 soles</option>
+                            <option value="Prefiero no contestar">Prefiero no contestar</option>
+                    </select>
                     </div>
 
                     <div class="form-group">

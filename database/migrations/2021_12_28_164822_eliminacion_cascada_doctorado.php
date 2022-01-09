@@ -16,7 +16,7 @@ class EliminacionCascadaDoctorado extends Migration
         //
         Schema::table('doctorado', function (Blueprint $table) {
 
-            $table->foreign('matricula')->references('matricula')->on('egresado')->after('fecha_final');
+            $table->foreign('matricula')->references('matricula')->on('egresado')->onDelete('cascade')->onUpdate('cascade')->after('fecha_final');
         });
     }
 
@@ -30,8 +30,11 @@ class EliminacionCascadaDoctorado extends Migration
         //
         Schema::table('egresado', function (Blueprint $table) {
 
-            $table->dropColumn('doctorado');
+            /*  $table->dropColumn('doctorado'); */
             Schema::disableForeignKeyConstraints();
+           /*  $table->dropForeign('matricula'); */
+            /* $table->dropColumn('matricula'); */
+
             Schema::enableForeignKeyConstraints();
         });
     }

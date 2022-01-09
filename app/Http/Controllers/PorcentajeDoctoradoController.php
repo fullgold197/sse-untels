@@ -39,6 +39,6 @@ class PorcentajeDoctoradoController extends Controller
         }
 
         /* return $porc_doctorados; */
-        return view('admin.egresado.graficos_doctorado', ["data" => json_encode($puntos)]);
+        return view('admin.datos_estadistiscos.graficos_doctorado', ["data" => json_encode($puntos)]);
     }
 }

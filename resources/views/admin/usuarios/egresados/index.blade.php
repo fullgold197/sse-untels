@@ -13,22 +13,23 @@
         <h4>Gestion de Usuarios</h4>
         <div class="row">
             <div class="col-xl-12">
-                <form action="{{route('usuario.index')}}" method="POST">
+                <!--El método method="GET" get permite buscar las personas solicitadas-->
+                <form action="{{route('usuario.index')}}" method="GET">
 
                     <div class="form-row">
                         <div class="col-sm-4 my-2">
-                            <input type="text" class="form-control" name="texto" value="{{$texto}}">
+                            <input type="text" class="form-control" name="texto" placeholder="Buscar"  value="{{$texto}}">
                         </div>
                         <div class="col-sm-8 my-2">
                             <input type="submit" class="btn btn-dark"  value="Buscar">
                         </div>
                     </div>
-                        <div class="form-row">
+                        {{--  <div class="form-row">
                         <div class="col-auto my-2">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-create">Nuevo</button>
                         </div>
 
-                    </div>
+                        </div>  --}}
                 </form>
 
             </div>
@@ -98,9 +99,9 @@
 
                             </tr>
 
-                            @include('admin.usuarios.delete')
-                            @include('admin.usuarios.edit')
-                            @include('admin.usuarios.create')
+                            @include('admin.usuarios.egresados.delete')
+                            @include('admin.usuarios.egresados.edit')
+                            @include('admin.usuarios.egresados.create')
 
 
                             @endforeach

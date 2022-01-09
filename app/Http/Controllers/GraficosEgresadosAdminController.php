@@ -31,7 +31,7 @@ class GraficosEgresadosAdminController extends Controller
     $egresados = Porcentaje::findOrFail(2);
     $egresados->porcentaje = 100-$porc_maestrias; //suma la cantidad de doc más 1
     $egresados->save();
-    
+
     $egresados = Porcentaje::all();
 
     foreach($egresados as $egresado){
@@ -39,7 +39,7 @@ class GraficosEgresadosAdminController extends Controller
         }
 
     /* return $porc_doctorados; */
-    return view('admin.egresado.graficos',["data"=>json_encode($puntos)]);
+    return view('admin.datos_estadistiscos.graficos_maestria',["data"=>json_encode($puntos)]);
 
 }
 

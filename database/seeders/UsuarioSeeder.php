@@ -108,7 +108,7 @@ class UsuarioSeeder extends Seeder
         User::create(
             [
                 'name' => 'Erika',
-                'email' => 'erika@gmail.com',
+                'email' => 'emanrique@untels.edu.pe',
                 'password' => bcrypt('12345678'),
                 'role_as' => '1',
                 'estado' => '1'

@@ -14,8 +14,9 @@
             Deseas eliminar el usuario: {{$usuario->name}}
           </div>
           <div class="modal-footer">
+            <input type="submit" class="btn btn-danger" value="Eliminar">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <input type="submit" class="btn btn-danger btn-sm" value="Eliminar">
+
           </div>
         </div>
       </div>

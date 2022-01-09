@@ -23,7 +23,7 @@ class EgresadoAcademicoProfesionalController extends Controller
         $egresados0 = DB::table('egresado')
         ->join('users', 'users.egresado_matricula', '=', 'egresado.matricula')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
-        ->select('users.url','egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero', 'egresado.fecha_nacimiento', 'egresado.semestre_ingreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin', 'users.url', 'academico.id_academico', 'academico.carr_profesional')
+        ->select('users.url','egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero', 'egresado.fecha_nacimiento', 'egresado.año_ingreso' ,'egresado.semestre_ingreso', 'egresado.año_egreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin', 'users.url', 'academico.id_academico', 'academico.carr_profesional')
         ->where('matricula', $matricula_id)
         ->get();
 
@@ -38,12 +38,12 @@ class EgresadoAcademicoProfesionalController extends Controller
         ->get();
 
         $egresados3 = DB::table('profesion')
-        ->select('empresa', 'actividad_empresa', 'puesto', 'nivel_experiencia', 'area_puesto', 'subarea', 'pais', 'fecha_inicio', 'fecha_finalizacion')
+        ->select('empresa', 'actividad_empresa', 'puesto', 'nivel_experiencia', 'area_puesto', 'subarea', 'pais', 'fecha_inicio', 'fecha_finalizacion', 'descripcion_responsabilidades', 'sueldo')
         ->where('matricula', $matricula_id)
         ->get();
 
        /*  return $egresados0; */
-        return view('admin.egresado.academico_profesional',compact('egresados0', 'egresados1', 'egresados2', 'egresados3'));
+        return view('admin.egresado.egresado_academico_profesional',compact('egresados0', 'egresados1', 'egresados2', 'egresados3'));
 
 /* return $egresado; devuelve un arreglo(findOrfail) pero no de objetos asi que no necesita ser iterado en un forearch
  */}

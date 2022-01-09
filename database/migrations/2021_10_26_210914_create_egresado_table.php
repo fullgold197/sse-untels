@@ -25,8 +25,10 @@ class CreateEgresadoTable extends Migration
             $table->string('dni', 8)->unique();
             $table->enum('genero', ['Masculino', 'Femenino']);
             $table->date('fecha_nacimiento');
-            $table->string('semestre_ingreso', 10)->nullable();
-            $table->string('semestre_egreso', 10)->nullable();
+            $table->string('año_ingreso', 4)->nullable();
+            $table->string('semestre_ingreso', 1)->nullable();
+            $table->string('año_egreso', 4)->nullable();
+            $table->string('semestre_egreso', 1)->nullable();
             $table->string('celular', 9)->nullable();
             $table->string('pais_origen', 50)->nullable();
             $table->string('departamento_origen', 200)->nullable();
@@ -36,10 +38,12 @@ class CreateEgresadoTable extends Migration
             $table->integer('cant_maestrias')->nullable()->default(0);
             $table->integer('cant_doctorados')->nullable()->default(0);
             $table->string('linkedin', 100)->nullable();
+            $table->string('url')->nullable();
             $table->boolean('habilitado')->default('1');
-            $table->integer('id_academico')->unsigned()->default('1');            $table->foreign('id_academico')->references('id_academico')->on('academico')->unique();
-           /*  $table->integer('id_profesion')->unsigned()->nullable();
-            $table->foreign('id_profesion')->references('id_profesion')->on('profesion')->unique(); */
+            $table->integer('id_academico')->unsigned()->default('1');
+            $table->foreign('id_academico')->references('id_academico')->on('academico')->unique();
+            /* $table->integer('id_egresado_profesion')->unsigned()->nullable(); */
+
             $table->timestamps();
         });
     }

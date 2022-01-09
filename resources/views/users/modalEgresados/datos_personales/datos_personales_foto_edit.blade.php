@@ -1,8 +1,8 @@
 <!-- Modal -->
-<form action="{{route('imagen.update', $egresado->id)}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('imagen.update', $egresado->matricula)}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <div class="modal fade" id="modal-datos-personales-foto-edit-{{$egresado->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-datos-personales-foto-edit-{{$egresado->matricula}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -10,6 +10,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body" align="left">
+
             <div class="form-group">
                 <label for="file"> Seleccione Imagen: </label><br>
                     <input type="file" name="file" id="file" accept="image/*"

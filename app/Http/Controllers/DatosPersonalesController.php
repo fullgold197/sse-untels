@@ -21,7 +21,7 @@ class DatosPersonalesController extends Controller
     {
         $egresados = DB::table('egresado')
         ->join('users', 'egresado.matricula', '=', 'users.egresado_matricula')
-        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.celular', 'egresado.dni', 'users.url', 'users.id')->where('matricula', Auth::user()->egresado_matricula)->get();
+        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.celular', 'egresado.dni', 'users.email', 'egresado.url', 'users.id')->where('matricula', Auth::user()->egresado_matricula)->get();
         /* return $users; */
         return view('users.datospersonales', compact('egresados'));
         /* return view('users.datospersonales', compact('egresados'))->share('layouts.egresado'); */
@@ -80,7 +80,7 @@ class DatosPersonalesController extends Controller
      */
     public function update(Request $request, $matricula)
     {
-        
+
         $egresados = Egresado::findOrFail($matricula);
         $egresados->ap_paterno = $request->input('ap_paterno');
         $egresados->ap_materno = $request->input('ap_materno');
@@ -89,6 +89,11 @@ class DatosPersonalesController extends Controller
         $egresados->celular = $request->input('celular');
         $egresados->fecha_nacimiento = $request->input('fecha_nacimiento');
         $egresados->save();
+
+        DB::table('users')
+        ->where('egresado_matricula', Auth::user()->egresado_matricula)  // find your user by their email
+        ->limit(1)  // optional - to ensure only one record is updated.
+        ->update(array('email' => $request->input('email')));  // update the record in the DB.
             /* return $url; */
         return redirect()->route('datos-personales.index');
     }

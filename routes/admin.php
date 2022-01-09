@@ -13,9 +13,9 @@ use Spatie\Permission\Models\Permission;
 Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::get('/admin', function () {
-        return view('admin.home');
+        return view('admin.inicio.home');
     });
-    
+
 });
 Route::resource('/admin/usuario', UsuarioController::class)->middleware('auth');
 

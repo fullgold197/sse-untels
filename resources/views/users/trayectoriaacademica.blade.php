@@ -41,13 +41,13 @@
                         </tr>
 
                         <tr>
-                        <th>FECHA DE INGRESO</th>
-                        <td>{{$egresado->semestre_ingreso}}</td>
+                        <th>CICLO DE INGRESO</th>
+                        <td>{{$egresado->año_ingreso}}-{{$egresado->semestre_ingreso}}</td>
                         </tr>
 
                         <tr>
-                        <th>FECHA DE EGRESO</th>
-                        <td>{{$egresado->semestre_egreso}}</td>
+                        <th>CICLO DE EGRESO</th>
+                        <td>{{$egresado->año_egreso}}-{{$egresado->semestre_egreso}}</td>
                         </tr>
 
                         @endforeach
@@ -103,20 +103,32 @@
                                 </tbody>
                                 </table>
                                 <div align="right">
-                                    <button  type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->id_maestria}}">
+
+                                    </button>
+                                    <button  type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-maestria-edit-{{$egresado->id_maestria}}">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-delete-{{$egresado->id_maestria}}">
+                                    @if ($doctorados=='0')
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-maestria-delete-{{$egresado->id_maestria}}">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
+                                    @else
+                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                    @endif
+
                                 </div>
                                 </div>
                             </div>
 
 
 
-                            @include('users.modalEgresados.academico_maestria_delete')
-                            @include('users.modalEgresados.academico_edit')
+
+                            @include('users.modalEgresados.academico.maestria.academico_edit')
+                            @include('users.modalEgresados.academico.maestria.academico_maestria_edit')
+                            @include('users.modalEgresados.academico.maestria.academico_maestria_delete')
+
 
 
                         @endforeach
@@ -162,7 +174,7 @@
                                 <td>{{$egresado->doctorado_fecha_final}}</td>
 
                             </tr>
-                             
+
                                 <td colspan="2" align="right">
 
                                 </td>
@@ -170,18 +182,19 @@
 
 
 
-                            @include('users.modalEgresados.academico_doctorado_edit')
-                            @include('users.modalEgresados.academico_doctorado_delete')
+                            @include('users.modalEgresados.academico.doctorado.academico_doctorado_edit')
+                            @include('users.modalEgresados.academico.doctorado.academico_doctorado_delete')
                             </tbody>
                         </table>
                         <div align="right">
-                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-doctorado-edit-{{$egresado->id_doctorado}}">
-                                    <i class="fas fa-edit"></i>
-                                    </button>
 
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-doctorado-delete-{{$egresado->id_doctorado}}">
-                                    <i class="fas fa-trash-alt"></i>
-                                    </button>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-doctorado-edit-{{$egresado->id_doctorado}}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-doctorado-delete-{{$egresado->id_doctorado}}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
                         </div>
 
                         </div>
@@ -193,7 +206,7 @@
 
                         {{--  {{$egresado->id_academico}}  --}}
                         {{--  <input type="hidden" value="{{$egresado->id_academico}}" name="id_academico" />  --}}
-                        @include('users.modalEgresados.academico_create')
+                        @include('users.modalEgresados.academico.academico_create')
 
                     </form>
                 </div>
