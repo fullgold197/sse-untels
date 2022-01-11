@@ -79,7 +79,7 @@ class ImagenController extends Controller
         $egresados = Egresado::findOrFail($matricula);
         $request->validate(
             [
-                'file' => 'image|max:2048'
+                'file' => 'image|max:2048|mimes:jpg,png,jpeg'
             ]
         );
         /* return $request->all();*/
@@ -92,9 +92,6 @@ class ImagenController extends Controller
             $url = Storage::url($ruta);
             if ($egresados->url != '') {  //si ya hay imagenes anteriores entonces eliminarlas y que solo quede la ultima imagen actualizada
                 //unlink(storage_path('app/public/imagenes/subfolder/ '. $egresados->matricula.'/image (1).png'));
-
-
-
             };
             //para obtener la ruta de la imagen correspondiente a app/storage/public/imagenes/subfolder.... hayamos definido en la variable $ruta
             $egresados->update(['url' => $url]);
@@ -113,6 +110,8 @@ class ImagenController extends Controller
 
 
         $egresados->save();
+
+        if ($request->hasFile('file')) {
         $url_users = $url; //la variable $url_users igual la direccion $url
         $egresado_matricula = $matricula; //iguala el campo egresado_matricula con la llave primaria $matricula de la tabla egresado
         //Permite actualizar otra tabla
@@ -120,7 +119,7 @@ class ImagenController extends Controller
         ->where('egresado_matricula', $egresado_matricula) //encuentra el campo solicitado que sería egresado matricula de la tabla users
         ->limit(1) //opcional: para garantizar que solo se actualice un registro.
         ->update(array('url' => $url_users)); //la url representa el campo a actualizar
-
+        }
         /* return $url; */
         return redirect()->route('datos-personales.index');
 

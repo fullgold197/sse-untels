@@ -11,6 +11,28 @@
     <div class="container">
         <h4 class="mb-5 my-2">Importar Registros de Egresados</h4>
         <div class="row">
+
+            @if(isset($errors) && $errors->any())
+                @foreach ($errors->all() as $error)
+                <div class="col-xl-4">
+                <div class="alert alert-danger" role="alert">
+
+                    {{$error}}
+
+                </div>
+                </div>
+                @endforeach
+            @endif
+
+            {{--  Este mensaje se activa cuando los datos de excel han sido importados exitosamente. Esto proviene de Http/Controllers/ReporteAdminController.php  --}}
+            @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{session('success')}}
+                </div>
+                <
+            @endif
+
+
             <div class="col-xl-12">
                 <form action="{{ url('admin/egresado/ImportExcel')}}" method="post" enctype="multipart/form-data">
                     @csrf

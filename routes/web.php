@@ -57,7 +57,7 @@ Route::middleware(['auth', 'isUser'])->group(function () {
     Route::resource('/home/trayectoria-profesional', TrayectoriaProfesionalController::class);
 
 
-    //Ruta para lista de 5 en 5 cualquier lista
+    //Ruta para listar de 5 en 5 cualquier lista
     Route::resource('/permisos', App\Http\Controllers\PermissionController::class);
 
     //Ruta para la vista de cambiar contraseña del egresado

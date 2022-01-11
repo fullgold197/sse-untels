@@ -37,7 +37,7 @@
                 <form action="{{route('egresado.index')}}" method="GET">
                     <div class="form-row" >
                     <div class="col-sm-3 my-2">
-                            <select name="texto" class="form-control"  id="texto" required>
+                            <select name="carrera" class="form-control"  id="texto" required>
                             <option selected disabled value="">Seleccione filtro</option>
                             <option value="">Mostrar todos</option>
                             <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
@@ -48,7 +48,8 @@
                             </select>
                     </div>
                     <div class="col-sm-9 my-2">
-                            <input type="submit" class="btn btn-dark"  value="Filtrar">
+
+                        <input type="submit" class="btn btn-dark"  value="Filtrar">
                     </div>
                     </div>
                 </form>
@@ -76,6 +77,7 @@
                 <div class="row">
                     <div class="form-row">
             <div class="col-auto my-1" >
+
                 <a href="{{ route('imprimir', $valor2)}}"  target="_blank" class="btn btn-danger" ><i class="fas fa-file-pdf"></i></a>
                 </div>
                 <div class="col-auto my-1" >
@@ -168,7 +170,7 @@
                             @include('admin.egresado.egresado_edit')
                             @include('admin.egresado.egresado_delete')
 
-
+                            
                             @endforeach
                             @endif
 

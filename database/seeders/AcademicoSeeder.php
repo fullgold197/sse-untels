@@ -36,7 +36,7 @@ class AcademicoSeeder extends Seeder
 
         Academico::create(
             [
-                'carr_profesional' =>'Ingeniería de sistemas',
+                'carr_profesional' =>'Ingeniería de Sistemas',
             ]
             );
         Academico::create(

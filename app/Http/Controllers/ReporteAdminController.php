@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class ReporteAdminController extends Controller
 {
-    //
+    //Controlador para importar y exportar datos en formato Excel
     public function showReporteEgresados( Request $request,$string)
     {
         if( $string == "empty" )
@@ -32,7 +32,8 @@ class ReporteAdminController extends Controller
         ->orderBy( 'ap_paterno', 'desc' )
         ->get(); */
 
-        $pdf = PDF::LoadView('admin.egresado.pdf',compact('egresados'),['valor2'=>$string])->setPaper('a4', 'landscape'); //->setPaper('a4', 'landscape') permite colocar la hoja en horizontal
+        //Importa los datos en PDF
+        $pdf = PDF::LoadView('admin.egresado.egresado_pdf',compact('egresados'),['valor2'=>$string])->setPaper('a4', 'landscape'); //->setPaper('a4', 'landscape') permite colocar la hoja en horizontal
         return $pdf->stream();
 
 
@@ -42,23 +43,38 @@ class ReporteAdminController extends Controller
         $pdf = PDF::loadView('pdf.test_pdf')->setPaper('a4', 'landscape');
         return $pdf->stream('test_pdf.pdf');
     } */
+
+    //Exportar los datos del excel
     public function exportExcel(){
 
         return Excel::download(new EgresadosExport,'egresados-list.xlsx');
 
     }
 
+    //Retorna hacia la vista para importar el excel
     public function VistaimportExcel(){
-
-
-        return view('admin.egresado.import');
-
+        return view('admin.egresado.egresado_import');
     }
-    public function importExcel(Request $request){
 
+    //Importa los datos del excel
+    public function importExcel(Request $request){
+        //Permite validar si el archivo es distinto de .xlsx
+        $request->validate(
+            [
+                'file' => 'mimes:xlsx'
+            ]
+        );
+        //El if ($request->hasFile('file')) sirve para validar si hay algun archivo vacio
+        if ($request->hasFile('file')) {
         $file=$request->file('file');
+
         Excel::import(new EgresadosImport,$file);
-        return redirect()->to(url('admin/egresado'));
+            return redirect()->route('egresados.Import-excel')->with('success', 'Lista de egresados importados exitosamente.');
+        }
+        else{
+            return redirect()->route('egresados.Import-excel');
+        }
+        /* return back()->withStatus('El archivo excel has sido importado.'); */
 
     }
 
