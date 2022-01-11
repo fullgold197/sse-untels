@@ -83,7 +83,16 @@
                 value="{{$egresado->email}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
                 @endif
             </div>
-
+            <div class="form-group">
+                <label for="linkedin">Linkedin</label>
+                <input type="text" class="form-control" id="linkedin" name="linkedin" required maxlength="100"
+                @if($errors->any()) {{-- Si existe algun error entonces--}}
+                value="{{old('linkedin')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
+                {{$errors->first('linkedin')}}
+                @else
+                value="{{$egresado->linkedin}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
+                @endif
+            </div>
 
 
 

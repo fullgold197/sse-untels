@@ -21,7 +21,7 @@ class DatosPersonalesController extends Controller
     {
         $egresados = DB::table('egresado')
         ->join('users', 'egresado.matricula', '=', 'users.egresado_matricula')
-        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.celular', 'egresado.dni', 'users.email', 'egresado.url', 'users.id')->where('matricula', Auth::user()->egresado_matricula)->get();
+        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.celular', 'egresado.dni', 'egresado.linkedin', 'users.email', 'egresado.url', 'users.id')->where('matricula', Auth::user()->egresado_matricula)->get();
         /* return $users; */
         return view('users.datospersonales', compact('egresados'));
         /* return view('users.datospersonales', compact('egresados'))->share('layouts.egresado'); */
@@ -88,6 +88,7 @@ class DatosPersonalesController extends Controller
         $egresados->genero = $request->input('genero');
         $egresados->celular = $request->input('celular');
         $egresados->fecha_nacimiento = $request->input('fecha_nacimiento');
+        $egresados->linkedin = $request->input('linkedin');
         $egresados->save();
 
         DB::table('users')
