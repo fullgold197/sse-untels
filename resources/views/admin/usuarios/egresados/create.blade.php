@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Correo electronico</label>
-                        <input type="text" class="form-control" id="email" name="email" value="{{ old('email')}}" required maxlength="20" >
+                        <input type="text" class="form-control" id="email" name="email" value="{{ old('email')}}" required maxlength="50" >
                         {{$errors->first('email')}}
                     </div>
                     <div class="form-group">

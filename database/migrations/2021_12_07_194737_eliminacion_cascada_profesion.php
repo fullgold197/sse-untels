@@ -16,7 +16,7 @@ class EliminacionCascadaProfesion extends Migration
         //
         Schema::table('profesion',function (Blueprint $table){
 
-        $table->foreign('matricula')->references('matricula')->on('egresado')->onDelete('cascade')->after('descripcion_responsabilidades');
+        $table->foreign('matricula')->references('matricula')->on('egresado')->onDelete('cascade')->onUpdate('cascade')->after('descripcion_responsabilidades');
      });
 
     }

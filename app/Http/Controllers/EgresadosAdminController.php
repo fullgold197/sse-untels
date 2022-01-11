@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminEgresadoCreateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\EgresadoCreateRequest;
@@ -31,18 +32,21 @@ class EgresadosAdminController extends Controller
         $string = $request->texto;
         }
 
-        $texto=$request->get('texto');
-        $carrera = "Ingeniería de Sistemas";
-
+        $texto=trim($request->get('texto'));
         //trae de la tabla egresa$egresados todo los campos
 
         $egresados=DB::table('egresado')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
-        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero','egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso','egresado.año_egreso' ,'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin','egresado.url', 'academico.id_academico', 'academico.carr_profesional')
-        ->where('ap_paterno','LIKE','%'.$texto.'%')
+        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero','egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso','egresado.año_egreso' ,'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin','egresado.url','egresado.habilitado', 'academico.id_academico', 'academico.carr_profesional')
+        ->where('matricula', 'LIKE', '%' . $texto . '%')
+        ->orwhere('ap_paterno','LIKE','%'.$texto.'%')
+        ->orwhere('ap_materno', 'LIKE', '%' . $texto . '%')
         ->orWhere('nombres', 'LIKE', '%'.$texto.'%')
-        ->orWhere('matricula', 'LIKE', '%'.$texto.'%')
-        ->Where('carr_profesional', 'LIKE', '%'. $texto.'%')
+        ->orWhere('semestre_ingreso', 'LIKE', '%'.$texto.'%')
+        ->orwhere('semestre_egreso', 'LIKE', '%' . $texto . '%')
+        ->orWhere('carr_profesional', 'LIKE', '%'. $texto.'%')
+        ->orWhere('dni', 'LIKE', '%' . $texto . '%')
+        ->orWhere('celular', 'LIKE', '%' . $texto . '%')
         ->orderBy('ap_paterno','asc')
         ->paginate(5);
 
@@ -80,7 +84,7 @@ class EgresadosAdminController extends Controller
      */
     public function create()
     {
-        //
+
 
 
     }
@@ -94,7 +98,6 @@ class EgresadosAdminController extends Controller
     public function store(EgresadoCreateRequest $request)
     {
         //
-
         $egresados=new Egresado;
 
         $egresados->matricula = $request->input('matricula');
@@ -118,20 +121,16 @@ class EgresadosAdminController extends Controller
         $egresados->pais_residencia  = $request->input('pais_residencia');
         $egresados->ciudad_residencia = $request->input('ciudad_residencia');
         $egresados->lugar_residencia = $request->input('lugar_residencia');
-        $egresados->linkedin = $request->input('linkedin');
-        $egresados->id_academico =$request->input('id_academico');
 
+        $egresados->id_academico =$request->input('id_academico');
+        $egresados->habilitado = 0;
         $egresados->save();
 
-        $usuarios = new User;
-        $usuarios->name = $request->input('nombres');
-        $usuarios->dni = $request->input('dni');
-        $usuarios->email = $request->input('matricula').'@untels.edu.pe';
-        $usuarios->egresado_matricula = $request->input('matricula');
-        $usuarios->password = Hash::make($request->input('dni'));
-        $usuarios->estado = 0;
-        $usuarios->role_as = 0;
-        $usuarios->save();
+        
+
+
+
+
         /* return $egresados; */
         return redirect()->route('egresado.index');
 
@@ -206,6 +205,9 @@ class EgresadosAdminController extends Controller
         $egresados->id_academico=$request->input('id_academico');
 
         $egresados->save();
+
+
+
         /* return $egresados; */
         $matricula_id= $egresados->matricula;
         return redirect()->route('egresado.index',['matricula_id'=>$matricula_id]);

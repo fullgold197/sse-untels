@@ -16,6 +16,7 @@ class PermissionController extends Controller
     {
         //
         $permissions=Permission::paginate(5);
+        
         return view('permissions.index',compact('permissions'));
     }
 

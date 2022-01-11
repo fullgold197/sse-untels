@@ -16,7 +16,7 @@ class EliminacionCascada extends Migration
         //
         Schema::table('users',function (Blueprint $table){
 
-        $table->foreign('egresado_matricula')->references('matricula')->on('egresado')->onDelete('cascade')->after('estado');
+        $table->foreign('egresado_matricula')->references('matricula')->on('egresado')->onDelete('cascade')->onUpdate('cascade')->after('estado');
 
         });
     }

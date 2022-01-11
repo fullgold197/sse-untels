@@ -18,7 +18,7 @@ class EliminacionCascadaMaestria extends Migration
 
            /*  $table->foreign('matricula')->references('matricula')->on('Egresado')->after('descripcion_responsabilidades'); */
 
-            $table->foreign('matricula')->references('matricula')->on('egresado')->onDelete('cascade')->after('fecha_final');
+            $table->foreign('matricula')->references('matricula')->on('egresado')->onDelete('cascade')->onUpdate('cascade')->after('fecha_final');
         });
     }
 

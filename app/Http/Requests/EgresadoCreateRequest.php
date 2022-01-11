@@ -30,12 +30,12 @@ class EgresadoCreateRequest extends FormRequest
         return [
 
             //Nuestras reglas o validaciones
-
             'matricula'=> 'required|integer|unique:egresado',
-           // 'matricula' => 'required|unique:users_table,user_name,'.$id.',user_id' ,
+            'dni' => 'required|integer|unique:egresado',
+            // 'matricula' => 'required|unique:users_table,user_name,'.$id.',user_id' ,
 
             //'email' => 'unique:table,email_column_to_check,id_to_ignore'
-
+            /* 'email' => 'required|unique:users|email', */
             'ap_paterno' => 'required|alpha',
             'ap_materno' => 'required|alpha',
             'nombres' => 'required|regex:/^[\pL\s\-]+$/u',
@@ -46,19 +46,15 @@ class EgresadoCreateRequest extends FormRequest
     }
 
     public function messages(){
-
-return [
-    'matricula.integer' => 'Formato no valido, solo numeros',
-    'matricula.unique' => 'El codigo ya existe, por favor eliga otro',
-    'ap_paterno.alpha' => 'Formato no valido, solo letras sin espacios entre ellas',
-    'ap_materno.alpha' => 'Formato no valido, solo letras sin espacios entre ellas',
-    'nombres.regex' => 'Formato no valido, solo letras o espacios entre ellas',
-    'telefono.integer' => 'Formato no valido, solo numeros',
-
-
-
-
-            ];
+        return [
+            'matricula.integer' => 'Formato no válido, solo números',
+            'matricula.unique' => 'El código ya existe, por favor eliga otros',
+            'ap_paterno.alpha' => 'Formato no válido, solo letras sin espacios entre ellas',
+            'ap_materno.alpha' => 'Formato no válido, solo letras sin espacios entre ellas',
+            'nombres.regex' => 'Formato no válido, solo letras o espacios entre ellas',
+            'telefono.integer' => 'Formato no válido, solo números',
+            /* 'email.required' => 'Se está repitiendo el email. Por favor cambie el código de matricula del egresado.' */
+                    ];
 
     }
 }

@@ -17,7 +17,7 @@ class CreateEgresadoTable extends Migration
     {
         Schema::create('egresado', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('matricula', 10)->primary()->unique();
+            $table->string('matricula', 10)->primary()->unique()->onDelete('cascade')->onUpdate('cascade');
             $table->string('ap_paterno', 50);
             $table->string('ap_materno', 50);
             $table->string('nombres', 100);
@@ -39,9 +39,9 @@ class CreateEgresadoTable extends Migration
             $table->integer('cant_doctorados')->nullable()->default(0);
             $table->string('linkedin', 100)->nullable();
             $table->string('url')->nullable();
-            $table->boolean('habilitado')->default('1');
+            $table->boolean('habilitado')->default('0');
             $table->integer('id_academico')->unsigned()->default('1');
-            $table->foreign('id_academico')->references('id_academico')->on('academico')->unique();
+            $table->foreign('id_academico')->references('id_academico')->on('academico')->onUpdate('cascade')->unique();
             /* $table->integer('id_egresado_profesion')->unsigned()->nullable(); */
 
             $table->timestamps();

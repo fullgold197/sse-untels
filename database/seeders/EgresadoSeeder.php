@@ -56,7 +56,8 @@ class EgresadoSeeder extends Seeder
                 'lugar_residencia' => 'Av. Ferreñape 390',
                 'linkedin' => 'www.linkendin.com',
                 'cant_maestrias' => '2',
-                'id_academico' => '1'
+                'id_academico' => '1',
+                'habilitado' => '1'
 
         ]
         );
@@ -83,7 +84,8 @@ class EgresadoSeeder extends Seeder
                 'linkedin' => 'www.linkendin.com',
                 'cant_maestrias' => '2',
                 'cant_doctorados' => '1',
-                'id_academico' => '1'
+                'id_academico' => '1',
+                'habilitado' => '1'
 
             ]
             );
@@ -110,7 +112,8 @@ class EgresadoSeeder extends Seeder
                 'linkedin' => 'www.linkendin.com',
                 'cant_maestrias' => '2',
                 'cant_doctorados' => '1',
-                'id_academico' => '1'
+                'id_academico' => '1',
+                'habilitado' => '1'
                 ]
                 );
                 Egresado::create(
@@ -135,7 +138,8 @@ class EgresadoSeeder extends Seeder
                 'lugar_residencia' => 'Av. Chavez 728',
                 'linkedin' => 'www.linkendin.com',
                 'cant_maestrias' => '2',
-                'id_academico' => '1'
+                'id_academico' => '1',
+                'habilitado' => '1'
                     ]
                     );
                 Egresado::create(
@@ -160,7 +164,8 @@ class EgresadoSeeder extends Seeder
                             'lugar_residencia' => 'Av. Habana 458',
                             'linkedin' => 'www.linkendin.com',
                             'cant_maestrias' => '2',
-                            'id_academico' => '2'
+                            'id_academico' => '2',
+                            'habilitado' => '1'
                         ]
                         );
 

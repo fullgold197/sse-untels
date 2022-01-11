@@ -59,7 +59,9 @@
                         <label for="fecha_finalizacion">Fecha de finalización</label>
                             <input type="date" class="form-control" id="fecha_finalizacion" name="fecha_finalizacion" required maxlength="20" min="1910-01-01" max="2100-12-31"  >
                             {{-- La class="agree" permite desabilitar o habilitar la fecha de finalización. Este proviene de la función JQuery almacenada en view/layouts/egresado.blase.php --}}
-                            <label><input type="checkbox" class="agree" id="fecha_finalizacion_checkbox" value="Actualmente laborando" name="fecha_finalizacion">Actualmente laborando</label>
+                            <label>
+                                <input type="checkbox" class="agree" id="fecha_finalizacion_checkbox" value="Actualmente laborando" name="fecha_finalizacion">Actualmente laborando
+                            </label>
                     </div>
 
                     <div class="form-group">

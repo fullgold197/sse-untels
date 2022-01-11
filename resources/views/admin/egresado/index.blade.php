@@ -37,7 +37,7 @@
                 <form action="{{route('egresado.index')}}" method="GET">
                     <div class="form-row" >
                     <div class="col-sm-3 my-2">
-                            <select name="carrera" class="form-control"  id="texto" required>
+                            <select name="texto" class="form-control"  id="texto" required>
                             <option selected disabled value="">Seleccione filtro</option>
                             <option value="">Mostrar todos</option>
                             <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
@@ -48,7 +48,6 @@
                             </select>
                     </div>
                     <div class="col-sm-9 my-2">
-
                         <input type="submit" class="btn btn-dark"  value="Filtrar">
                     </div>
                     </div>
@@ -56,6 +55,7 @@
             </div>
         </div>
 
+        {{--  Crear nuevo egresado  --}}
         <div class="container">
         <div class="row" >
             <div class="col-xl-12" >
@@ -90,6 +90,17 @@
 
             </div>
         </div>
+         @if(isset($errors) && $errors->any())
+                @foreach ($errors->all() as $error)
+                <div class="col-xl-4">
+                <div class="alert alert-danger" role="alert">
+
+                    {{$error}}
+
+                </div>
+                </div>
+                @endforeach
+            @endif
 
     </div>
 
@@ -106,13 +117,16 @@
                                 <th>Ciclo de ingreso</th>
                                 <th>Ciclo de egreso</th>
                                 <th>Celular</th>
+                                <th>DNI</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {{--  Permite mostrar un mensaje de no hay resultados si no se encuentra lo buscado  --}}
+
                             @if (count($egresados)<=0)
                                 <tr class="text-center">
-                                    <td colspan="8">No hay resultados</td>
+                                    <td colspan="9">No hay resultados</td>
                                 </tr>
                             @else
                                 @foreach ($egresados as $egresado)
@@ -132,25 +146,42 @@
                                 <td class="text-capitalize">{{$egresado->ap_paterno}} {{$egresado->ap_materno}} {{$egresado->nombres}}</td>
                                 <td>{{$egresado->año_ingreso}}-{{$egresado->semestre_ingreso}}</td>
                                 <td>{{$egresado->año_egreso}}-{{$egresado->semestre_egreso}}</td>
-                                {{--  <td>{{$egresado->genero}}</td>
-                                <td>{{$egresado->fecha_nacimiento}}</td>  --}}
                                 <td>{{$egresado->celular}}</td>
+                                <td>{{$egresado->dni}}</td>
+                                {{--  <td>{{$egresado->egresado_matricula}}</td>  --}}
                                 <td>
 
-                                <!-- Button trigger modal -->
+                                {{--  Crear usuario de egresado automaticamente. Pendiente  --}}
+
+                                @if ($egresado->habilitado=='0')
+                                <form action="{{route('usuario.store')}}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-dark"      data-bs-toggle="modal" data-bs-target="#modal">
+                                <i class="fas fa-user-plus"></i>
+                                </button>
+                                <input type="hidden" name="nombres" value="{{$egresado->nombres}}">
+                                <input type="hidden" name="dni" value="{{$egresado->dni}}">
+                                <input type="hidden" name="matricula" value="{{$egresado->matricula}}">
+                                <input type="hidden" name="regresar" value="1">
+                                {{--  <input type="hidden" name="crear_egresado" value="0">  --}}
+                                </form>
+                                @endif
+
+                                {{--  Ver lista completa de datos de egresado  --}}
                                 <form action="{{route('academico-profesional.index')}}" method="GET">
-{{--                                 <a href="{{route('academico-profesional.index')}}">
- --}}
                                 <button type="submit" class="btn btn-info btn-sm"      data-bs-toggle="modal" data-bs-target="#modal">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
-
                                 </button>
 
                                 <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}"
                                 <input type="hidden" name="url" value="{{$egresado->matricula}}">
                                 </form>
-                                </a>
 
+
+
+
+
+                                {{--  Editar egresado --}}
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->matricula}}">
                                 <i class="fas fa-edit"></i>
                                 </button>
@@ -159,24 +190,27 @@
                                 <i class="fas fa-edit"></i>
                                 </button>  --}}
 
+                                {{--  Eliminar egresado --}}
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-delete-{{$egresado->matricula}}">
                                 <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>
 
                             </tr>
-                            {{-- Poner aquí los include.. --}}
+                            {{-- Estos includes permite activar la vista de los modales. Poner aquí los include. --}}
                             @include('admin.egresado.egresado_create')
                             @include('admin.egresado.egresado_edit')
                             @include('admin.egresado.egresado_delete')
 
-                            
+
                             @endforeach
                             @endif
 
                         </tbody>
                     </table>
-                    {{$egresados->links()}}
+
+                    {{--  Permite mostrar los egresados en paginaciones. El comando appends permite que la variable de busqueda no se pierda. Es necesario poner el nombre de la variable.  --}}
+                    {{$egresados->appends(['texto'=>$texto])}}
 
                 </div>
 

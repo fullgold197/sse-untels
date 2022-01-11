@@ -27,10 +27,10 @@ class AdminEgresadoCreateRequest extends FormRequest
             //
              //Nuestras reglas o validaciones
 
-             'egresado_matricula'=> 'required|integer|unique:users,egresado_matricula',
-             // 'matricula' => 'required|unique:users_table,user_name,'.$id.',user_id' ,
+             'egresado_matricula'=> 'required|integer|bail|unique:users,egresado_matricula',
+             
 
-              'email' => 'required|unique:users|email',
+            'email' => 'required|unique:users|email',
 
             'name' => 'required|required|regex:/^[a-zA-Z0-9,.!? ]*$/',
 

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('estado')->default('1');
             $table->string('egresado_matricula', 10)->nullable();
             $table->string('dni', 8)->nullable();
-            $table->foreign('dni')->references('dni')->on('egresado')->unique();
+            $table->foreign('dni')->references('dni')->on('egresado')->onDelete('cascade')->onUpdate('cascade')->unique();
             $table->string('api_token')->unique()->nullable()->default(null);
             $table->rememberToken();
             $table->string('url')->nullable();

@@ -149,11 +149,7 @@
                         {{$errors->first('lugar_residencia')}}
                     </div>
 
-                    <div class="form-group">
-                        <label for="linkedin">Linkedin</label>
-                        <input type="text" class="form-control" id="linkedin" name="linkedin" value="{{ old('linkedin')}}"  maxlength="20">
-                        {{$errors->first('linkedin')}}
-                    </div>
+                   
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Guardar</button>

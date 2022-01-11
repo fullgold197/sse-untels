@@ -68,12 +68,7 @@
                             <tr>
                                 <th>DESCRIPCIÓN DE RESPONSABILIDADES</th>
                                 <td>{{$egresado->descripcion_responsabilidades}}</td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
+         
                             </tr>
                             <tr>
                                 <th>SUELDO</th>

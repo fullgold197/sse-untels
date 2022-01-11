@@ -58,16 +58,29 @@ class UsuarioController extends Controller
      */
     public function store(AdminEgresadoCreateRequest $request)
     {
+        $regresar = $request->get('regresar');
         $usuarios = new User;
-        $usuarios->name = $request->input('name');
-        $usuarios->email = $request->input('email');
+        $usuarios->name = $request->input('nombres');
+        $usuarios->email = $request->input('matricula') . '@untels.edu.pe';
         $usuarios->password = Hash::make($request->input('password'));
-        $usuarios->egresado_matricula = $request->input('egresado_matricula');
-        /* $usuarios->role_as = $request->input('role_as'); */
-        $usuarios->estado = $request->input('estado');
+        $usuarios->egresado_matricula = $request->input('matricula');
+        $usuarios->dni = $request->input('dni');
+        $usuarios->estado = 0;
         $usuarios->save();
-        return $usuarios;
-        return redirect()->route('usuario.index');
+
+        DB::table('egresado')
+        ->where('matricula', $request->input('matricula'))
+        ->limit(1)
+        ->update(array('habilitado' => 1));
+
+        /* return $usuarios; */
+        if($regresar=='1'){
+            return redirect()->route('egresado.index');
+        }
+        else{
+            return redirect()->route('usuario.index');
+        }
+
     }
 
     /**
@@ -138,11 +151,19 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $egresado_matricula =$request->get('egresado_matricula');
+        DB::table('egresado')
+        ->where('matricula', $egresado_matricula)  // find your user by their email
+        ->limit(1)  // optional - to ensure only one record is updated.
+        ->update(array('habilitado' =>'0'));  // update the record in the DB.
+
         $usuarios = User::findOrFail($id);
         $usuarios->delete();
         return redirect()->route('usuario.index');
+
+
     }
 
 }
