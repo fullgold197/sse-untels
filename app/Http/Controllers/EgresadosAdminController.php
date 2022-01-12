@@ -33,11 +33,20 @@ class EgresadosAdminController extends Controller
         }
 
         $texto=trim($request->get('texto'));
-        //trae de la tabla egresa$egresados todo los campos
-
+        //trae de la tabla $egresados todo los campos
+        $tipo_filtrado= $request->get('tipo_filtrado');
+        $orden= $request->get('orden');
+        if($tipo_filtrado==NULL || $orden== NULL){
+            $tipo_filtrado='ap_paterno';
+            $orden='asc';
+        } else{
+            $tipo_filtrado = $request->get('tipo_filtrado');
+            $orden = $request->get('orden');
+        }
+        /* return $orden; */
         $egresados=DB::table('egresado')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
-        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero','egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso','egresado.año_egreso' ,'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin','egresado.url','egresado.habilitado', 'academico.id_academico', 'academico.carr_profesional')
+        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero','egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso','egresado.año_egreso' ,'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin','egresado.url','egresado.habilitado', 'egresado.created_at', 'egresado.updated_at', 'academico.id_academico', 'academico.carr_profesional')
         ->where('matricula', 'LIKE', '%' . $texto . '%')
         ->orwhere('ap_paterno','LIKE','%'.$texto.'%')
         ->orwhere('ap_materno', 'LIKE', '%' . $texto . '%')
@@ -47,14 +56,14 @@ class EgresadosAdminController extends Controller
         ->orWhere('carr_profesional', 'LIKE', '%'. $texto.'%')
         ->orWhere('dni', 'LIKE', '%' . $texto . '%')
         ->orWhere('celular', 'LIKE', '%' . $texto . '%')
-        ->orderBy('ap_paterno','asc')
-        ->paginate(5);
+        ->orderBy($tipo_filtrado, $orden)
+        ->paginate(3);
 
-       /*  return $egresados; */
+
 
        /*  */
 
-         return view('admin.egresado.index',compact('egresados','texto'),[ 'valor2' => $string ]);
+         return view('admin.egresado.index',compact('egresados','texto', 'tipo_filtrado', 'orden'),[ 'valor2' => $string ]);
 
 
 }
@@ -126,13 +135,15 @@ class EgresadosAdminController extends Controller
         $egresados->habilitado = 0;
         $egresados->save();
 
-        
+
 
 
 
 
         /* return $egresados; */
-        return redirect()->route('egresado.index');
+        /* return redirect()->route('egresado.index'); */
+        $path = $_SERVER['HTTP_REFERER'];
+        return redirect($path);
 
     }
 
@@ -210,7 +221,8 @@ class EgresadosAdminController extends Controller
 
         /* return $egresados; */
         $matricula_id= $egresados->matricula;
-        return redirect()->route('egresado.index',['matricula_id'=>$matricula_id]);
+        $path = $_SERVER['HTTP_REFERER'];
+        return redirect($path);
 
         //return $matricula_id; si envia el id
     }
@@ -226,7 +238,8 @@ class EgresadosAdminController extends Controller
         //
         $egresados = Egresado::findOrFail($matricula);
         $egresados->delete();
-        return redirect()->route('egresado.index');
+        $path=$_SERVER['HTTP_REFERER'];
+        return redirect($path);
     }
     //funcion para exportar datos a formato PDF esta ubicado ahora en ReporteAdminController
 

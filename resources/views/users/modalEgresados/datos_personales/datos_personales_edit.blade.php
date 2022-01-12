@@ -12,57 +12,7 @@
           <div class="modal-body" align="left">
 
 
-            <div class="form-group">
-                <label for="ap_paterno">Apellido Paterno</label>
-                <input type="text" class="form-control" id="ap_paterno" name="ap_paterno" required maxlength="20"
 
-                @if($errors->any()) {{-- Si existe algun error entonces--}}
-                value="{{old('ap_paterno')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
-                {{$errors->first('ap_paterno')}}
-                @else
-                value="{{$egresado->ap_paterno}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
-                @endif
-
-            </div>
-            <div class="form-group">
-                <label for="ap_materno">Apellido Materno</label>
-                <input type="text" class="form-control" id="ap_materno" name="ap_materno" required maxlength="20"
-                @if($errors->any()) {{-- Si existe algun error entonces--}}
-                value="{{old('ap_materno')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
-                {{$errors->first('ap_materno')}}
-                @else
-                value="{{$egresado->ap_materno}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="nombres">Nombres</label>
-                <input type="text" class="form-control" id="nombres" name="nombres" required maxlength="20"
-                @if($errors->any()) {{-- Si existe algun error entonces--}}
-                value="{{old('nombres')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
-                {{$errors->first('nombres')}}
-                @else
-                value="{{$egresado->nombres}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="genero">Genero</label>
-                <select name="genero" class="form-control" id="genero" >
-
-                    <option value="Masculino" {{$egresado->genero=="Masculino" ? 'selected' : '' }}>Masculino</option>
-                    <option value="Femenino" {{$egresado->genero=="Femenino" ? 'selected' : '' }}>Femenino</option>
-                  </select>
-
-            </div>
-            <div class="form-group">
-                <label for="fecha_nacimiento">Fecha de nacimiento</label>
-                <input type="date" class="form-control" id="fecha_nacimiento"  min="1910-01-01" max="2100-12-31" name="fecha_nacimiento" required maxlength="20"
-                @if($errors->any()) {{-- Si existe algun error entonces--}}
-                value="{{old('fecha_nacimiento')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
-                {{$errors->first('fecha_nacimiento')}}
-                @else
-                value="{{$egresado->fecha_nacimiento}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
-                @endif
-            </div>
             <div class="form-group">
                 <label for="celular">Teléfono</label>
                 <input type="text" class="form-control" id="celular" name="celular" required maxlength="20"
@@ -84,6 +34,56 @@
                 @endif
             </div>
             <div class="form-group">
+                <label for="pais_origen">País de origen</label>
+                <input type="text" class="form-control" id="pais_origen" name="pais_origen" required maxlength="100"
+                @if($errors->any()) {{-- Si existe algun error entonces--}}
+                value="{{old('pais_origen')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
+                {{$errors->first('pais_origen')}}
+                @else
+                value="{{$egresado->pais_origen}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
+                @endif
+            </div>
+            <div class="form-group">
+                <label for="departamento_origen">Departamento de origen</label>
+                <input type="text" class="form-control" id="departamento_origen" name="departamento_origen" required maxlength="100"
+                @if($errors->any()) {{-- Si existe algun error entonces--}}
+                value="{{old('departamento_origen')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
+                {{$errors->first('departamento_origen')}}
+                @else
+                value="{{$egresado->departamento_origen}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
+                @endif
+            </div>
+            <div class="form-group">
+                <label for="pais_residencia">País de residencia</label>
+                <input type="text" class="form-control" id="pais_residencia" name="pais_residencia" required maxlength="100"
+                @if($errors->any()) {{-- Si existe algun error entonces--}}
+                value="{{old('pais_residencia')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
+                {{$errors->first('pais_residencia')}}
+                @else
+                value="{{$egresado->pais_residencia}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
+                @endif
+            </div>
+            <div class="form-group">
+                <label for="ciudad_residencia">Ciudad de residencia</label>
+                <input type="text" class="form-control" id="ciudad_residencia" name="ciudad_residencia" required maxlength="100"
+                @if($errors->any()) {{-- Si existe algun error entonces--}}
+                value="{{old('ciudad_residencia')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
+                {{$errors->first('ciudad_residencia')}}
+                @else
+                value="{{$egresado->ciudad_residencia}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
+                @endif
+            </div>
+            <div class="form-group">
+                <label for="lugar_residencia">Lugar de residencia</label>
+                <input type="text" class="form-control" id="lugar_residencia" name="lugar_residencia" required maxlength="100"
+                @if($errors->any()) {{-- Si existe algun error entonces--}}
+                value="{{old('lugar_residencia')}}">   {{-- Ojo aqui se debe cerrar el input con ">" si ingresa a la condicion --}}
+                {{$errors->first('lugar_residencia')}}
+                @else
+                value="{{$egresado->lugar_residencia}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
+                @endif
+            </div>
+            <div class="form-group">
                 <label for="linkedin">Linkedin</label>
                 <input type="text" class="form-control" id="linkedin" name="linkedin" required maxlength="100"
                 @if($errors->any()) {{-- Si existe algun error entonces--}}
@@ -93,6 +93,8 @@
                 value="{{$egresado->linkedin}}"> {{--Si no ingresa a la condicion tambien debe cerrarse el input con ">" --}}
                 @endif
             </div>
+            
+
 
 
 

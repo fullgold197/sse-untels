@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Admin')
+@section('title', 'Lista de egresados')
 
 @section('content_header')
 
@@ -10,9 +10,10 @@
 <link href="{{ asset('css/letras.css') }}" rel="stylesheet">
 <link href="{{ asset('css/espacio_div.css') }}" rel="stylesheet">
 
-    <body>
+
     <div class="container" id="">
         <h4 >Gestion de Egresados</h4>
+        {{--  Buscar  --}}
         <div class="row" >
             {{--  class="col-xl-12" para indicar que se va a dividir en 12 columnas  --}}
             <div class="col-xl-12" >
@@ -31,32 +32,66 @@
 
             </div>
         </div>
+
+
+
+
+        {{--  Ordenar por campo seleccionado  --}}
         <div class="row" >
-            {{--  class="col-xl-12" para indicar que se va a dividir en 12 columnas  --}}
+            {{--  Seleccion de carreras  --}}
+            {{-- La class="col-xl-12" para indicar que se va a dividir en 12 columnas  --}}
             <div class="col-xl-12" >
                 <form action="{{route('egresado.index')}}" method="GET">
                     <div class="form-row" >
                     <div class="col-sm-3 my-2">
-                            <select name="texto" class="form-control"  id="texto" required>
+                        <select name="texto" class="form-control"  id="texto" required>
                             <option selected disabled value="">Seleccione filtro</option>
-                            <option value="">Mostrar todos</option>
-                            <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
-                            <option value="Ingeniería Electrónica y Telecomunicaciones">Ingeniería Electrónica y Telecomunicaciones</option>
-                            <option value="Ingeniería Ambiental">Ingeniería Ambiental</option>
-                            <option value="Ingeniería Mecánica y Eléctrica">Ingeniería Mecánica y Eléctrica</option>
-                            <option value="Administración de Empresas">Administración de Empresas</option>
+                            <option value="">Todas las carreras</option>
+                            <option value="Ingeniería de Sistemas" {{$texto=="Ingeniería de Sistemas" ? 'selected' : '' }}>Ingeniería de Sistemas</option>
+                            <option value="Ingeniería Electrónica y Telecomunicaciones" {{$texto=="Ingeniería Electrónica y Telecomunicaciones" ? 'selected' : '' }}>Ingeniería Electrónica y Telecomunicaciones</option>
+                            <option value="Ingeniería Ambiental" {{$texto=="Ingeniería Ambiental" ? 'selected' : '' }}>Ingeniería Ambiental</option>
+                            <option value="Ingeniería Mecánica y Eléctrica" {{$texto=="Ingeniería Mecánica y Eléctrica" ? 'selected' : '' }}>Ingeniería Mecánica y Eléctrica</option>
+                            <option value="Administración de Empresas" {{$texto=="Administración de Empresas" ? 'selected' : '' }}>Administración de Empresas</option>
                             </select>
                     </div>
-                    <div class="col-sm-9 my-2">
-                        <input type="submit" class="btn btn-dark"  value="Filtrar">
+
+                    {{--  Ordenar por el campo seleccionado  --}}
+                    <div class="col-sm-3 my-2">
+                            {{-- Para evitar que la página pierda el dato que estamos buscando en necesario poner un selected. {{$tipo_filtrado=="matricula" ? 'selected' : '' }}.
+                            Aqui se captura la variable $tipo_filtrado que viene del controlador EgresadoAdminController e iguala con el campo que se desee.  --}}
+                            <select name="tipo_filtrado" class="form-control"  id="tipo_filtrado" required>
+                            <option selected disabled value="">Seleccione campo</option>
+                            <option value="matricula" {{$tipo_filtrado=="matricula" ? 'selected' : '' }}>Código de matricula</option>
+                            <option value="ap_paterno" {{$tipo_filtrado=="ap_paterno" ? 'selected' : '' }}>Apellidos y nombres</option>
+                            <option value="dni" {{$tipo_filtrado=="dni" ? 'selected' : '' }}>DNI</option>
+                            <option value="año_ingreso" {{$tipo_filtrado=="año_ingreso" ? 'selected' : '' }}>Año de ingreso</option>
+                            <option value="año_egreso" {{$tipo_filtrado=="año_egreso" ? 'selected' : '' }}>Año de egreso</option>
+                            <option value="carr_profesional" {{$tipo_filtrado=="carr_profesional" ? 'selected' : '' }}>Carrera profesional</option>
+                            <option value="created_at" {{$tipo_filtrado=="created_at" ? 'selected' : '' }}>Fecha de creación</option>
+                            <option value="updated_at" {{$tipo_filtrado=="updated_at" ? 'selected' : '' }}>Fecha de modificación</option>
+                            </select>
+                    </div>
+
+                    {{--  Ordenar por ascendente o descendente --}}
+                    <div class="col-sm-3 my-2">
+                            <select name="orden" class="form-control"  id="orden" required>
+                            <option selected disabled value="">Seleccione orden</option>
+                            <option value="asc" {{$orden=="asc" ? 'selected' : '' }}>Ascendente</option>
+                            <option value="desc" {{$orden=="desc" ? 'selected' : '' }}>Descendente</option>
+                            </select>
+                    </div>
+                    <div class="col-sm-3 my-2">
+                        <input type="submit" class="btn btn-dark"  value="Mostrar">
                     </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        {{--  Crear nuevo egresado  --}}
 
+
+
+        {{--  Crear nuevo egresado  --}}
         <div class="row" >
             <div class="col-xl-12" >
                 <button type="button" class="btn btn-primary" id="open" data-bs-toggle="modal" data-bs-target="#modal-create">
@@ -67,44 +102,44 @@
 
     </div>
 
-
-
-
-
-
-        <div class="container">
+    <div class="container">
             <div class="col-xl-12">
                 <div class="row">
                     <div class="form-row">
-            <div class="col-auto my-1" >
+                        <div class="col-auto my-1" >
+                            <a href="{{ route('imprimir', $valor2)}}"  target="_blank" class="btn btn-danger" ><i class="fas fa-file-pdf"></i></a>
+                        </div>
 
-                <a href="{{ route('imprimir', $valor2)}}"  target="_blank" class="btn btn-danger" ><i class="fas fa-file-pdf"></i></a>
-                </div>
-                <div class="col-auto my-1" >
-                    <a href="{{ route('egresados.Export-excel')}}"  target="_blank" class="btn btn-success" ><i class="fas fa-file-export"></i></a>
+                        <div class="col-auto my-1" >
+                            <a href="{{ route('egresados.Export-excel')}}"  target="_blank" class="btn btn-success" ><i class="fas fa-file-export"></i></a>
+                        </div>
+
+                        <div class="col-auto my-1">
+                            <a href="{{ route('egresados.Import-excel')}}" class="btn btn-warning" ><i class="fas fa-upload"></i></a>
+                        </div>
+
                     </div>
-            <div class="col-auto my-1">
-
-                <a href="{{ route('egresados.Import-excel')}}" class="btn btn-warning" ><i class="fas fa-upload"></i></a>
                 </div>
+
 
             </div>
-        </div>
-         @if(isset($errors) && $errors->any())
-                @foreach ($errors->all() as $error)
-                <div class="col-xl-4">
-                <div class="alert alert-danger" role="alert">
-
-                    {{$error}}
-
-                </div>
-                </div>
-                @endforeach
-        @endif
-
     </div>
+    
+                    @if(isset($errors) && $errors->any())
+                        @foreach ($errors->all() as $error)
 
-    </div>
+
+                        <div class="col-xl-4">
+                        <div class="alert alert-danger" role="alert">
+
+                            {{$error}}
+
+                        </div>
+                        </div>
+
+                        @endforeach
+                    @endif
+
             <div class="col-xl-12 my-2">
                 <div class="table-responsive ">
                     <table class="table table-striped" >
@@ -150,11 +185,21 @@
                                 <td>{{$egresado->dni}}</td>
 
                                 <td>
+                                {{--  Ver lista completa de datos de egresado  --}}
+                                <form action="{{route('academico-profesional.index')}}" method="GET">
+                                <button type="submit" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modal">
+                                <i class="fa fa-eye " aria-hidden="true"></i>
+                                </button>
+
+                                <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}"
+                                <input type="hidden" name="url" value="{{$egresado->matricula}}">
+                                </form>
+
                                 {{--  Crear usuario de egresado automaticamente.  --}}
                                 @if ($egresado->habilitado=='0')
                                 <form action="{{route('usuario.store')}}" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal">
+                                <button type="submit" class="btn btn-dark btn-sm my-1" data-bs-toggle="modal" data-bs-target="#modal">
                                 <i class="fas fa-user-plus"></i>
                                 </button>
                                 <input type="hidden" name="name" value="{{$egresado->nombres}}">
@@ -165,15 +210,7 @@
 
                                 </form>
                                 @endif
-                                {{--  Ver lista completa de datos de egresado  --}}
-                                <form action="{{route('academico-profesional.index')}}" method="GET">
-                                <button type="submit" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modal">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                </button>
 
-                                <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}"
-                                <input type="hidden" name="url" value="{{$egresado->matricula}}">
-                                </form>
                                 </td>
 
                                 <td>
@@ -182,7 +219,7 @@
                                 <i class="fas fa-edit"></i>
                                 </button>
                                 {{--  Eliminar egresado --}}
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-delete-{{$egresado->matricula}}">
+                                <button type="button" class="btn btn-danger btn-sm my-1" data-bs-toggle="modal" data-bs-target="#modal-delete-{{$egresado->matricula}}">
                                 <i class="fas fa-trash-alt"></i>
                                 </button>
                                 </td>
@@ -204,17 +241,17 @@
                     </table>
 
                     {{--  Permite mostrar los egresados en paginaciones. El comando appends permite que la variable de busqueda no se pierda. Es necesario poner el nombre de la variable.  --}}
-                    {{$egresados->appends(['texto'=>$texto])}}
+                    {{$egresados->appends(['texto'=>$texto,'tipo_filtrado'=>$tipo_filtrado,'orden'=>$orden])->links()}}
 
                 </div>
 
             </div>
 
-        </div>
-
     </div>
 
-    </body>
+</div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 

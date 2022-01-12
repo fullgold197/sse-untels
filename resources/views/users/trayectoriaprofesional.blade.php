@@ -1,4 +1,5 @@
 @extends('layouts.egresado')
+@section('title', 'Trayectoria profesional')
 @section('content')
     <div class="container">
         <div class="row">
@@ -68,7 +69,7 @@
                             <tr>
                                 <th>DESCRIPCIÓN DE RESPONSABILIDADES</th>
                                 <td>{{$egresado->descripcion_responsabilidades}}</td>
-         
+
                             </tr>
                             <tr>
                                 <th>SUELDO</th>

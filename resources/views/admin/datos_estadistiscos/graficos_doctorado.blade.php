@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+
     <body>
     <div class="container">
         <h4 class="mb-5 my-2">Grafico de Egresados</h4>

@@ -244,8 +244,7 @@
 
     <div align="center" >
         <div class="modal-header" align="center">
-        <button type="button" class="btn btn-danger"  >
-            <a href="{{route('egresado.index')}}" style="color:#FFFFFF" >Regresar</a>
+        <a href="{{url()->previous()}}"><button type="button" class="btn btn-danger">Regresar
         </button>
         </div>
     </div>

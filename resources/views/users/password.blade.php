@@ -1,5 +1,5 @@
 @extends('layouts.egresado')
-
+@section('title', 'Cambiar contraseña')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -60,7 +60,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Guardar') }}
                                 </button>
-                                <a href="{{Route('home')}}">Regresar</a>
+
+                                <a href="{{Route('home')}}"><button type="button" class="btn btn-secondary">Regresar</button></a>
+
                             </div>
                         </div>
                     </form>

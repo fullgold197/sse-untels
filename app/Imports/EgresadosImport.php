@@ -101,7 +101,7 @@ class EgresadosImport implements ToModel, WithValidation
         return [
             //Aqui se está validando en el campo matricula de la bd que el codigo debe ser único
             '0' =>[
-                'integer','unique:egresado,matricula', 'digits_between:10,10', 'required'
+                'integer','unique:egresado,matricula', 'digits:10', 'required'
            ],
             '1' => [
                 'string','required'
@@ -116,7 +116,7 @@ class EgresadosImport implements ToModel, WithValidation
                 'string', 'required'
             ],
             '5' => [
-                'integer', 'unique:egresado,dni', 'digits_between:8,8', 'required'
+                'integer', 'unique:egresado,dni', 'digits:8', 'required'
             ],
             '6' => [
                 'string', 'required'
@@ -192,7 +192,7 @@ class EgresadosImport implements ToModel, WithValidation
 
     }
 
-    public function messages()
+    /* public function messages()
     {
 
         return [
@@ -200,5 +200,5 @@ class EgresadosImport implements ToModel, WithValidation
             '5' => 'r2beat',
 
         ];
-    }
+    } */
 }

@@ -1,5 +1,5 @@
-
 @extends('layouts.egresado')
+@section('title', 'Trayectoria académica')
 @section('content')
 
 

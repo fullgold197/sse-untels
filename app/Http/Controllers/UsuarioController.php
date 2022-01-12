@@ -34,6 +34,10 @@ class UsuarioController extends Controller
         ->where('name', 'LIKE', '%' . $texto . '%')
         ->orWhere('email', 'LIKE', '%' . $texto . '%')
         ->orWhere('role_as', 'LIKE', '%' . $texto . '%')
+        ->orWhere('ap_paterno', 'LIKE', '%' . $texto . '%')
+        ->orWhere('ap_materno', 'LIKE', '%' . $texto . '%')
+        ->orWhere('nombres', 'LIKE', '%' . $texto . '%')
+        ->orWhere('matricula', 'LIKE', '%' . $texto . '%')
         ->orderBy('name', 'asc')
         ->paginate(5);
        /*  return $usuarios; */
@@ -76,10 +80,14 @@ class UsuarioController extends Controller
 
         /* return $usuarios; */
         if($regresar=='1'){
-            return redirect()->route('egresado.index');
+            /* return redirect()->route('egresado.index'); */
+            $path = $_SERVER['HTTP_REFERER'];
+            return redirect($path);
         }
         else{
-            return redirect()->route('usuario.index');
+            /* return redirect()->route('usuario.index'); */
+            $path = $_SERVER['HTTP_REFERER'];
+            return redirect($path);
         }
 
     }
@@ -138,9 +146,14 @@ class UsuarioController extends Controller
         }
 
         if ($role_as == '0') {
-            return redirect()->route('usuario.index');
+
+            $path = $_SERVER['HTTP_REFERER'];
+            return redirect($path);
+         /*    return redirect()->route('usuario.index'); */
         } else if ($role_as == '1') {
-            return redirect()->route('administradores.index');
+            $path = $_SERVER['HTTP_REFERER'];
+            return redirect($path);
+            /* return redirect()->route('administradores.index'); */
         }
 
 
@@ -162,7 +175,9 @@ class UsuarioController extends Controller
 
         $usuarios = User::findOrFail($id);
         $usuarios->delete();
-        return redirect()->route('usuario.index');
+        /* return redirect()->route('usuario.index'); */
+        $path = $_SERVER['HTTP_REFERER'];
+        return redirect($path);
 
 
     }
