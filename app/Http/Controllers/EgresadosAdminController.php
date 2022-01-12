@@ -60,7 +60,6 @@ class EgresadosAdminController extends Controller
         ->paginate(3);
 
 
-
        /*  */
 
          return view('admin.egresado.index',compact('egresados','texto', 'tipo_filtrado', 'orden'),[ 'valor2' => $string ]);

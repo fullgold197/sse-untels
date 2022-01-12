@@ -128,7 +128,7 @@
                     @if(isset($errors) && $errors->any())
                         @foreach ($errors->all() as $error)
 
-
+                        
                         <div class="col-xl-4">
                         <div class="alert alert-danger" role="alert">
 
