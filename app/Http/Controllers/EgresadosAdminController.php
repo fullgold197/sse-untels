@@ -140,9 +140,9 @@ class EgresadosAdminController extends Controller
 
 
         /* return $egresados; */
-        /* return redirect()->route('egresado.index'); */
-        $path = $_SERVER['HTTP_REFERER'];
-        return redirect($path);
+        return redirect()->route('egresado.index');
+        /* $path = $_SERVER['HTTP_REFERER'];
+        return redirect($path); */
 
     }
 
@@ -220,9 +220,9 @@ class EgresadosAdminController extends Controller
 
         /* return $egresados; */
         $matricula_id= $egresados->matricula;
-        $path = $_SERVER['HTTP_REFERER'];
-        return redirect($path);
-
+        /* $path = $_SERVER['HTTP_REFERER'];
+        return redirect($path); */
+        return redirect()->route('egresado.index');
         //return $matricula_id; si envia el id
     }
 
@@ -237,8 +237,9 @@ class EgresadosAdminController extends Controller
         //
         $egresados = Egresado::findOrFail($matricula);
         $egresados->delete();
-        $path=$_SERVER['HTTP_REFERER'];
-        return redirect($path);
+        /* $path=$_SERVER['HTTP_REFERER'];
+        return redirect($path); */
+        return redirect()->route('egresado.index');
     }
     //funcion para exportar datos a formato PDF esta ubicado ahora en ReporteAdminController
 

@@ -80,14 +80,16 @@ class UsuarioController extends Controller
 
         /* return $usuarios; */
         if($regresar=='1'){
-            /* return redirect()->route('egresado.index'); */
-            $path = $_SERVER['HTTP_REFERER'];
-            return redirect($path);
+            return redirect()->route('egresado.index');
+            /* $path = $_SERVER['HTTP_REFERER'];
+            return redirect($path); */
+
+
         }
         else{
-            /* return redirect()->route('usuario.index'); */
-            $path = $_SERVER['HTTP_REFERER'];
-            return redirect($path);
+            return redirect()->route('usuario.index');
+            /* $path = $_SERVER['HTTP_REFERER'];
+            return redirect($path); */
         }
 
     }
@@ -147,13 +149,13 @@ class UsuarioController extends Controller
 
         if ($role_as == '0') {
 
-            $path = $_SERVER['HTTP_REFERER'];
-            return redirect($path);
-         /*    return redirect()->route('usuario.index'); */
+           /*  $path = $_SERVER['HTTP_REFERER'];
+            return redirect($path); */
+            return redirect()->route('usuario.index');
         } else if ($role_as == '1') {
-            $path = $_SERVER['HTTP_REFERER'];
-            return redirect($path);
-            /* return redirect()->route('administradores.index'); */
+           /*  $path = $_SERVER['HTTP_REFERER'];
+            return redirect($path); */
+            return redirect()->route('administradores.index');
         }
 
 
@@ -175,9 +177,9 @@ class UsuarioController extends Controller
 
         $usuarios = User::findOrFail($id);
         $usuarios->delete();
-        /* return redirect()->route('usuario.index'); */
-        $path = $_SERVER['HTTP_REFERER'];
-        return redirect($path);
+        return redirect()->route('usuario.index');
+       /*  $path = $_SERVER['HTTP_REFERER'];
+        return redirect($path); */
 
 
     }
