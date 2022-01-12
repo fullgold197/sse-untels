@@ -28,6 +28,16 @@
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-administradores-create">Nuevo</button>
                         </div>
                     </div>
+                    @if(isset($errors) && $errors->any())
+                    @foreach ($errors->all() as $error)
+                    <div class="col-xl-4">
+                    <div class="alert alert-danger" role="alert">
+                        {{$error}}
+                    </div>
+                    </div>
+                    @endforeach
+                    @endif
+
                 </form>
 
             </div>

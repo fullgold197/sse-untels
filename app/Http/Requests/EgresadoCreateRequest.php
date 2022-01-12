@@ -32,10 +32,6 @@ class EgresadoCreateRequest extends FormRequest
             //Nuestras reglas o validaciones
             'matricula'=> 'required|integer|unique:egresado',
             'dni' => 'required|integer|unique:egresado',
-            // 'matricula' => 'required|unique:users_table,user_name,'.$id.',user_id' ,
-
-            //'email' => 'unique:table,email_column_to_check,id_to_ignore'
-            /* 'email' => 'required|unique:users|email', */
             'ap_paterno' => 'required|alpha',
             'ap_materno' => 'required|alpha',
             'nombres' => 'required|regex:/^[\pL\s\-]+$/u',

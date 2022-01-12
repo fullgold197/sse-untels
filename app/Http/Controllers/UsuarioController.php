@@ -59,17 +59,18 @@ class UsuarioController extends Controller
     public function store(AdminEgresadoCreateRequest $request)
     {
         $regresar = $request->get('regresar');
+        $matricula_egresado= $request->get('egresado_matricula');
         $usuarios = new User;
-        $usuarios->name = $request->input('nombres');
-        $usuarios->email = $request->input('matricula') . '@untels.edu.pe';
-        $usuarios->password = Hash::make($request->input('password'));
-        $usuarios->egresado_matricula = $request->input('matricula');
+        $usuarios->name = $request->input('name');
+        $usuarios->email = $request->input('email');
+        $usuarios->password = Hash::make($request->input('dni'));
+        $usuarios->egresado_matricula = $request->input('egresado_matricula');
         $usuarios->dni = $request->input('dni');
         $usuarios->estado = 0;
         $usuarios->save();
 
         DB::table('egresado')
-        ->where('matricula', $request->input('matricula'))
+        ->where('matricula', $matricula_egresado)
         ->limit(1)
         ->update(array('habilitado' => 1));
 

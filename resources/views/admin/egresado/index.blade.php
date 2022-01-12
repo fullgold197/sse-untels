@@ -56,7 +56,7 @@
         </div>
 
         {{--  Crear nuevo egresado  --}}
-        <div class="container">
+
         <div class="row" >
             <div class="col-xl-12" >
                 <button type="button" class="btn btn-primary" id="open" data-bs-toggle="modal" data-bs-target="#modal-create">
@@ -64,7 +64,7 @@
                 </button>
             </div>
         </div>
-        </div>
+
     </div>
 
 
@@ -100,7 +100,7 @@
                 </div>
                 </div>
                 @endforeach
-            @endif
+        @endif
 
     </div>
 
@@ -110,15 +110,15 @@
                     <table class="table table-striped" >
                         <thead>
                             <tr class="text-center">
-                                <th>Código</th>
+                                <th >Código</th>
                                 <th>Egresado</th>
                                 <th>Carrera</th>
-                                <th>Nombres</th>
-                                <th>Ciclo de ingreso</th>
-                                <th>Ciclo de egreso</th>
+                                <th class="col-md-6">Apellidos y nombres</th>
+                                <th class="col-md-3">Ciclo de ingreso</th>
+                                <th class="col-md-3">Ciclo de egreso</th>
                                 <th>Celular</th>
                                 <th>DNI</th>
-                                <th>Opciones</th>
+                                <th colspan="2">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -148,53 +148,47 @@
                                 <td>{{$egresado->año_egreso}}-{{$egresado->semestre_egreso}}</td>
                                 <td>{{$egresado->celular}}</td>
                                 <td>{{$egresado->dni}}</td>
-                                {{--  <td>{{$egresado->egresado_matricula}}</td>  --}}
+
                                 <td>
-
-                                {{--  Crear usuario de egresado automaticamente. Pendiente  --}}
-
+                                {{--  Crear usuario de egresado automaticamente.  --}}
                                 @if ($egresado->habilitado=='0')
                                 <form action="{{route('usuario.store')}}" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-dark"      data-bs-toggle="modal" data-bs-target="#modal">
+                                <button type="submit" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal">
                                 <i class="fas fa-user-plus"></i>
                                 </button>
-                                <input type="hidden" name="nombres" value="{{$egresado->nombres}}">
+                                <input type="hidden" name="name" value="{{$egresado->nombres}}">
+                                <input type="hidden" name="email" value="{{$egresado->matricula.'@untels.edu.pe'}}">
                                 <input type="hidden" name="dni" value="{{$egresado->dni}}">
-                                <input type="hidden" name="matricula" value="{{$egresado->matricula}}">
+                                <input type="hidden" name="egresado_matricula" value="{{$egresado->matricula}}">
                                 <input type="hidden" name="regresar" value="1">
-                                {{--  <input type="hidden" name="crear_egresado" value="0">  --}}
+
                                 </form>
                                 @endif
-
                                 {{--  Ver lista completa de datos de egresado  --}}
                                 <form action="{{route('academico-profesional.index')}}" method="GET">
-                                <button type="submit" class="btn btn-info btn-sm"      data-bs-toggle="modal" data-bs-target="#modal">
+                                <button type="submit" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modal">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                 </button>
 
                                 <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}"
                                 <input type="hidden" name="url" value="{{$egresado->matricula}}">
                                 </form>
+                                </td>
 
-
-
-
-
+                                <td>
                                 {{--  Editar egresado --}}
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->matricula}}">
                                 <i class="fas fa-edit"></i>
                                 </button>
-
-                                {{--  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-view-{{$egresado->matricula}}">
-                                <i class="fas fa-edit"></i>
-                                </button>  --}}
-
                                 {{--  Eliminar egresado --}}
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-delete-{{$egresado->matricula}}">
                                 <i class="fas fa-trash-alt"></i>
                                 </button>
-                            </td>
+                                </td>
+
+
+
 
                             </tr>
                             {{-- Estos includes permite activar la vista de los modales. Poner aquí los include. --}}

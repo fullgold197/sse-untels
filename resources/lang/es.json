@@ -1,4 +1,4 @@
 {
-    "There was an error on row :row. :message": "Hubo un error en la fila :row. :message",
-    "The password must be at least 8 characters.":"The password must be at least 8 qqer2."
+    "There was an error on row :row. :message": "Hubo un error en la fila :row de Excel. :message"
+
 }

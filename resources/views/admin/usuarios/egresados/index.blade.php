@@ -24,13 +24,9 @@
                             <input type="submit" class="btn btn-dark"  value="Buscar">
                         </div>
                     </div>
-                        <div class="form-row">
-                        <div class="col-auto my-2">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-create">Nuevo</button>
-                        </div>
-
-                        </div>
+                       
                 </form>
+
 
             </div>
 
