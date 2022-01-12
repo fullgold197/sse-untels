@@ -28,11 +28,11 @@ class AdminEgresadoCreateRequest extends FormRequest
              //Nuestras reglas o validaciones
 
              'egresado_matricula'=> 'required|integer|bail|unique:users,egresado_matricula',
-             
+
 
             'email' => 'required|unique:users|email',
 
-            'name' => 'required|required|regex:/^[a-zA-Z0-9,.!? ]*$/',
+            'name' => 'required|regex:/^[a-zA-Z0-9,.!? ]*$/',
 
         ];
     }
@@ -42,7 +42,7 @@ class AdminEgresadoCreateRequest extends FormRequest
             'egresado_matricula.integer' => 'Formato no valido, solo numeros',
             'egresado_matricula.unique' => 'El codigo ya existe, por favor eliga otro',
             'email.email' => 'Formato no valido para correo',
-            'email.unique' => 'El correo ya existe, por favor eliga otro',
+            'email.unique' => 'El correo ya existe. Por favor cambie el código de egresado.',
             'name.regex' => 'Formato no valido, solo letras, números o espacios entre ellas',
 
                     ];

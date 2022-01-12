@@ -125,7 +125,7 @@ class UsuariosAdministradoresController extends Controller
             $usuario->save();
         }
 
-        return redirect()->route('administradores.index');
+        return redirect()->route('administradores.index')->with('success', 'Operación realizada con éxito.');
     }
 
     /**

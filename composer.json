@@ -12,6 +12,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "jeroennoten/laravel-adminlte": "^3.7",
+        "laravel-lang/lang": "~7.0",
         "laravel/fortify": "^1.8",
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
