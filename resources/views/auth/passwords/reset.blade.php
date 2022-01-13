@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<title>Actualizar contraseña</title>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4" style="margin:70px;align=center">

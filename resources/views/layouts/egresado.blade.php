@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="DgJGD2Z8KYouB74sM3zjhZHWcwoaQ3GinV6eUMGN">
-    <title>Egresado</title>
+    <title>@yield('title')</title>
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css')}} ">
 
@@ -14,7 +14,8 @@
 
         <link rel="stylesheet" href="/css/admin_custom.css">
         <link rel="stylesheet" href="{{ asset('css/letras.css') }}">
-
+    <!-- Imagen del title -->
+    <link rel="shortcut icon" href="{{asset('images/untels/untels.png')}}">
 
 
 </head>
@@ -221,7 +222,7 @@
             });
         </script>
 
-       
+
 
 
 

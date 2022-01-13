@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Admin')
+@section('title', 'Usuarios egresados')
 
 @section('content_header')
 
@@ -24,11 +24,12 @@
                             <input type="submit" class="btn btn-dark"  value="Buscar">
                         </div>
                     </div>
-                       
+
                 </form>
 
 
             </div>
+            
 
             <div class="col-xl-12 my-2">
                 <div class="table-responsive ">
@@ -37,7 +38,7 @@
 
                             <tr class="text-center">
                                 <th>N°</th>
-                                <th>Nombre</th>
+                                {{--  <th>Nombre</th>  --}}
                                 <th>Codigo</th>
                                 <th>Usuario</th>
                                 <th>Correo</th>
@@ -59,7 +60,7 @@
 
                             <tr class="text-center">
                                 <td>{{++$n}}</td>
-                                <td class="text-capitalize">{{$usuario->nombres}} {{$usuario->ap_paterno}} {{$usuario->ap_materno}} </td>
+                                {{--  <td class="text-capitalize">{{$usuario->nombres}} {{$usuario->ap_paterno}} {{$usuario->ap_materno}} </td>  --}}
                                 <td>{{$usuario->matricula}}</td>
                                 <td>{{$usuario->name}}</td>
                                 <td>{{$usuario->email}}</td>

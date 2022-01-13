@@ -1,3 +1,4 @@
+{{--  Vista del login  --}}
 @extends('layouts.auth')
 @section('content')
     <title>SSE-Untels</title>
@@ -24,12 +25,12 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        {{-- Codigo--}}
+                        {{-- Codigo de egresado--}}
                         <div id="azul">
                             Usuario
                         </div>
                         <div class="form-group row">
-                            {{--  <label for="egresado_matricula" class="col-md-4 col-form-label text-md-right">{{ __('Codigo') }}</label>  --}}
+
                             <div class="col-md-12">
                                 <input id="egresado_matricula" type="egresado_matricula" class="form-control @error('egresado_matricula') is-invalid @enderror" name="egresado_matricula" value="{{ old('egresado_matricula') }}" required autocomplete="egresado_matricula" autofocus>
 
@@ -40,12 +41,11 @@
                                 @enderror
                             </div>
                         </div>
+                        {{-- Contraseña--}}
                         <div id="azul">
                             Contraseña
                         </div>
                         <div class="form-group row">
-                            {{--  <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>  --}}
-
                             <div class="col-md-12">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -56,18 +56,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        {{--  <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Recuerdame') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>  --}}
 
                         <div class="form-group row mb-0" id="" align="center">
                             <div class="col-md-8 offset-md-2" >

@@ -29,7 +29,7 @@
                 <div class="alert alert-success" role="alert">
                     {{session('success')}}
                 </div>
-                
+
             @endif
 
 
@@ -40,6 +40,9 @@
                         <br>
                         <input type="submit"  value="Importar" class="btn btn-warning ">
                     </form>
+                    <div>
+                        <a href="{{route('egresado.index')}}" ><button type="button" class="btn btn-secondary">Regresar</button></a>
+                    </div>
             </div>
 
         </div>

@@ -74,8 +74,11 @@ class UsuariosAdministradoresController extends Controller
         $usuarios->role_as = 1;
         $usuarios->estado = $request->input('estado');
         $usuarios->save();
-      /*   return $usuarios; */
-        return redirect()->route('administradores.index');
+        return back()->withInput();
+        /*   return $usuarios; */
+        /* return redirect()->route('administradores.index'); */
+        /* $path = $_SERVER['HTTP_REFERER'];
+        return redirect($path); */
     }
 
     /**
@@ -124,8 +127,10 @@ class UsuariosAdministradoresController extends Controller
             $usuario->password = Hash::make($request->input('password'));
             $usuario->save();
         }
-
-        return redirect()->route('administradores.index')->with('success', 'Operación realizada con éxito.');
+        /* $path = $_SERVER['HTTP_REFERER'];
+        return redirect($path); */
+        /* return redirect()->route('administradores.index'); */
+        return back()->withInput();
     }
 
     /**
@@ -138,7 +143,10 @@ class UsuariosAdministradoresController extends Controller
     {
         $usuarios = User::findOrFail($id);
         $usuarios->delete();
-        return redirect()->route('administradores.index');
-
+        return back()->withInput();
+       /*  return redirect()->route('administradores.index'); */
+        /* $path = $_SERVER['HTTP_REFERER'];
+        return redirect($path);
+ */
     }
 }

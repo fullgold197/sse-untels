@@ -21,7 +21,7 @@ class DatosPersonalesController extends Controller
     {
         $egresados = DB::table('egresado')
         ->join('users', 'egresado.matricula', '=', 'users.egresado_matricula')
-        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.celular', 'egresado.dni', 'egresado.linkedin', 'users.email', 'egresado.url', 'users.id')->where('matricula', Auth::user()->egresado_matricula)->get();
+        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso', 'egresado.año_egreso', 'egresado.semestre_egreso','egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.dni', 'egresado.linkedin', 'users.email', 'egresado.url', 'egresado.grado_academico', 'users.id')->where('matricula', Auth::user()->egresado_matricula)->get();
         /* return $users; */
         return view('users.datospersonales', compact('egresados'));
         /* return view('users.datospersonales', compact('egresados'))->share('layouts.egresado'); */
@@ -82,12 +82,18 @@ class DatosPersonalesController extends Controller
     {
 
         $egresados = Egresado::findOrFail($matricula);
-        $egresados->ap_paterno = $request->input('ap_paterno');
+        /* $egresados->ap_paterno = $request->input('ap_paterno');
         $egresados->ap_materno = $request->input('ap_materno');
         $egresados->nombres = $request->input('nombres');
         $egresados->genero = $request->input('genero');
+        $egresados->fecha_nacimiento = $request->input('fecha_nacimiento'); */
+
         $egresados->celular = $request->input('celular');
-        $egresados->fecha_nacimiento = $request->input('fecha_nacimiento');
+        $egresados->celular = $request->input('pais_origen');
+        $egresados->linkedin = $request->input('departamento_origen');
+        $egresados->celular = $request->input('pais_residencia');
+        $egresados->linkedin = $request->input('ciudad_residencia');
+        $egresados->celular = $request->input('lugar_residencia');
         $egresados->linkedin = $request->input('linkedin');
         $egresados->save();
 

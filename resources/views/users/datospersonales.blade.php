@@ -1,5 +1,7 @@
 @extends('layouts.egresado')
+@section('title', 'Datos personales')
 @section('content')
+
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-xl-12 ">
@@ -77,12 +79,44 @@
                                 <th style="padding-left:50px;padding-bottom: 5px;">EMAIL</th>
                                 <td>{{$egresado->email}} </td>
                             </tr>
-                            <tr>
+                            <tr class="bg-gray-light">
                                 <th style="padding-left:50px;padding-bottom: 5px;">LINKEDIN</th>
                                 <td>{{$egresado->linkedin}} </td>
                             </tr>
 
+                            <tr>
+                                <th style="padding-left:50px;padding-bottom: 5px;">CICLO DE INGRESO</th>
+                                <td >{{$egresado->año_ingreso}}-{{$egresado->semestre_ingreso}}
+                                     </td>
+                            </tr>
 
+                            <tr class="bg-gray-light">
+                                <th style="padding-left:50px;padding-bottom: 5px;">CICLO DE EGRESO</th>
+                                <td>{{$egresado->año_egreso}}-{{$egresado->semestre_egreso}}</td>
+                            </tr>
+                            <tr  >
+                                <th style="padding-left:50px;padding-bottom: 5px;">PAÍS DE ORIGEN</th>
+                                <td>{{$egresado->pais_origen}}</td>
+                            </tr>
+                            <tr class="bg-gray-light">
+                                <th style="padding-left:50px;padding-bottom: 5px;">DEPARTAMENTO DE ORIGEN</th>
+                                <td>{{$egresado->departamento_origen}}</td>
+                            </tr>
+                            <tr  >
+                                <th style="padding-left:50px;padding-bottom: 5px;">PÁÍS DE RESIDENCIA</th>
+                                <td>{{$egresado->pais_residencia}} </td>
+                            </tr>
+
+                            <tr class="bg-gray-light">
+                                <th style="padding-left:50px;padding-bottom: 5px;">CIUDAD DE RESIDENCIA</th>
+                                <td>{{$egresado->ciudad_residencia}} </td>
+                            </tr>
+                            <tr >
+                                <th style="padding-left:50px;padding-bottom: 5px;">LUGAR DE RESIDENCIA</th>
+                                <td>{{$egresado->ciudad_residencia}} </td>
+                            </tr>
+
+                            
                             <tr class="text-lg-center">
                                 <td  colspan="2" style="padding-left:50px;padding-bottom: 5px;">
                                 <!-- Button trigger modal -->
@@ -98,10 +132,6 @@
                                 </button>
                                 </td>
                             </tr>
-
-
-
-
 
                             <input type="hidden" class="form-control" id="matricula" name="matricula"
                              value="{{$egresado->matricula}}">
