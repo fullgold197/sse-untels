@@ -190,11 +190,13 @@ class EgresadosAdminController extends Controller
         /* $data=$request->validate([
             'matricula' => ['required',Rule::unique('egresado')->ignore($user->id), 'matricula']
         ]); */
+/*         $page=$request->input('page');
+ */     $egresados=Egresado::findOrFail($matricula);
         /* $matricula_hidden='2016200241';
         if($matricula_hidden){
             return redirect()->route('egresado.index', compact('matricula_hidden'));
         } */
-        
+
         $egresados=Egresado::findOrFail($matricula);
         $egresados->matricula = $request->input('matricula');
         $egresados->ap_paterno = $request->input('ap_paterno');
@@ -226,6 +228,10 @@ class EgresadosAdminController extends Controller
         return back()->withInput();
 
 
+
+        /* return $egresados; */
+/*         return redirect()->route('egresado.index',['matricula_id'=>$matricula_id,'page'=>$page]);
+ */    //    return redirect()->route('egresado.index',['matricula_id'=>$matricula_id]);
         /* $path = $_SERVER['HTTP_REFERER'];
         return redirect($path); */
         /* return redirect()->route('egresado.index'); */
@@ -239,7 +245,7 @@ class EgresadosAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($matricula)
+    public function destroy(Request $request,$matricula)
     {
         //
         $egresados = Egresado::findOrFail($matricula);
