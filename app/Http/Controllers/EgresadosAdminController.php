@@ -57,7 +57,7 @@ class EgresadosAdminController extends Controller
         ->orWhere('dni', 'LIKE', '%' . $texto . '%')
         ->orWhere('celular', 'LIKE', '%' . $texto . '%')
         ->orderBy($tipo_filtrado, $orden)
-        ->paginate(3);
+        ->paginate(5);
 
 
        /*  */
@@ -140,7 +140,8 @@ class EgresadosAdminController extends Controller
 
 
         /* return $egresados; */
-        return redirect()->route('egresado.index');
+        return back()->withInput();
+        /* return redirect()->route('egresado.index'); */
         /* $path = $_SERVER['HTTP_REFERER'];
         return redirect($path); */
 
@@ -222,7 +223,8 @@ class EgresadosAdminController extends Controller
         $matricula_id= $egresados->matricula;
         /* $path = $_SERVER['HTTP_REFERER'];
         return redirect($path); */
-        return redirect()->route('egresado.index');
+        /* return redirect()->route('egresado.index'); */
+        return back()->withInput();
         //return $matricula_id; si envia el id
     }
 
@@ -237,9 +239,10 @@ class EgresadosAdminController extends Controller
         //
         $egresados = Egresado::findOrFail($matricula);
         $egresados->delete();
+        return back()->withInput();
         /* $path=$_SERVER['HTTP_REFERER'];
         return redirect($path); */
-        return redirect()->route('egresado.index');
+        /* return redirect()->route('egresado.index'); */
     }
     //funcion para exportar datos a formato PDF esta ubicado ahora en ReporteAdminController
 

@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
-  
+        $this->app['request']->server->set('HTTPS', 'on');
         //Sirve para convertir http en https
         if (config('app.env') === 'production') {
             \URL::forceScheme('https');
