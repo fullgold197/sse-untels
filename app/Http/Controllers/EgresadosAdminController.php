@@ -190,6 +190,11 @@ class EgresadosAdminController extends Controller
         /* $data=$request->validate([
             'matricula' => ['required',Rule::unique('egresado')->ignore($user->id), 'matricula']
         ]); */
+        /* $matricula_hidden='2016200241';
+        if($matricula_hidden){
+            return redirect()->route('egresado.index', compact('matricula_hidden'));
+        } */
+        
         $egresados=Egresado::findOrFail($matricula);
         $egresados->matricula = $request->input('matricula');
         $egresados->ap_paterno = $request->input('ap_paterno');
@@ -216,15 +221,15 @@ class EgresadosAdminController extends Controller
         $egresados->id_academico=$request->input('id_academico');
 
         $egresados->save();
+        $matricula_id = $egresados->matricula;
+        /* return $matricula_hidden; */
+        return back()->withInput();
 
 
-
-        /* return $egresados; */
-        $matricula_id= $egresados->matricula;
         /* $path = $_SERVER['HTTP_REFERER'];
         return redirect($path); */
         /* return redirect()->route('egresado.index'); */
-        return back()->withInput();
+
         //return $matricula_id; si envia el id
     }
 

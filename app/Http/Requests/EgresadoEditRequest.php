@@ -25,9 +25,10 @@ class EgresadoEditRequest extends FormRequest
     {
         /* $egresado = $this->route('egresado'); */
         return [
-            
 
-           //Para hacer una validación adecuada es necesario poner al final del la linea la llave primaria de la fila. En este caso la llave se llama matricula. Si no se pone esto va a salir un error.
+
+            //Para hacer una validación adecuada es necesario poner al final del la linea la llave primaria de la fila. En este caso la llave se llama matricula. Si no se pone esto va a salir un error.
+
             'matricula' => 'required|unique:egresado,matricula,'.$this->egresado.',matricula',
             'ap_paterno' => 'required|alpha',
             'ap_materno' => 'required|alpha',
@@ -35,7 +36,7 @@ class EgresadoEditRequest extends FormRequest
             'fecha_nacimiento' => 'required|date',
             'telefono' => 'nullable|integer',
             'dni' => 'required|unique:egresado,dni,'.$this->egresado. ',matricula',
-            /* 'dni' => 'required|integer|unique:egresado', */
+            /* 'matricula_hidden' =>$this->egresado.'matricula', */
         ];
     }
 

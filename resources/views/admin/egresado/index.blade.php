@@ -124,27 +124,29 @@
 
             </div>
     </div>
-    
+
                     @if(isset($errors) && $errors->any())
                         @foreach ($errors->all() as $error)
-
-                        
                         <div class="col-xl-4">
                         <div class="alert alert-danger" role="alert">
-
                             {{$error}}
+
 
                         </div>
                         </div>
 
                         @endforeach
+                        <div>
+                            {{--  {{$matricula_hidden}}  --}}
+                        </div>
                     @endif
 
             <div class="col-xl-12 my-2">
                 <div class="table-responsive ">
                     <table class="table table-striped" >
                         <thead>
-                            <tr class="text-center">
+                            <tr
+                            class="text-center">
                                 <th >Código</th>
                                 <th>Egresado</th>
                                 <th>Carrera</th>
@@ -166,6 +168,12 @@
                             @else
                                 @foreach ($egresados as $egresado)
                             <tr class="text-center">
+                            @if(isset($errors) && $errors->any() )
+                            @if ($egresado->matricula=='2016200062')
+                            <tr class="alert alert-danger text-center">
+                            @endif
+                            @endif
+
                                 <td>{{$egresado->matricula}}</td>
 
                                 <td>
