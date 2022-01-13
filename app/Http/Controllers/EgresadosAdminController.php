@@ -126,7 +126,7 @@ class EgresadosAdminController extends Controller
         $egresados->habilitado = 0;
         $egresados->save();
 
-        
+
 
 
 
@@ -179,7 +179,8 @@ class EgresadosAdminController extends Controller
         /* $data=$request->validate([
             'matricula' => ['required',Rule::unique('egresado')->ignore($user->id), 'matricula']
         ]); */
-        $egresados=Egresado::findOrFail($matricula);
+/*         $page=$request->input('page');
+ */     $egresados=Egresado::findOrFail($matricula);
         $egresados->matricula = $request->input('matricula');
         $egresados->ap_paterno = $request->input('ap_paterno');
         $egresados->ap_materno = $request->input('ap_materno');
@@ -210,7 +211,8 @@ class EgresadosAdminController extends Controller
 
         /* return $egresados; */
         $matricula_id= $egresados->matricula;
-        return redirect()->route('egresado.index',['matricula_id'=>$matricula_id]);
+/*         return redirect()->route('egresado.index',['matricula_id'=>$matricula_id,'page'=>$page]);
+ */        return redirect()->route('egresado.index',['matricula_id'=>$matricula_id]);
 
         //return $matricula_id; si envia el id
     }
@@ -221,11 +223,12 @@ class EgresadosAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($matricula)
+    public function destroy(Request $request,$matricula)
     {
         //
         $egresados = Egresado::findOrFail($matricula);
-        $egresados->delete();
+/*         $page=$request->input('page');
+ */        $egresados->delete();
         return redirect()->route('egresado.index');
     }
     //funcion para exportar datos a formato PDF esta ubicado ahora en ReporteAdminController

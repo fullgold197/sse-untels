@@ -10,6 +10,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+
+          {{--   <div class="form-group">
+                <input type="hidden" class="form-control" value={{$egresados->currentPage()}} name="page">
+            </div> --}}
+
                     <div class="form-group">
                         <label for="matricula">Matricula</label>
                         <input type="text" class="form-control" id="matricula" name="matricula" required maxlength="12"
