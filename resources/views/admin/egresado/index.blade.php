@@ -168,10 +168,18 @@
                             @else
                                 @foreach ($egresados as $egresado)
                             <tr class="text-center">
+                            @if(isset($errors) && $errors->any() )
+                            @if ($egresado->matricula=='2016200062')
+                            <tr class="alert alert-danger text-center">
+                            @endif
+                            @endif
+
                                 <td>{{$egresado->matricula}}</td>
+
                                 <td>
                                     <li class="nav-link ">
                                     <img src="{{asset($egresado->url)}}"
+
                                     class="brand-image img-circle elevation-4"
                                     style="opacity:.8" width="40">
                                     </li>
