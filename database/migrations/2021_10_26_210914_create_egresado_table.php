@@ -21,10 +21,10 @@ class CreateEgresadoTable extends Migration
             $table->string('ap_paterno', 50);
             $table->string('ap_materno', 50);
             $table->string('nombres', 100);
-            $table->string('grado_academico')->default('Bachiller');
-            $table->string('dni', 8)->unique();
-            $table->enum('genero', ['Masculino', 'Femenino']);
-            $table->date('fecha_nacimiento');
+            $table->string('grado_academico')->default('Bachiller')->nullable();
+            $table->string('dni', 8)->unique()->nullable();
+            $table->enum('genero', ['Masculino', 'Femenino'])->nullable();
+            $table->date('fecha_nacimiento')->nullable();
             $table->string('año_ingreso', 4)->nullable();
             $table->string('semestre_ingreso', 1)->nullable();
             $table->string('año_egreso', 4)->nullable();
@@ -39,8 +39,8 @@ class CreateEgresadoTable extends Migration
             $table->integer('cant_doctorados')->nullable()->default(0);
             $table->string('linkedin', 100)->nullable();
             $table->string('url')->nullable();
-            $table->boolean('habilitado')->default('0');
-            $table->integer('id_academico')->unsigned()->default('1');
+            $table->boolean('habilitado')->default('0')->nullable();
+            $table->integer('id_academico')->unsigned()->default('1')->nullable();
             $table->foreign('id_academico')->references('id_academico')->on('academico')->onUpdate('cascade')->unique();
             /* $table->integer('id_egresado_profesion')->unsigned()->nullable(); */
 

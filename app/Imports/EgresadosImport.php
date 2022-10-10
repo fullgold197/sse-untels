@@ -12,13 +12,15 @@ use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Throwable;
 
 //SkipsOnError: Permite mostrar un error de mensaje en caso haya en el excel
-//WithHeadingRow: Permite que la primera fila del excel no se exporte
+//WithHeadingRow: Permite poner cabecera. Es importante que el excel tenga el mismo nombre de las cabeceras de los nombres de la derecha.
 //WithValidation: Valida los datos del excel
-class EgresadosImport implements ToModel, WithValidation
+//WithStartRow: importa desde la fila que se desee. Puede ser fila 2, 3. etc.
+class EgresadosImport implements ToModel, WithValidation, WithStartRow
 {
     /* use Importable,SkipsErrors,SkipsFailures; */
     /**
@@ -37,7 +39,8 @@ class EgresadosImport implements ToModel, WithValidation
     public function model(array $row)
     {
         return new Egresado([
-            //
+            //Con cabecera. Es importante que el excel tenga el mismo nombre de las cabeceras de los nombres de la derecha. Por ejemplo, codigo, apellido_paterno, apellido_materno
+
             /* 'matricula'             =>$row['codigo'],
             'ap_paterno'            =>$row['apellido_paterno'],
             'ap_materno'            =>$row['apellido_materno'],
@@ -56,8 +59,8 @@ class EgresadosImport implements ToModel, WithValidation
             'pais_residencia'       =>$row['pais_de_residencia'],
             'ciudad_residencia'     =>$row['ciudad_de_residencia'],
             'lugar_residencia'      =>$row['direccion_de_residencia'],
-            'id_academico'          =>$this->carr_profesional[$row['carrera']] */
-
+            'id_academico'          =>$this->carr_profesional[$row['carrera']], */
+//Sin cabecera
             'matricula'             => $row['0'],
             'ap_paterno'            => $row['1'],
             'ap_materno'            => $row['2'],
@@ -81,7 +84,11 @@ class EgresadosImport implements ToModel, WithValidation
 
         ]);
     }
-
+    //Importar desde fila 2 del excel
+    public function startRow(): int
+    {
+        return 2;
+    }
     /* public function onError(Throwable $error)
     {
 
@@ -101,61 +108,61 @@ class EgresadosImport implements ToModel, WithValidation
         return [
             //Aqui se está validando en el campo matricula de la bd que el codigo debe ser único
             '0' =>[
-                'integer','unique:egresado,matricula', 'digits:10', 'required'
+                'integer','unique:egresado,matricula', 'digits:10','required'
            ],
             '1' => [
-                'string','required'
+                'string','required','nullable'
             ],
             '2' => [
-                'string', 'required'
+                'string', 'required','nullable'
             ],
             '3' => [
-                'string', 'required'
+                'string', 'required','nullable'
             ],
             '4' => [
-                'string', 'required'
+                'string', 'nullable'
             ],
             '5' => [
-                'integer', 'unique:egresado,dni', 'digits:8', 'required'
+                'integer', 'unique:egresado,dni', 'digits:8', 'nullable'
             ],
             '6' => [
-                'string', 'required'
+                'string', 'nullable'
             ],
             '7' => [
-                'date', 'required'
+                'date', 'nullable'
             ],
             '8' => [
-                'integer', 'required'
+                'integer', 'nullable'
             ],
             '9' => [
-                'integer', 'required'
+                'integer', 'nullable'
             ],
             '10' => [
-                'integer', 'required'
+                'integer', 'nullable'
             ],
             '11' => [
-                'integer', 'required'
+                'integer', 'nullable'
             ],
             '12' => [
-                'integer', 'required'
+                'integer', 'nullable'
             ],
             '13' => [
-                'string', 'required'
+                'string', 'nullable'
             ],
             '14' => [
-                'string', 'required'
+                'string', 'nullable'
             ],
             '15' => [
-                'string', 'required'
+                'string', 'nullable'
             ],
             '16' => [
-                'string', 'required'
+                'string', 'nullable'
             ],
             '17' => [
-                'string', 'required'
+                'string', 'nullable'
             ],
             '18' => [
-                'string', 'required'
+                'string', 'nullable'
             ],
 
 

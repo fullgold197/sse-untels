@@ -147,8 +147,8 @@
                         <thead>
                             <tr
                             class="text-center">
-                                <th >Código</th>
                                 <th>Egresado</th>
+                                <th >Código</th>
                                 <th>Carrera</th>
                                 <th class="col-md-6">Apellidos y nombres</th>
                                 <th class="col-md-3">Ciclo de ingreso</th>
@@ -174,7 +174,7 @@
                             @endif
                             @endif
 
-                                <td>{{$egresado->matricula}}</td>
+
 
                                 <td>
                                     <li class="nav-link ">
@@ -185,6 +185,7 @@
                                     </li>
                                 </td>
 
+                                <td>{{$egresado->matricula}}</td>
                                 <td>{{$egresado->carr_profesional}}</td>
                                 <td class="text-capitalize">{{$egresado->ap_paterno}} {{$egresado->ap_materno}} {{$egresado->nombres}}</td>
                                 <td>{{$egresado->año_ingreso}}-{{$egresado->semestre_ingreso}}</td>

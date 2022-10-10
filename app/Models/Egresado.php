@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Egresado extends Model
 {
 
-    public $table = "egresado"; // hace referencia a la tabla cliente de la bd
-    public $primaryKey = "matricula";
+    public $table = 'egresado'; // hace referencia a la tabla cliente de la bd
+    public $primaryKey = 'matricula';
     public $fillable = [
-        'matricula','ap_paterno', 'ap_materno', 'nombres', 'grado_academico', 'dni',
+        'matricula','ap_paterno','ap_materno', 'nombres', 'grado_academico', 'dni',
         'genero', 'fecha_nacimiento', 'url', 'año_ingreso','semestre_ingreso','año_egreso', 'semestre_egreso', 'celular', 'pais_origen', 'departamento_origen', 'pais_residencia',
         'ciudad_residencia', 'lugar_residencia', 'linkedin', 'habilitado', 'primer_empleo_id ','id_academico ', 'created_at', 'updated_at'
     ];
