@@ -37,7 +37,12 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
     //Este constructor junto con el comando pluck permite hacer una comparación del id de la tabla académico con el campo carr_profesional. Si la carrera profesional es igual a Ingeniería de Sistemas automaticamente lo convierte en el id que le corresponde que sería 1 y así sucesivamente para el resto de carreras.
 
     public function __construct(){
-        $this->carr_profesional=Academico::pluck('id_academico','carr_profesional');
+        try {
+            $this->carr_profesional=Academico::pluck('id_academico','carr_profesional');
+        } catch (\Throwable $th) {
+            
+        }
+
     }
 
     public function model(array $row)

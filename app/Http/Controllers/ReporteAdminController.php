@@ -64,17 +64,23 @@ class ReporteAdminController extends Controller
                 'file' => 'mimes:xlsx'
             ]
         );
-        //El if ($request->hasFile('file')) sirve para validar si hay algun archivo vacio
+        //Try para validar error de carrera profesional. Es necesario saber adecuadamente el error. En esta caso es ErrorExc.
+        try {
+            //El if ($request->hasFile('file')) sirve para validar si hay algun archivo vacio
         if ($request->hasFile('file')) {
-        $file=$request->file('file');
+            $file=$request->file('file');
 
-        Excel::import(new EgresadosImport,$file);
-            return redirect()->route('egresados.Import-excel')->with('success', 'Lista de egresados importados exitosamente.');
+            Excel::import(new EgresadosImport,$file);
+                return redirect()->route('egresados.Import-excel')->with('success', 'Lista de egresados importados exitosamente.');
+            }
+            else{
+                return redirect()->route('egresados.Import-excel');
+            }
+            /* return back()->withStatus('El archivo excel has sido importado.'); */
+        } catch (\ErrorException $th) {
+            return back()->withErrors('Error de tipeo en la columna carrera profesional. Digite exactamente las carreras de: "Ingeniería de Sistemas", "Ingeniería Electrónica y Telecomunicaciones","Ingeniería Ambiental","Ingeniería Mecánica y Eléctrica" o "Administración de Empresas"');
         }
-        else{
-            return redirect()->route('egresados.Import-excel');
-        }
-        /* return back()->withStatus('El archivo excel has sido importado.'); */
+
 
     }
 
