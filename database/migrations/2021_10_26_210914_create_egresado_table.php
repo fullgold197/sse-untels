@@ -40,7 +40,7 @@ class CreateEgresadoTable extends Migration
             $table->string('linkedin', 100)->nullable();
             $table->string('url')->nullable();
             $table->boolean('habilitado')->default('0')->nullable();
-            $table->integer('id_academico')->unsigned()->default('1')->nullable();
+            $table->integer('id_academico')->unsigned();
             $table->foreign('id_academico')->references('id_academico')->on('academico')->onUpdate('cascade')->unique();
             /* $table->integer('id_egresado_profesion')->unsigned()->nullable(); */
 

@@ -23,6 +23,7 @@
                 </div>
                 @endforeach
             @endif
+          
 
             {{--  Este mensaje se activa cuando los datos de excel han sido importados exitosamente. Esto proviene de Http/Controllers/ReporteAdminController.php  --}}
             @if(session('success'))

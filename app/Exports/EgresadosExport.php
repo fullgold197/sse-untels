@@ -17,7 +17,7 @@ class EgresadosExport implements FromCollection, WithHeadings
         //selecciona todos los campos de la tabla egresado
         $egresados = DB::table('egresado')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
-        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.grado_academico', 'egresado.dni', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso', 'egresado.año_egreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'academico.carr_profesional')->get();
+        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'academico.carr_profesional','egresado.grado_academico', 'egresado.dni', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso', 'egresado.año_egreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia')->get();
         return $egresados; //aqui envia todos los datos seleccionados
 
     }
@@ -28,6 +28,7 @@ class EgresadosExport implements FromCollection, WithHeadings
             'Ap.Paterno',
             'Ap.Materno',
             'Nombres',
+            'Carrera',
             'Grado Académico',
             'DNI',
             'Género',
@@ -42,7 +43,7 @@ class EgresadosExport implements FromCollection, WithHeadings
             'País residencia',
             'Ciudad residencia',
             'Dirección residencia',
-            'Carrera',
+
         ];
     }
 }
