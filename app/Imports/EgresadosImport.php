@@ -3,7 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Academico;
-use App\Models\egresado;
+use App\Models\Egresado;
 use Illuminate\Contracts\Validation\Rule;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
@@ -37,12 +37,7 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
     //Este constructor junto con el comando pluck permite hacer una comparación del id de la tabla académico con el campo carr_profesional. Si la carrera profesional es igual a Ingeniería de Sistemas automaticamente lo convierte en el id que le corresponde que sería 1 y así sucesivamente para el resto de carreras.
 
     public function __construct(){
-        try {
-            $this->carr_profesional=Academico::pluck('id_academico','carr_profesional');
-        } catch (\ErrorException $e) {
-            return back()->withErrors('QQR2');
-        }
-
+        $this->carr_profesional=Academico::pluck('id_academico','carr_profesional');
     }
 
     public function model(array $row)
