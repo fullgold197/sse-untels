@@ -39,9 +39,16 @@
 
 
                             <tr>
+
+                                @if ($egresado->url == NULL)
+                                <td colspan="2">
+                                    <img src="{{asset('images/user_egresado.png')}}" alt="{{asset('images/user_egresado.png')}}" style="width:80%;max-height:400px" class="img-fluid img-thumbnail mx-auto d-block my-4 card-img-top" >
+                                </td>
+                                @else
                                 <td colspan="2">
                                     <img src="{{asset($egresado->url)}}" alt="{{$egresado->url}}" style="width:80%;max-height:400px" class="img-fluid img-thumbnail mx-auto d-block my-4 card-img-top" >
                                 </td>
+                                @endif
                             </tr>
 
                             <tr>
@@ -116,7 +123,7 @@
                                 <td>{{$egresado->ciudad_residencia}} </td>
                             </tr>
 
-                            
+
                             <tr class="text-lg-center">
                                 <td  colspan="2" style="padding-left:50px;padding-bottom: 5px;">
                                 <!-- Button trigger modal -->

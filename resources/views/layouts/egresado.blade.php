@@ -44,12 +44,22 @@
     @php
         $url=Auth::user()->url
     @endphp
+    @if ($url == NULL)
+    <li class="">
+        <img src="{{asset('images/user_egresado.png')}}"
+         alt="{{asset('images/user_egresado.png')}}
+         class="brand-image img-circle elevation-4"
+         style="opacity:.8" width="33">
+    </li>
+    @else
     <li class="">
         <img src="{{asset($url)}}"
          alt="{{asset($url)}}"
          class="brand-image img-circle elevation-4"
          style="opacity:.8" width="33">
     </li>
+    @endif
+
     <li class="nav-item dropdown">
         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
             {{ Auth::user()->name }}</a>
