@@ -175,15 +175,25 @@
                             @endif
 
 
-
+                                @if ($egresado->url == NULL)
                                 <td>
                                     <li class="nav-link ">
                                     <img src="{{asset('images/user_egresado.png')}}"
-
                                     class="brand-image img-circle elevation-4"
                                     style="opacity:.8" width="40">
                                     </li>
                                 </td>
+                                @else
+                                <td>
+                                    <li class="nav-link ">
+                                    {{-- <img src="{{asset('images/user_egresado.png')}}" --}}
+                                    <img src="{{asset($egresado->url)}}"
+                                    class="brand-image img-circle elevation-4"
+                                    style="opacity:.8" width="40">
+                                    </li>
+                                </td>
+                                @endif
+
 
                                 <td>{{$egresado->matricula}}</td>
                                 <td>{{$egresado->carr_profesional}}</td>
