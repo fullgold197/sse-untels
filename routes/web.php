@@ -17,6 +17,7 @@ use App\Http\Controllers\TrayectoriaAcademicaController;
 use App\Http\Controllers\TrayectoriaProfesional;
 use App\Http\Controllers\TrayectoriaProfesionalController;
 use App\Http\Controllers\UsuariosAdministradoresController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 
@@ -69,6 +70,9 @@ Route::middleware(['auth', 'isUser'])->group(function () {
     Route::resource('/home/ofertas-laborales-egresado', OfertasLaboralesEgresadoController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('storage-link', function(){
+    Artisan::call(('storage:link'));
+});
 
 
 
