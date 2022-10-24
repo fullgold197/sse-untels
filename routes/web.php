@@ -70,9 +70,7 @@ Route::middleware(['auth', 'isUser'])->group(function () {
     Route::resource('/home/ofertas-laborales-egresado', OfertasLaboralesEgresadoController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('storage-link', function(){
-    Artisan::call(('storage:link'));
-});
+
 
 
 
