@@ -9,6 +9,7 @@ use App\Http\Controllers\EgresadosAdminTrayectoriaAcademicaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\MaestriaController;
+use App\Http\Controllers\OfertasLaboralesEgresadoController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\QQR2Controller;
 use App\Http\Controllers\TrayectoriaAcademica;
@@ -63,6 +64,9 @@ Route::middleware(['auth', 'isUser'])->group(function () {
     //Ruta para la vista de cambiar contraseña del egresado
     Route::view('/home/password', 'users.password')->name('password');
     });
+
+    //Oferta laborales
+    Route::resource('/home/ofertas-laborales-egresado', OfertasLaboralesEgresadoController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

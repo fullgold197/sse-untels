@@ -287,6 +287,11 @@ return [
             'url'  => 'admin/egresado',
             'icon' => 'fas fa-fw fa-graduation-cap',
         ],
+        /* [
+            'text' => 'Ofertas Laborales',
+            'url'  => 'admin/ofertas-laborales',
+            'icon' => 'fas fa-fw fa-briefcase',
+        ], */
         [
             /* 'text' => 'qqr2', */
             'url'  => 'admin/academico-profesional',
