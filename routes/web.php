@@ -69,6 +69,11 @@ Route::middleware(['auth', 'isUser'])->group(function () {
     //Oferta laborales
     Route::resource('/home/ofertas-laborales-egresado', OfertasLaboralesEgresadoController::class);
 
+    //Forzar storage link
+    Route::get('/home/link', function(){
+        Artisan::call('storage:link');
+    });
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
