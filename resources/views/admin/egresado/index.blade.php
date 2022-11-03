@@ -226,7 +226,6 @@
                                 <input type="hidden" name="dni" value="{{$egresado->dni}}">
                                 <input type="hidden" name="egresado_matricula" value="{{$egresado->matricula}}">
                                 <input type="hidden" name="regresar" value="1">
-
                                 </form>
                                 @endif
 
