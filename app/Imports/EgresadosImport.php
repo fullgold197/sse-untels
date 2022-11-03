@@ -40,7 +40,7 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
         try {
             $this->carr_profesional=Academico::pluck('id_academico','carr_profesional');
         } catch (\Throwable $th) {
-            
+
         }
 
     }

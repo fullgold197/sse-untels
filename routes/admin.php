@@ -5,6 +5,7 @@ use App\Http\Controllers\DatosPersonalesController;
 use App\Http\Controllers\EgresadoAcademicoProfesionalController;
 use App\Http\Controllers\EgresadosAdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OfertasLaboralesController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsuarioController;
@@ -48,6 +49,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     //Ruta ver la lista completa de los egresados
     Route::resource('/admin/academico-profesional',EgresadoAcademicoProfesionalController::class);
+
+    //Ruta para ver ofertas laborales
+    Route::resource('/admin/ofertas-laborales',OfertasLaboralesController::class);
 });
 
 

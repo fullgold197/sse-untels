@@ -115,6 +115,16 @@ class UsuarioSeeder extends Seeder
 
             ]
         );
+        User::create(
+            [
+                'name' => 'Igor',
+                'email' => 'iaguilar@untels.edu.pe',
+                'password' => bcrypt('12345678'),
+                'role_as' => '1',
+                'estado' => '1'
+
+            ]
+        );
 
     }
 }

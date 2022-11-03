@@ -47,7 +47,7 @@
     @if ($url == NULL)
     <li class="">
         <img src="{{asset('images/user_egresado.png')}}"
-         alt="{{asset('images/user_egresado.png')}}
+         alt="{{asset('images/user_egresado.png')}}"
          class="brand-image img-circle elevation-4"
          style="opacity:.8" width="33">
     </li>
@@ -164,7 +164,16 @@
         <p>Trayectoria profesional</p>
     </a>
 </li>
+{{-- Ofertas Laborales --}}
+{{-- <li  class="nav-item">
+    <a class="{{ (request()->is('home/ofertas-laborales-egresado')) ? 'nav-link active' : 'nav-link' }}"
 
+       href="{{route('ofertas-laborales-egresado.index')}}">
+        <i class="fas fa-fw fa-briefcase"></i>
+        <p>Ofertas Laborales</p>
+    </a>
+</li> --}}
+{{-- Contraseña --}}
 <li  class="nav-item">
     <a class="{{ (request()->is('home/password')) ? 'nav-link active' : 'nav-link' }}"
 

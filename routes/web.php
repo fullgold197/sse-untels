@@ -5,6 +5,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QQR2Controller;
 use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\ImagenController;
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\MaestriaController;
+use App\Http\Controllers\OfertasLaboralesEgresadoController;
+>>>>>>> origin/main
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\MaestriaController;
 use App\Http\Controllers\DoctoradoController;
@@ -17,8 +22,14 @@ use App\Http\Controllers\Cambiarcontrasenapordefecto;
 use App\Http\Controllers\TrayectoriaAcademicaController;
 use App\Http\Controllers\TrayectoriaProfesionalController;
 use App\Http\Controllers\UsuariosAdministradoresController;
+<<<<<<< HEAD
 use App\Http\Controllers\EgresadoAcademicoProfesionalController;
 use App\Http\Controllers\EgresadosAdminTrayectoriaAcademicaController;
+=======
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
+>>>>>>> origin/main
 
 /*
 |--------------------------------------------------------------------------
@@ -62,14 +73,23 @@ Route::middleware(['auth','isUser','isCambiarcontrasena'])->group(function () {
 
     //Ruta para listar de 5 en 5 cualquier lista
     Route::resource('/permisos', App\Http\Controllers\PermissionController::class);
-    
+
     //Ruta para la vista de cambiar contraseña del egresado
     Route::view('/home/password', 'users.password')->name('password');
  //Ruta para la vista de cambiar contraseña del egresado por defecto
     });
 
 Route::resource('/cambiarcontrasenapordefecto', Cambiarcontrasenapordefecto::class);
+    //Oferta laborales
+    Route::resource('/home/ofertas-laborales-egresado', OfertasLaboralesEgresadoController::class);
+
+    //Forzar storage link
+    Route::get('/home/link', function(){
+        Artisan::call('storage:link');
+    });
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 
 
