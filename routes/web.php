@@ -5,13 +5,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QQR2Controller;
 use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\ImagenController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\MaestriaController;
 use App\Http\Controllers\OfertasLaboralesEgresadoController;
->>>>>>> origin/main
 use App\Http\Controllers\PruebaController;
-use App\Http\Controllers\MaestriaController;
 use App\Http\Controllers\DoctoradoController;
 use App\Http\Controllers\TrayectoriaAcademica;
 use App\Http\Controllers\TrayectoriaProfesional;
@@ -22,14 +18,9 @@ use App\Http\Controllers\Cambiarcontrasenapordefecto;
 use App\Http\Controllers\TrayectoriaAcademicaController;
 use App\Http\Controllers\TrayectoriaProfesionalController;
 use App\Http\Controllers\UsuariosAdministradoresController;
-<<<<<<< HEAD
 use App\Http\Controllers\EgresadoAcademicoProfesionalController;
 use App\Http\Controllers\EgresadosAdminTrayectoriaAcademicaController;
-=======
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Permission;
->>>>>>> origin/main
 
 /*
 |--------------------------------------------------------------------------

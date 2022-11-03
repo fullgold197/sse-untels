@@ -30,6 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'url',
         'role_as',
         'estado',
+        'estadocontrasena',
 
     ];
     //protected $guarded =[];

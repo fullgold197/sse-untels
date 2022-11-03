@@ -9,13 +9,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.js"></script>
 
 
-  
+
 <!-- Modal -->
-<form action="{{ route('cambiarcontrasenapordefecto.store') }}" name="crear" id="crear" method="post">
+<form action="{{ route('cambiarcontrasenapordefecto.update',Auth::user()->matricula) }}" name="crear" id="crear" method="post">
     @csrf
     <div class="text-center">
         <a href="#myModal" class=" btn btn btn-danger trigger-btn" data-toggle="modal">Click Para abrir el Modal</a>
-</div>  
+</div>
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -33,23 +33,23 @@
                         </div>
                     </div>
             <div class="form-group">
-                        <label for="nuevacontrasena">Nueva Contraseña</label>
-                        <input type="text" class="form-control" id="nuevacontrasena" name="nuevacontrasena" value="{{ old('nuevacontrasena')}}"  maxlength="10" >
+                        <label for="password">Nueva Contraseña</label>
+                        <input type="text" class="form-control" id="password" name="password" value="{{ old('password')}}"  maxlength="10" >
                         <div class="text-danger">
-                        {{$errors->first('nuevacontrasena')}}
+                        {{$errors->first('password')}}
                         </div>
-            </div>   
+            </div>
             <div class="form-group">
                 <label for="repitanuevacontrasena">Repita nueva contraseña</label>
                 <input type="text" class="form-control" id="repitanuevacontrasena" name="repitanuevacontrasena" value="{{ old('repitanuevacontrasena')}}"  maxlength="10" >
                 <div class="text-danger">
                 {{$errors->first('repitanuevacontrasena')}}
                 </div>
-            </div>      
+            </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    
+
             </div>
 
 <script>
