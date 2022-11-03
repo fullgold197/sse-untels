@@ -11,8 +11,9 @@
 
 
 <!-- Modal -->
-<form action="{{ route('cambiarcontrasenapordefecto.update',Auth::user()->matricula) }}" name="crear" id="crear" method="post">
+<form action="{{ route('cambiarcontrasenapordefecto.update',Auth::user()->egresado_matricula) }}" name="crear" id="crear" method="post">
     @csrf
+    @method('PUT')
     <div class="text-center">
         <a href="#myModal" class=" btn btn btn-danger trigger-btn" data-toggle="modal">Click Para abrir el Modal</a>
 </div>
@@ -26,22 +27,22 @@
         <div class="modal-body">
            {{--   El old('') permite rescatar los valores en caso hay algún error a la hora de validar. Esto va en value="{{old('nombre_del_campo')}}"  --}}
             <div class="form-group">
-                        <label for="contrasenaactual">Contraseña actual</label>
-                        <input type="text" class="form-control" id="contrasenaactual" name="contrasenaactual" value="{{ old('contrasenaactual')}}"  maxlength="10" >
+                        <label for="contrasenaactual">Ingrese contraseña actual</label>
+                        <input type="password" class="form-control" id="contrasenaactual" name="contrasenaactual" value="{{ old('contrasenaactual')}}"  maxlength="10" >
                         <div class="text-danger">
                         {{$errors->first('contrasenaactual')}}
                         </div>
                     </div>
             <div class="form-group">
-                        <label for="password">Nueva Contraseña</label>
-                        <input type="text" class="form-control" id="password" name="password" value="{{ old('password')}}"  maxlength="10" >
+                        <label for="password">Ingrese nueva Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}"  maxlength="10" >
                         <div class="text-danger">
                         {{$errors->first('password')}}
                         </div>
             </div>
             <div class="form-group">
-                <label for="repitanuevacontrasena">Repita nueva contraseña</label>
-                <input type="text" class="form-control" id="repitanuevacontrasena" name="repitanuevacontrasena" value="{{ old('repitanuevacontrasena')}}"  maxlength="10" >
+                <label for="repitanuevacontrasena">Confirmar nueva contraseña</label>
+                <input type="password" class="form-control" id="repitanuevacontrasena" name="repitanuevacontrasena" value="{{ old('repitanuevacontrasena')}}"  maxlength="10" >
                 <div class="text-danger">
                 {{$errors->first('repitanuevacontrasena')}}
                 </div>

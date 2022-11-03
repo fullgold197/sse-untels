@@ -80,7 +80,7 @@ Route::resource('/cambiarcontrasenapordefecto', Cambiarcontrasenapordefecto::cla
     });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('logout', 'AppHttpControllersAuthLoginController@logout');
 
 
 

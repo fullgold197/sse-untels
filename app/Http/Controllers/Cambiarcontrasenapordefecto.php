@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class Cambiarcontrasenapordefecto extends Controller
 {
@@ -78,6 +80,35 @@ class Cambiarcontrasenapordefecto extends Controller
     public function update(Request $request, $id)
     {
         //
+
+
+        $rules = [
+            'contrasenaactual'=>'required',
+            'password' => 'required|min:8',
+            'repitanuevacontrasena' => 'required|min:8|same:password',
+        ];
+
+        $messages = [
+            'repitanuevacontrasena.same' => 'La confirmación de la contraseña debe coincidir con la nueva contraseña',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator-> messages());
+        }
+        else{
+
+            if(Hash::check($request->contrasenaactual,Auth::user()->password)){
+                $user= new User;
+                $user->where('email','=',Auth::user()->email)
+                ->update(['password'=>bcrypt($request->password),
+                           'estadocontrasena'=>'modificado',
+
+            ]);
+            Auth::logout(); //cierra sesion primero (esto hace uso de la ruta logout en web.php)
+            return redirect('/login')->with('status','Contraseña cambiada con exito');
+            }
+        }
 
     }
 
