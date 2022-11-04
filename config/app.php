@@ -179,6 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,    //Excel
+        Laraveles\Spanish\SpanishServiceProvider::class,
 
     ],
 

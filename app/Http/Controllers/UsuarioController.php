@@ -70,7 +70,7 @@ class UsuarioController extends Controller
         $usuarios->password = Hash::make($request->input('dni'));
         $usuarios->egresado_matricula = $request->input('egresado_matricula');
         $usuarios->dni = $request->input('dni');
-        $usuarios->estado = 0;
+        $usuarios->estado = 1;
         $usuarios->save();
 
         DB::table('egresado')

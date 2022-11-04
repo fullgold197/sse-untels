@@ -17,12 +17,9 @@
                 @foreach ($egresados as $egresado)
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-6">
-                <form action="{{route('datos-personales.update',$egresado->matricula)}}" method="POST" enctype="multipart/form-data">
+                {{-- <form action="{{route('datos-personales.update',$egresado->matricula)}}" method="POST" enctype="multipart/form-data"> --}}
                 <div class="table-responsive mx-auto d-block" style="margin:10px">
                     <div class="card " >
-
-
-
                             <div class="card-header" {{-- style="background-color:teal" --}} >
                              <h5 style="font-family:garamond;text-align:center;">PERFIL DEL EGRESADO</h5>
                        </div>
@@ -31,13 +28,10 @@
                         <tbody >
 
 
-                        @csrf
-                        @method('PUT')
+                        {{-- @csrf
+                        @method('PUT') --}}
                             <input type="hidden" class="form-control" id="matricula" name="matricula"
                              value="{{$egresado->matricula}}">
-
-
-
                             <tr>
 
                                 @if ($egresado->url == NULL)
@@ -151,7 +145,7 @@
             </div>
                     </tbody>
                 </table>
-                </form>
+                {{-- </form> --}}
 
     </div>
 </div>

@@ -8,6 +8,8 @@ use App\Models\Egresado;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 use Symfony\Component\HttpFoundation\File\File;
 
 class DatosPersonalesController extends Controller
@@ -80,20 +82,40 @@ class DatosPersonalesController extends Controller
      */
     public function update(Request $request, $matricula)
     {
+        $egresado_id = DB::table('users')
+        ->select('id')
+        ->where('egresado_matricula', $matricula)
+        ->get();
+        foreach ($egresado_id as $id) {
+            $id_egresado = $id->id;
+        }
+        request()->validate([
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore(User::findOrFail($id_egresado)),
+            ],
+            'celular' => ['required','numeric','digits:9'],
+            'pais_origen' => 'required|string',
+            'departamento_origen' => 'required|string',
+            'pais_residencia' => 'required|string',
+            'ciudad_residencia' => 'required|string',
+            'lugar_residencia' => 'required|string',
+            'linkedin' => ['required','string'],
+        ],
+            [
+
+            ]);
 
         $egresados = Egresado::findOrFail($matricula);
-        /* $egresados->ap_paterno = $request->input('ap_paterno');
-        $egresados->ap_materno = $request->input('ap_materno');
-        $egresados->nombres = $request->input('nombres');
-        $egresados->genero = $request->input('genero');
-        $egresados->fecha_nacimiento = $request->input('fecha_nacimiento'); */
-
         $egresados->celular = $request->input('celular');
-        $egresados->celular = $request->input('pais_origen');
-        $egresados->linkedin = $request->input('departamento_origen');
-        $egresados->celular = $request->input('pais_residencia');
-        $egresados->linkedin = $request->input('ciudad_residencia');
-        $egresados->celular = $request->input('lugar_residencia');
+        $egresados->pais_origen = $request->input('pais_origen');
+        $egresados->departamento_origen = $request->input('departamento_origen');
+        $egresados->pais_residencia = $request->input('pais_residencia');
+        $egresados->ciudad_residencia = $request->input('ciudad_residencia');
+        $egresados->lugar_residencia = $request->input('lugar_residencia');
         $egresados->linkedin = $request->input('linkedin');
         $egresados->save();
 
@@ -101,8 +123,7 @@ class DatosPersonalesController extends Controller
         ->where('egresado_matricula', Auth::user()->egresado_matricula)  // find your user by their email
         ->limit(1)  // optional - to ensure only one record is updated.
         ->update(array('email' => $request->input('email')));  // update the record in the DB.
-            /* return $url; */
-        return redirect()->route('datos-personales.index');
+        /* return redirect()->route('datos-personales.index'); */
     }
 
     /**

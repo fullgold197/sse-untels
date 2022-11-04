@@ -5,7 +5,6 @@
         "This file is @generated automatically"
     ],
     "content-hash": "3ea75399c44d2dd31417bc2df85e1473",
-    "post-install-cmd": [ "ln -sr storage/app/public public/storage" ],
     "packages": [
         {
             "name": "almasaeed2010/adminlte",

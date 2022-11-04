@@ -53,7 +53,8 @@ class UsuarioSeeder extends Seeder
             'egresado_matricula'=> $egresadoID,
             'dni' => $egresadoDNI,
             'role_as' => '0',
-            'estado' => '1'
+            'estado' => '1',
+            'estadocontrasena' => 'modificado'
 
         ]
         );
@@ -65,7 +66,8 @@ class UsuarioSeeder extends Seeder
                 'egresado_matricula'=> $egresadoID2,
                 'dni' => $egresadoDNI2,
                 'role_as' => '0',
-                'estado' => '1'
+                'estado' => '1',
+                'estadocontrasena' => 'modificado'
 
             ]
             );
@@ -77,7 +79,8 @@ class UsuarioSeeder extends Seeder
                 'egresado_matricula'=> $egresadoID3,
                 'dni' => $egresadoDNI3,
                 'role_as' => '0',
-                'estado' => '1'
+                'estado' => '1',
+                'estadocontrasena' => 'modificado'
 
             ]
             );
@@ -89,7 +92,8 @@ class UsuarioSeeder extends Seeder
                 'egresado_matricula' => $egresadoID4,
                 'dni' => $egresadoDNI4,
                 'role_as' => '0',
-                'estado' => '1'
+                'estado' => '1',
+                'estadocontrasena' => 'modificado'
 
             ]
         );
@@ -101,7 +105,8 @@ class UsuarioSeeder extends Seeder
                 'egresado_matricula' => $egresadoID5,
                 'dni' => $egresadoDNI5,
                 'role_as' => '0',
-                'estado' => '1'
+                'estado' => '1',
+                'estadocontrasena' => 'modificado'
 
             ]
         );
@@ -111,7 +116,8 @@ class UsuarioSeeder extends Seeder
                 'email' => 'emanrique@untels.edu.pe',
                 'password' => bcrypt('12345678'),
                 'role_as' => '1',
-                'estado' => '1'
+                'estado' => '1',
+                'estadocontrasena' => 'modificado'
 
             ]
         );
@@ -121,7 +127,8 @@ class UsuarioSeeder extends Seeder
                 'email' => 'iaguilar@untels.edu.pe',
                 'password' => bcrypt('12345678'),
                 'role_as' => '1',
-                'estado' => '1'
+                'estado' => '1',
+                'estadocontrasena' => 'modificado'
 
             ]
         );
