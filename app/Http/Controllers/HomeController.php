@@ -29,7 +29,10 @@ class HomeController extends Controller
         {
             return redirect('/admin');
 
-        } else if (Auth::user()->role_as == '0' and Auth::user()->estado =='1') {
+        } else if (Auth::user()->role_as == '0' and Auth::user()->estado =='1' and Auth::user()->estadocontrasena == 'null') {
+            return view('users.cambiar_contrasena_defecto');
+
+        } else if(Auth::user()->role_as == '0' and Auth::user()->estado =='1'){
             return view('users.home');
         }
         else{

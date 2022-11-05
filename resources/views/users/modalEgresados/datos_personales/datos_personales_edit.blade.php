@@ -86,7 +86,7 @@
       <div class="modal-footer">
         <input name="" type="hidden" id="resultado" value="{{$egresado->matricula}}">
         <input type="submit" class="btn btn-primary" onclick="updateData();" value="Editar">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="reset" class="btn btn-secondary" onclick="refreshData();" data-bs-dismiss="modal">Cancelar</button>
 
       </div>
     </div>
@@ -94,6 +94,9 @@
 </div>
 {{--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
 <script>
+    function refreshData() {
+        location.reload();
+    }
     function updateData() {
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 

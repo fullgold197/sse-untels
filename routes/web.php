@@ -71,16 +71,12 @@ Route::middleware(['auth','isUser','isCambiarcontrasena'])->group(function () {
     });
 
 Route::resource('/cambiarcontrasenapordefecto', Cambiarcontrasenapordefecto::class);
+/* Route::view('/cambiarcontrasenapordefecto', 'users.cambiar_contrasena_defecto')->name('passwordDefecto'); */
     //Oferta laborales
-    Route::resource('/home/ofertas-laborales-egresado', OfertasLaboralesEgresadoController::class);
-
-    //Forzar storage link
-    Route::get('/home/link', function(){
-        Artisan::call('storage:link');
-    });
+ /*    Route::resource('/home/ofertas-laborales-egresado', OfertasLaboralesEgresadoController::class); */
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('logout', 'AppHttpControllersAuthLoginController@logout');
+/* Route::get('logout', 'AppHttpControllersAuthLoginController@logout'); */
 
 
 
