@@ -36,7 +36,7 @@
 
                                 @if ($egresado->url == NULL)
                                 <td colspan="2">
-                                    <img src="{{asset('images/user_egresado.png')}}" alt="{{asset('images/user_egresado.png')}}" style="width:80%;max-height:400px" class="img-fluid img-thumbnail mx-auto d-block my-4 card-img-top" >
+                                    <img src="http://sigu.untels.edu.pe/portalAlumno/images/fotosAlumno/{{ Auth::user()->egresado_matricula }}.jpg" alt="http://sigu.untels.edu.pe/portalAlumno/images/fotosAlumno/{{ Auth::user()->egresado_matricula }}.jpg style="width:80%;max-height:400px" class="img-fluid img-thumbnail mx-auto d-block my-4 card-img-top" >
                                 </td>
                                 @else
                                 <td colspan="2">

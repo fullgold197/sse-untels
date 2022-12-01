@@ -54,7 +54,7 @@ class TrayectoriaAcademicaController extends Controller
      */
     public function create()
     {
-        //
+        return 0;
     }
 
     /**
@@ -112,6 +112,7 @@ class TrayectoriaAcademicaController extends Controller
                 return redirect()->route('trayectoria-academica.index');
             }
         }
+        return 0;
     }
 
     /**
@@ -122,7 +123,7 @@ class TrayectoriaAcademicaController extends Controller
      */
     public function show($id)
     {
-        //
+        return 0;
     }
 
     /**
@@ -133,7 +134,7 @@ class TrayectoriaAcademicaController extends Controller
      */
     public function edit($id_academico)
     {
-
+        return 0;
     }
 
     /**
@@ -145,7 +146,7 @@ class TrayectoriaAcademicaController extends Controller
      */
     public function update(Request $request, $id_academico)
     {
-
+        return 0;
     }
 
     /**
@@ -156,6 +157,6 @@ class TrayectoriaAcademicaController extends Controller
      */
     public function destroy($id)
     {
-
+        return 0;
     }
 }

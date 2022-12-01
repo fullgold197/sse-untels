@@ -36,7 +36,7 @@ class DatosPersonalesController extends Controller
      */
     public function create()
     {
-        //
+        return 0;
     }
 
     /**
@@ -47,7 +47,7 @@ class DatosPersonalesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 0;
 
     }
 
@@ -59,7 +59,7 @@ class DatosPersonalesController extends Controller
      */
     public function show($id)
     {
-        //
+        return 0;
     }
 
     /**
@@ -70,7 +70,7 @@ class DatosPersonalesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return 0;
     }
 
     /**
@@ -123,6 +123,7 @@ class DatosPersonalesController extends Controller
         ->where('egresado_matricula', Auth::user()->egresado_matricula)  // find your user by their email
         ->limit(1)  // optional - to ensure only one record is updated.
         ->update(array('email' => $request->input('email')));  // update the record in the DB.
+        return 0;
         /* return redirect()->route('datos-personales.index'); */
     }
 
@@ -134,6 +135,6 @@ class DatosPersonalesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 0;
     }
 }

@@ -18,7 +18,7 @@ class ImagenController extends Controller
      */
     public function index()
     {
-        //
+        return 0;
     }
 
     /**
@@ -28,7 +28,7 @@ class ImagenController extends Controller
      */
     public function create()
     {
-        //
+        return 0;
     }
 
     /**
@@ -39,7 +39,7 @@ class ImagenController extends Controller
      */
     public function store(Request $request)
     {
-
+        return 0;
     }
 
     /**
@@ -50,7 +50,7 @@ class ImagenController extends Controller
      */
     public function show($id)
     {
-        //
+        return 0;
     }
 
     /**
@@ -61,7 +61,7 @@ class ImagenController extends Controller
      */
     public function edit($id)
     {
-        //
+        return 0;
     }
 
     /**
@@ -87,7 +87,7 @@ class ImagenController extends Controller
                     unlink($image_path);
                 }
             } catch (\Throwable $th) {
-
+                
             }
 
         }
@@ -136,6 +136,6 @@ class ImagenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 0;
     }
 }
