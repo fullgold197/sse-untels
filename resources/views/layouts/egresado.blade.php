@@ -46,7 +46,7 @@
     @endphp
     @if ($url == NULL)
     <li class="">
-        <img src="http://sigu.untels.edu.pe/portalAlumno/images/fotosAlumno/{{ Auth::user()->egresado_matricula }}.jpg"
+        <img src="{{asset('images/user_egresado.png')}}"
          alt="{{asset('images/user_egresado.png')}}"
          class="brand-image img-circle elevation-4"
          style="opacity:.8" width="33">

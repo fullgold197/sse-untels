@@ -178,7 +178,7 @@
                                 @if ($egresado->url == NULL)
                                 <td>
                                     <li class="nav-link ">
-                                    <img src="http://sigu.untels.edu.pe/portalAlumno/images/fotosAlumno/{{$egresado->matricula}}.jpg"
+                                    <img src="{{asset('images/user_egresado.png')}}"
                                     class="brand-image img-circle elevation-4"
                                     style="opacity:.8" width="40">
                                     </li>
