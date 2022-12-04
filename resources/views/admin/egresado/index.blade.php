@@ -210,7 +210,7 @@
                                 <i class="fa fa-eye " aria-hidden="true"></i>
                                 </button>
 
-                                <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}"
+                                <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}">
                                 <input type="hidden" name="url" value="{{$egresado->matricula}}">
                                 </form>
 
@@ -233,7 +233,7 @@
 
                                 <td>
                                 {{--  Editar egresado --}}
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->matricula}}">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->matricula}}" data-id="{{$egresado->matricula}}" id="editIdBtn">
                                 <i class="fas fa-edit"></i>
                                 </button>
                                 {{--  Eliminar egresado --}}
@@ -247,17 +247,19 @@
 
                             </tr>
                             {{-- Estos includes permite activar la vista de los modales. Poner aquí los include. --}}
-                            @include('admin.egresado.egresado_create')
+
                             @include('admin.egresado.egresado_edit')
                             @include('admin.egresado.egresado_delete')
 
 
                             @endforeach
+                            {{-- Para el id editar --}}
+                            <input name="" type="hidden" id="resultado" value="">
                             @endif
 
                         </tbody>
                     </table>
-
+                    @include('admin.egresado.egresado_create')
                     {{--  Permite mostrar los egresados en paginaciones. El comando appends permite que la variable de busqueda no se pierda. Es necesario poner el nombre de la variable.  --}}
                     {{$egresados->appends(['texto'=>$texto,'tipo_filtrado'=>$tipo_filtrado,'orden'=>$orden])->links()}}
 
@@ -270,16 +272,25 @@
 </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 
 
 
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script> console.log('Hi!'); </script>
+    <script>
+        $(document).on('click','#editIdBtn', function(){
+                var editIdBtn = $(this).data('id');
+                document.getElementById('resultado').value = editIdBtn;
+                console.log(editIdBtn);
+            });
+
+    </script>
 @stop

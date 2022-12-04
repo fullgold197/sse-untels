@@ -10,6 +10,7 @@ use App\Http\Requests\AdminAdministradorEditRequest;
 use App\Http\Requests\AdminAdministradorCreateRequest;
 use App\Http\Requests\AdminEgresadoCreateRequest;
 use App\Http\Requests\AdminEgresadoEditRequest;
+use Illuminate\Validation\Rule;
 
 class UsuariosAdministradoresController extends Controller
 {
@@ -64,8 +65,23 @@ class UsuariosAdministradoresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AdminAdministradorCreateRequest $request)
+    public function store(Request $request)
     {
+        request()->validate([
+            'name' => ['required','string'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+            'password' => 'required|min:6',
+            'estado' => 'required'
+        ],
+            [
+                'name.required' => 'El campo usuario es obligatorio.',
+            ]);
         $usuarios = new User();
         $usuarios->name = $request->input('name');
         $usuarios->email = $request->input('email');
@@ -75,10 +91,7 @@ class UsuariosAdministradoresController extends Controller
         $usuarios->estado = $request->input('estado');
         $usuarios->save();
         return back()->withInput();
-        /*   return $usuarios; */
-        /* return redirect()->route('administradores.index'); */
-        /* $path = $_SERVER['HTTP_REFERER'];
-        return redirect($path); */
+
     }
 
     /**
@@ -110,19 +123,33 @@ class UsuariosAdministradoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AdminAdministradorEditRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $role_as = "1";
+        request()->validate([
+            'name' => ['required','string'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore(User::findOrFail($id)),
+                    ],
+        ],
+            [
+                'name.required' => 'El campo usuario es obligatorio.',
+            ]);
         $usuario = User::findOrFail($id);
         if (trim($request->password) == '') {
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
-            $usuario->role_as = $request->input('role_as');
+            $usuario->role_as = $role_as;
             $usuario->estado = $request->input('estado');
             $usuario->save();
         } else {
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
-            $usuario->role_as = $request->input('role_as');
+            $usuario->role_as = $role_as;
             $usuario->estado = $request->input('estado');
             $usuario->password = Hash::make($request->input('password'));
             $usuario->save();
@@ -130,7 +157,7 @@ class UsuariosAdministradoresController extends Controller
         /* $path = $_SERVER['HTTP_REFERER'];
         return redirect($path); */
         /* return redirect()->route('administradores.index'); */
-        return back()->withInput();
+        /* return back()->withInput(); */
     }
 
     /**
