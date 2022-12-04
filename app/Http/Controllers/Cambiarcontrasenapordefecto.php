@@ -100,7 +100,7 @@ class Cambiarcontrasenapordefecto extends Controller
 
             if(Hash::check($request->contrasenaactual,Auth::user()->password)){
                 $user= new User;
-                $user->where('email','=',Auth::user()->email)
+                $user->where('dni','=',Auth::user()->dni)
                 ->update(['password'=>bcrypt($request->password),
                            'estadocontrasena'=>'modificado',
 
