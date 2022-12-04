@@ -110,16 +110,15 @@ class Cambiarcontrasenapordefecto extends Controller
             return back()->withInput()->withErrors($validator-> messages());
         }
         else{
-
             if(Hash::check($request->contrasenaactual,Auth::user()->password)){
                 $user= new User;
                 $user->where('email','=',Auth::user()->email)
                 ->update(['password'=>bcrypt($request->password),
                            'estadocontrasena'=>'modificado',
-
             ]);
 /*             return redirect('/login')->with('status','Contraseña cambiada con exito'); */
             Auth::logout(); //cierra sesion primero (esto hace uso de la ruta logout en web.php)
+            //return redirect('/login')->with('status','Contraseña cambiada con exito');
             return redirect('/login')->with('status','Contraseña cambiada con exito');
             }
         }

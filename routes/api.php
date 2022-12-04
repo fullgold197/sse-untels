@@ -36,7 +36,8 @@ Route::middleware(['auth:api'])->group(function(){
     Route::put('/updatetraypro/{id_profesion}', [App\Http\Controllers\Authcontroller::class, 'updatetraypro']);
     Route::delete('/deletetraypro/{id_profesion}', [App\Http\Controllers\Authcontroller::class, 'deletetraypro']);
 
-    
+    //Cambiar contraseña actual
+    Route::put('/cambiarContrasenaDefecto', [App\Http\Controllers\Authcontroller::class, 'cambiarContrasenaDefecto']);
     
     Route::post('/logout', [App\Http\Controllers\Authcontroller::class, 'logout']);
 });

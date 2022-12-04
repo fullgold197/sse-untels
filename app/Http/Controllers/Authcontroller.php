@@ -11,6 +11,7 @@ use App\Models\Egresado;
 use App\Models\Profesion;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\DatosPersonalesController;
@@ -255,6 +256,53 @@ class Authcontroller extends Controller
         ])->save();
 
         return response()->json(['message'=>'success']);
+    }
+
+    public function cambiarContrasenaDefecto(Request $request)
+    {
+        //
+        $value = $request->get('contrasenaactual');
+        $rules = [
+            'contrasenaactual'=>['required',
+            function ($attribute, $value, $fail) {
+                if (!Hash::check($value, Auth::user()->password)) {
+                    $fail('El campo contraseña actual es incorrecto.');
+                }
+            },
+        ],
+            'password' => 'required|min:8',
+            'repitanuevacontrasena' => 'required|min:8|same:password',
+        ];
+
+        $messages = [
+            'repitanuevacontrasena.same' => 'La confirmación de la contraseña debe coincidir con la nueva contraseña',
+            'repitanuevacontrasena.required' => 'El campo confirmar nueva contraseña es obligatorio.',
+            'repitanuevacontrasena.min' => 'El campo repita nueva contraseña debe contener al menos 8 caracteres.',
+            'password.required' => 'El campo nueva contraseña es obligatorio.',
+            'password.min' => 'El campo nueva contraseña debe contener al menos 8 caracteres.',
+            'contrasenaactual.required'=>'El campo contraseña actual es obligatorio.'
+
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator-> messages());
+        }
+        else{
+
+            if(Hash::check($request->contrasenaactual,Auth::user()->password)){
+                $user= new User;
+                $user->where('email','=',Auth::user()->email)
+                ->update(['password'=>bcrypt($request->password),
+                           'estadocontrasena'=>'modificado'
+            ]);
+/*             return redirect('/login')->with('status','Contraseña cambiada con exito'); */
+            //Auth::logout(); //cierra sesion primero (esto hace uso de la ruta logout en web.php)
+            return redirect('/home')->with('status','Contraseña cambiada con exito');
+            //return "Hola";
+            }
+        }
+
     }
 
 }
