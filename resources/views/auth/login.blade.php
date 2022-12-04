@@ -69,7 +69,7 @@
                             </div>
                         </div>  --}}
 
-                        <div class="form-group row mb-0" id="" align="center">
+                        <div class="form-group row mb-0" id="azul" align="center">
                             <div class="col-md-8 offset-md-2" >
                                 <button type="submit" class="btn btn-primary" style="background-color: #004A98;">
                                     {{ __('Iniciar Sesión') }}
@@ -77,6 +77,7 @@
 
                             </div>
                         </div>
+
                         <div id="" align="center">
                             @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}" id="azul">
@@ -86,23 +87,32 @@
                         </div>
                     </form>
                 </div>
+                <div class="card-body" id="" align="center">
+                    @if (\Session::has('bloqueo'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>{!! \Session::get('bloqueo') !!}</li>
+                        </ul>
+                    </div>
+                    @endif
+                </div>
+
             </div>
 
             <div id="espacio" align="center" >
-            <div id="col-md-10">
-            <a target="_blank" href="https://www.facebook.com/untelsperu">
-                <img src="{{asset('images/facebook.png')}}" class="img-fluid" width="40px" alt="facebook untelss">
-            </a>
-            <a target="_blank" href="https://www.instagram.com/untelsoficial">
-                <img src="{{asset('images/instagram.png')}}" class="img-fluid" width="40px" alt="instagram untels">
-            </a>
-            <a target="_blank" href="https://www.youtube.com/c/UniversidadNacionalTecnológicadeLimaSur">
-                <img src="{{asset('images/youtube.png')}}" class="img-fluid" width="40px" alt="youtube untels">
-            </a>
+                <div id="col-md-10">
+                <a target="_blank" href="https://www.facebook.com/untelsperu">
+                    <img src="{{asset('images/facebook.png')}}" class="img-fluid" width="40px" alt="facebook untelss">
+                </a>
+                <a target="_blank" href="https://www.instagram.com/untelsoficial">
+                    <img src="{{asset('images/instagram.png')}}" class="img-fluid" width="40px" alt="instagram untels">
+                </a>
+                <a target="_blank" href="https://www.youtube.com/c/UniversidadNacionalTecnológicadeLimaSur">
+                    <img src="{{asset('images/youtube.png')}}" class="img-fluid" width="40px" alt="youtube untels">
+                </a>
 
+                </div>
             </div>
-
-        </div>
 
 
 

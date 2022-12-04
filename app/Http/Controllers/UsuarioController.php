@@ -128,40 +128,47 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AdminEgresadoEditRequest $request,$id)
+    public function update(Request $request,$id)
     {
-        $role_as = $request->input('role_as');
+        $role_as = "0";
+        request()->validate([
+            'name' => ['required','string'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore(User::findOrFail($id)),
+                    ],
+        ],
+            [
+                'name.required' => 'El campo usuario es obligatorio.',
+            ]);
+
         $usuario = User::findOrFail($id);
 
         if(trim($request->password) == ''){
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
-            $usuario->role_as = $request->input('role_as');
+            $usuario->role_as = $role_as;
             $usuario->estado = $request->input('estado');
             $usuario->save();
         }
         else{
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
-            $usuario->role_as = $request->input('role_as');
+            $usuario->role_as = $role_as;
             $usuario->estado = $request->input('estado');
             $usuario->password = Hash::make($request->input('password'));
             $usuario->save();
         }
 
-        if ($role_as == '0') {
-
-            /*  $path = $_SERVER['HTTP_REFERER'];
-            return redirect($path); */
+        /* if ($role_as == '0') {
             return back()->withInput();
-            /* return redirect()->route('usuario.index'); */
+
         } else if ($role_as == '1') {
-            /*  $path = $_SERVER['HTTP_REFERER'];
-            return redirect($path); */
             return back()->withInput();
-            /* return redirect()->route('administradores.index'); */
-        }
-
+        } */
 
     }
 

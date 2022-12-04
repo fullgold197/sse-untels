@@ -29,7 +29,7 @@
 
 
             </div>
-            
+
 
             <div class="col-xl-12 my-2">
                 <div class="table-responsive ">
@@ -80,7 +80,7 @@
 
                                 <td>
                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$usuario->id}}">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$usuario->id}}" data-id="{{$usuario->id}}" id="editIdBtn">
                                 <i class="fas fa-edit"></i>
                                 </button>
 
@@ -98,14 +98,18 @@
 
                             @include('admin.usuarios.egresados.delete')
                             @include('admin.usuarios.egresados.edit')
-                            @include('admin.usuarios.egresados.create')
+
 
 
                             @endforeach
+                            {{-- Para el id editar --}}
+                            <input name="" type="hidden" id="resultado" value="">
                             @endif
+
 
                         </tbody>
                     </table>
+                    @include('admin.usuarios.egresados.create')
                     {{$usuarios->appends(['texto'=>$texto])}}
 
                 </div>
@@ -117,17 +121,27 @@
     </div>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 </html>
 
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
+
     <script> console.log('Hi!'); </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+        $(document).on('click','#editIdBtn', function(){
+                var editIdBtn = $(this).data('id');
+                document.getElementById('resultado').value = editIdBtn;
+                console.log(editIdBtn);
+            });
+
+    </script>
 @stop
 
 

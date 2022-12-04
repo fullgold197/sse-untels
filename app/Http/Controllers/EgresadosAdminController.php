@@ -103,9 +103,41 @@ class EgresadosAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EgresadoCreateRequest $request)
+    public function store(Request $request)
     {
-        //
+        request()->validate([
+            'matricula' => ['required',
+                            'numeric',
+                            'digits:10',
+                            Rule::unique(Egresado::class),
+                        ],
+            'ap_paterno' => ['required','string'],
+            'ap_materno' => ['required','string'],
+            'nombres' => ['required','string'],
+            /* 'grado_academico' => ['string'], */
+            'dni' => [
+                    'nullable',
+                    'numeric',
+                    'digits:8',
+                    Rule::unique(Egresado::class),
+                    ],
+            'genero' => ['required','string'],
+            'fecha_nacimiento' => ['nullable','string'],
+            'año_ingreso' => ['nullable','numeric','digits:4'],
+            'semestre_ingreso' => ['nullable','numeric','digits:1'],
+            'año_egreso' => ['nullable','numeric','digits:4'],
+            'semestre_egreso' => ['nullable','numeric','digits:1'],
+            'celular' => ['nullable','numeric','digits:9'],
+            'pais_origen' => ['nullable','string',],
+            'departamento_origen' => ['nullable','string'],
+            'pais_residencia' => ['nullable','string',],
+            'ciudad_residencia' => ['nullable','string',],
+            'lugar_residencia' => ['nullable','string',],
+            'id_academico' => ['required'],
+        ],
+            [
+                'id_academico.required' => 'El campo carrera es obligatorio.',
+            ]);
         $egresados=new Egresado;
 
         $egresados->matricula = $request->input('matricula');
@@ -134,16 +166,9 @@ class EgresadosAdminController extends Controller
         $egresados->habilitado = 0;
         $egresados->save();
 
+        /* return back()->withInput(); */
+        return 0;
 
-
-
-
-
-        /* return $egresados; */
-        return back()->withInput();
-        /* return redirect()->route('egresado.index'); */
-        /* $path = $_SERVER['HTTP_REFERER'];
-        return redirect($path); */
 
     }
 
@@ -184,37 +209,57 @@ class EgresadosAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EgresadoEditRequest $request,$matricula)
+    public function update(Request $request,$matricula)
     {
-        //
-        /* $data=$request->validate([
-            'matricula' => ['required',Rule::unique('egresado')->ignore($user->id), 'matricula']
-        ]); */
-/*         $page=$request->input('page');
- */     $egresados=Egresado::findOrFail($matricula);
-        /* $matricula_hidden='2016200241';
-        if($matricula_hidden){
-            return redirect()->route('egresado.index', compact('matricula_hidden'));
-        } */
+        $dni = $request->get('dni');
+        request()->validate([
+            'matricula' => ['required',
+                            'numeric',
+                            'digits:10',
+                            Rule::unique(Egresado::class)->ignore(Egresado::findOrFail($matricula))
+                        ],
+            'ap_paterno' => ['required','string'],
+            'ap_materno' => ['required','string'],
+            'nombres' => ['required','string'],
+            'grado_academico' => ['required','string'],
+            'dni' => ['required',
+                    'numeric',
+                    'digits:8',
+                    Rule::unique(Egresado::class)->ignore(Egresado::findOrFail($matricula))
+                    ],
+            'genero' => ['required'],
+            'fecha_nacimiento' => ['required'],
+            'año_ingreso' => ['required','numeric','digits:4'],
+            'semestre_ingreso' => ['required','numeric','digits:1'],
+            'año_egreso' => ['required','numeric','digits:4'],
+            'semestre_egreso' => ['required','numeric','digits:1'],
+            'celular' => ['required','numeric','digits:9'],
+            'pais_origen' => 'required|string',
+            'departamento_origen' => 'required|string',
+            'pais_residencia' => 'required|string',
+            'ciudad_residencia' => 'required|string',
+            'lugar_residencia' => 'required|string',
+            'linkedin' => ['required','string'],
+            'id_academico' => ['required'],
+        ],
+            [
+
+            ]);
 
         $egresados=Egresado::findOrFail($matricula);
         $egresados->matricula = $request->input('matricula');
         $egresados->ap_paterno = $request->input('ap_paterno');
         $egresados->ap_materno = $request->input('ap_materno');
         $egresados->nombres = $request->input('nombres');
-
-
         $egresados->dni = $request->input('dni');
         $egresados->genero = $request->input('genero');
         $egresados->fecha_nacimiento = $request->input('fecha_nacimiento');
-
         $egresados->año_ingreso = $request->input('año_ingreso');
         $egresados->semestre_ingreso = $request->input('semestre_ingreso');
         $egresados->año_egreso = $request->input('año_egreso');
         $egresados->semestre_egreso  = $request->input('semestre_egreso');
         $egresados->celular = $request->input('celular');
         $egresados->pais_origen = $request->input('pais_origen');
-
         $egresados->departamento_origen = $request->input('departamento_origen');
         $egresados->pais_residencia  = $request->input('pais_residencia');
         $egresados->ciudad_residencia = $request->input('ciudad_residencia');
@@ -223,22 +268,9 @@ class EgresadosAdminController extends Controller
         $egresados->id_academico=$request->input('id_academico');
 
         $egresados->save();
-        $matricula_id = $egresados->matricula;
-        /* return $matricula_hidden; */
-        return back()->withInput();
+        return 0;
+        /* return back()->withInput(); */
 
-
-
-        /* return $egresados; */
-/*         return redirect()->route('egresado.index',['matricula_id'=>$matricula_id,'page'=>$page]);
- */    //    return redirect()->route('egresado.index',['matricula_id'=>$matricula_id]);
-        /* $path = $_SERVER['HTTP_REFERER'];
-        return redirect($path); */
-        /* return redirect()->route('egresado.index'); */
-        $matricula_id= $egresados->matricula;
-        return redirect()->route('egresado.index',['matricula_id'=>$matricula_id]);
-
-        //return $matricula_id; si envia el id
     }
 
     /**

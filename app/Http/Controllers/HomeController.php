@@ -36,7 +36,7 @@ class HomeController extends Controller
             return view('users.home');
         }
         else{
-            return redirect('/login');
+            return redirect('/login')->with('bloqueo','Su cuenta está bloqueada. Por favor, comuniquese con su escuela para más detalles.');
         }
 
 
