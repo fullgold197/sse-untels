@@ -1,0 +1,21 @@
+# Codeception Test Suite Configuration
+#
+# Suite for unit or integration tests.
+
+#actor: UnitTester
+#modules:
+  #  enabled:
+ #       - Asserts
+#    step_decorators: ~
+
+class_name: UnitTester
+modules:
+  enabled:
+    - Asserts
+    - \Helper\Unit
+    - Laravel:
+      part: ORM
+      environment_file: .env.testing
+      cleanup: true
+      run_database_migrations: true
+

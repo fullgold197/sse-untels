@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class Cambiarcontrasenapordefecto extends Controller
 {
@@ -80,16 +82,27 @@ class Cambiarcontrasenapordefecto extends Controller
     public function update(Request $request, $id)
     {
         //
-
-
+        $value = $request->get('contrasenaactual');
         $rules = [
-            'contrasenaactual'=>'required',
+            'contrasenaactual'=>['required',
+            function ($attribute, $value, $fail) {
+                if (!Hash::check($value, Auth::user()->password)) {
+                    $fail('El campo contraseña actual es incorrecto.');
+                }
+            },
+        ],
             'password' => 'required|min:8',
             'repitanuevacontrasena' => 'required|min:8|same:password',
         ];
 
         $messages = [
             'repitanuevacontrasena.same' => 'La confirmación de la contraseña debe coincidir con la nueva contraseña',
+            'repitanuevacontrasena.required' => 'El campo confirmar nueva contraseña es obligatorio.',
+            'repitanuevacontrasena.min' => 'El campo repita nueva contraseña debe contener al menos 8 caracteres.',
+            'password.required' => 'El campo nueva contraseña es obligatorio.',
+            'password.min' => 'El campo nueva contraseña debe contener al menos 8 caracteres.',
+            'contrasenaactual.required'=>'El campo contraseña actual es obligatorio.'
+
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
 
@@ -105,6 +118,7 @@ class Cambiarcontrasenapordefecto extends Controller
                            'estadocontrasena'=>'modificado',
 
             ]);
+/*             return redirect('/login')->with('status','Contraseña cambiada con exito'); */
             Auth::logout(); //cierra sesion primero (esto hace uso de la ruta logout en web.php)
             return redirect('/login')->with('status','Contraseña cambiada con exito');
             }

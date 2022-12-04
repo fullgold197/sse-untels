@@ -28,21 +28,21 @@
            {{--   El old('') permite rescatar los valores en caso hay algún error a la hora de validar. Esto va en value="{{old('nombre_del_campo')}}"  --}}
             <div class="form-group">
                         <label for="contrasenaactual">Ingrese contraseña actual</label>
-                        <input type="password" class="form-control" id="contrasenaactual" name="contrasenaactual" value="{{ old('contrasenaactual')}}"  maxlength="10" >
+                        <input type="password" class="form-control" id="contrasenaactual" name="contrasenaactual" value="{{ old('contrasenaactual')}}"  maxlength="20" >
                         <div class="text-danger">
                         {{$errors->first('contrasenaactual')}}
                         </div>
                     </div>
             <div class="form-group">
                         <label for="password">Ingrese nueva Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}"  maxlength="10" >
+                        <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}"  maxlength="20" >
                         <div class="text-danger">
                         {{$errors->first('password')}}
                         </div>
             </div>
             <div class="form-group">
                 <label for="repitanuevacontrasena">Confirmar nueva contraseña</label>
-                <input type="password" class="form-control" id="repitanuevacontrasena" name="repitanuevacontrasena" value="{{ old('repitanuevacontrasena')}}"  maxlength="10" >
+                <input type="password" class="form-control" id="repitanuevacontrasena" name="repitanuevacontrasena" value="{{ old('repitanuevacontrasena')}}"  maxlength="20" >
                 <div class="text-danger">
                 {{$errors->first('repitanuevacontrasena')}}
                 </div>

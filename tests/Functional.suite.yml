@@ -1,0 +1,13 @@
+# Codeception Test Suite Configuration
+#
+# Suite for functional tests
+# Emulate web requests and make application process them
+# Include one of framework modules (Symfony, Yii2, Laravel, Phalcon5) to use it
+# Remove this suite if you don't use frameworks
+
+class_name: FunctionalTester
+modules:
+    enabled:
+        - Laravel:
+            environment_file: .env.testing
+        - \AppBundle\Helper\Functional
