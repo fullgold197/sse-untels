@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('estado')->default('1');
             $table->string('estadocontrasena', 10)->default('null');
             $table->string('egresado_matricula', 10)->nullable();
+            $table->integer('id_academico')->unsigned()->nullable();
+            $table->foreign('id_academico')->references('id_academico')->on('academico')->onUpdate('cascade')->unique();
             $table->string('dni', 8)->nullable();
             $table->foreign('dni')->references('dni')->on('egresado')->onDelete('cascade')->onUpdate('cascade')->unique();
             $table->string('api_token')->unique()->nullable()->default(null);

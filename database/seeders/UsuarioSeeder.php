@@ -51,6 +51,7 @@ class UsuarioSeeder extends Seeder
             'email' =>'cruzjean52@gmail.com',
             'password' => bcrypt('12345678'),
             'egresado_matricula'=> $egresadoID,
+            'id_academico' => 1,
             'dni' => $egresadoDNI,
             'role_as' => '0',
             'estado' => '1',
@@ -64,6 +65,7 @@ class UsuarioSeeder extends Seeder
                 'email' =>'oevr1997@gmail.com',
                 'password' => bcrypt('12345678'),
                 'egresado_matricula'=> $egresadoID2,
+                'id_academico' => 1,
                 'dni' => $egresadoDNI2,
                 'role_as' => '0',
                 'estado' => '1',
@@ -77,6 +79,7 @@ class UsuarioSeeder extends Seeder
                 'email' =>'orlando@gmail.com',
                 'password' => bcrypt('12345678'),
                 'egresado_matricula'=> $egresadoID3,
+                'id_academico' => 1,
                 'dni' => $egresadoDNI3,
                 'role_as' => '0',
                 'estado' => '1',
@@ -90,6 +93,7 @@ class UsuarioSeeder extends Seeder
                 'email' => 'elias@gmail.com',
                 'password' => bcrypt('12345678'),
                 'egresado_matricula' => $egresadoID4,
+                'id_academico' => 1,
                 'dni' => $egresadoDNI4,
                 'role_as' => '0',
                 'estado' => '1',
@@ -103,6 +107,7 @@ class UsuarioSeeder extends Seeder
                 'email' => 'nathan@gmail.com',
                 'password' => bcrypt('12345678'),
                 'egresado_matricula' => $egresadoID5,
+                'id_academico' => 2,
                 'dni' => $egresadoDNI5,
                 'role_as' => '0',
                 'estado' => '1',
@@ -117,7 +122,8 @@ class UsuarioSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'role_as' => '1',
                 'estado' => '1',
-                'estadocontrasena' => 'modificado'
+                'estadocontrasena' => 'modificado',
+                'id_academico' => 1,
 
             ]
         );
@@ -128,7 +134,8 @@ class UsuarioSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'role_as' => '1',
                 'estado' => '1',
-                'estadocontrasena' => 'modificado'
+                'estadocontrasena' => 'modificado',
+                'id_academico' => 2,
 
             ]
         );

@@ -10,6 +10,7 @@ use App\Http\Requests\AdminAdministradorEditRequest;
 use App\Http\Requests\AdminAdministradorCreateRequest;
 use App\Http\Requests\AdminEgresadoCreateRequest;
 use App\Http\Requests\AdminEgresadoEditRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UsuariosAdministradoresController extends Controller
@@ -36,7 +37,7 @@ class UsuariosAdministradoresController extends Controller
        /*  ->where('name', 'LIKE', '%' . $texto . '%')
         ->where('email', 'LIKE', '%' . $texto . '%')
         ->where('role_as', 'LIKE', '%' . $texto . '%') */
-
+        ->Where('id_academico', Auth::user()->id_academico)
         ->orderBy('name', 'asc')
         ->paginate(5);
         /* if(){

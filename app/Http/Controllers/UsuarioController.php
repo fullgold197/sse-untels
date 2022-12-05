@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AdminEgresadoEditRequest;
 use App\Http\Requests\AdminEgresadoCreateRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 class UsuarioController extends Controller
@@ -32,12 +33,13 @@ class UsuarioController extends Controller
         ->join('egresado','users.egresado_matricula','=','egresado.matricula')
         ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula')
         ->where('name', 'LIKE', '%' . $texto . '%')
-        ->orWhere('email', 'LIKE', '%' . $texto . '%')
+        /* ->orWhere('email', 'LIKE', '%' . $texto . '%')
         ->orWhere('role_as', 'LIKE', '%' . $texto . '%')
         ->orWhere('ap_paterno', 'LIKE', '%' . $texto . '%')
         ->orWhere('ap_materno', 'LIKE', '%' . $texto . '%')
         ->orWhere('nombres', 'LIKE', '%' . $texto . '%')
-        ->orWhere('matricula', 'LIKE', '%' . $texto . '%')
+        ->orWhere('matricula', 'LIKE', '%' . $texto . '%') */
+        ->Where('egresado.id_academico', Auth::user()->id_academico)
         ->orderBy('name', 'asc')
         ->paginate(5);
        /*  return $usuarios; */

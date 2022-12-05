@@ -84,7 +84,7 @@ class EgresadoSeeder extends Seeder
                 'linkedin' => 'www.linkendin.com',
                 'cant_maestrias' => '2',
                 'cant_doctorados' => '1',
-                'id_academico' => '1',
+                'id_academico' => '2',
                 'habilitado' => '1'
 
             ]
