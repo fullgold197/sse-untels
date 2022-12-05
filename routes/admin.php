@@ -52,6 +52,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     //Ruta para ver ofertas laborales
     Route::resource('/admin/ofertas-laborales',OfertasLaboralesController::class);
+
 });
 
 

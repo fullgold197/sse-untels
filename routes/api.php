@@ -1,7 +1,10 @@
 <?php
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +43,11 @@ Route::middleware(['auth:api'])->group(function(){
     Route::put('/cambiarContrasenaDefecto', [App\Http\Controllers\Authcontroller::class, 'cambiarContrasenaDefecto']);
     
     Route::post('/logout', [App\Http\Controllers\Authcontroller::class, 'logout']);
+});
+
+Route::post('/loginAdmin', [App\Http\Controllers\FortifyServiceController::class, 'login']);
+
+Route::middleware(['auth:api','isAdminApi'])->group(function () {
+    //Update egresado
+    Route::put('updateEgresado/{matricula}', [App\Http\Controllers\Authcontroller::class, 'updateEgresado']);
 });

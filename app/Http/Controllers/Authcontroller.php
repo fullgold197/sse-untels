@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\DatosPersonalesController;
+use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
 
 class Authcontroller extends Controller
 {
@@ -239,9 +243,16 @@ class Authcontroller extends Controller
                 'api_token'=>$token,
             ])->save();
 
-            return response()->json([
-                'token'=>$token
-            ]);
+            if ( $user->estado == '0' ){
+                return response()->json([
+                    'message'=>'Su cuenta está bloqueada. Por favor, comuníquese con su escuela para más detalles.'
+                ]);
+            }
+            else{
+                return response()->json([
+                    'token'=>$token
+                ]);
+            }
         }
 
         return response()->json([
@@ -305,4 +316,151 @@ class Authcontroller extends Controller
 
     }
 
+    public function updateEgresado(Request $request,$matricula)
+    {
+        $user = Auth::user();
+        $dni = $request->get('dni');
+        request()->validate([
+            'matricula' => ['required',
+                            'numeric',
+                            'digits:10',
+                            Rule::unique(Egresado::class)->ignore(Egresado::findOrFail($matricula))
+                        ],
+            'ap_paterno' => ['required','string'],
+            'ap_materno' => ['required','string'],
+            'nombres' => ['required','string'],
+            'grado_academico' => ['required','string'],
+            'dni' => ['required',
+                    'numeric',
+                    'digits:8',
+                    Rule::unique(Egresado::class)->ignore(Egresado::findOrFail($matricula))
+                    ],
+            'genero' => ['required'],
+            'fecha_nacimiento' => ['required'],
+            'año_ingreso' => ['required','numeric','digits:4'],
+            'semestre_ingreso' => ['required','numeric','digits:1'],
+            'año_egreso' => ['required','numeric','digits:4'],
+            'semestre_egreso' => ['required','numeric','digits:1'],
+            'celular' => ['required','numeric','digits:9'],
+            'pais_origen' => 'required|string',
+            'departamento_origen' => 'required|string',
+            'pais_residencia' => 'required|string',
+            'ciudad_residencia' => 'required|string',
+            'lugar_residencia' => 'required|string',
+            'linkedin' => ['required','string'],
+            'id_academico' => ['required'],
+        ],
+            [
+
+            ]);
+
+        $egresados=Egresado::findOrFail($matricula);
+        $egresados->matricula = $request->input('matricula');
+        $egresados->ap_paterno = $request->input('ap_paterno');
+        $egresados->ap_materno = $request->input('ap_materno');
+        $egresados->nombres = $request->input('nombres');
+        $egresados->dni = $request->input('dni');
+        $egresados->genero = $request->input('genero');
+        $egresados->fecha_nacimiento = $request->input('fecha_nacimiento');
+        $egresados->año_ingreso = $request->input('año_ingreso');
+        $egresados->semestre_ingreso = $request->input('semestre_ingreso');
+        $egresados->año_egreso = $request->input('año_egreso');
+        $egresados->semestre_egreso  = $request->input('semestre_egreso');
+        $egresados->celular = $request->input('celular');
+        $egresados->pais_origen = $request->input('pais_origen');
+        $egresados->departamento_origen = $request->input('departamento_origen');
+        $egresados->pais_residencia  = $request->input('pais_residencia');
+        $egresados->ciudad_residencia = $request->input('ciudad_residencia');
+        $egresados->lugar_residencia = $request->input('lugar_residencia');
+        $egresados->linkedin = $request->input('linkedin');
+        $egresados->id_academico=$request->input('id_academico');
+
+        $egresados->save();
+
+        return "Los cambios se han realizado satisfactoriamente.";
+    }
+
+}
+
+class FortifyServiceProviderController extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        /* $this->app->instance(LoginResponse::class, new class implements LoginResponse
+        {
+            public function toResponse($request)
+            {
+                if(1>2){
+                    return redirect('/cambiarcontrasena');
+                }
+                else{
+                    return redirect('/home');
+                }
+
+            }
+        }); */
+
+
+    }
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Fortify::createUsersUsing(CreateNewUser::class);
+        Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
+        Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
+        Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+
+        Fortify::loginView(function () {
+            return view('auth.login');
+        });
+
+        /* Fortify::registerView(function () {
+
+            return view('auth.register');
+        }); */
+
+        Fortify::requestPasswordResetLinkView(function () {
+            return view('auth.passwords.email');
+        });
+
+        Fortify::resetPasswordView(function ($request) {
+            return view('auth.passwords.reset', ['request' => $request]);
+        });
+
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify');
+        });
+
+        Fortify::authenticateUsing(function (Request $request) {
+            /* $rol=User::where('role_as', $request->role_as)->first(); */
+
+                $user = User::where('dni', $request->egresado_matricula)
+                ->orWhere('email', $request->egresado_matricula)
+                ->first();
+                if (
+                    $user &&
+                    Hash::check($request->password, $user->password)
+                )
+                 {
+                    return $user;
+                }
+        });
+
+        RateLimiter::for('login', function (Request $request) {
+            return Limit::perMinute(5)->by($request->email.$request->ip());
+        });
+
+        RateLimiter::for('two-factor', function (Request $request) {
+            return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        });
+    }
 }
