@@ -309,7 +309,9 @@ class Authcontroller extends Controller
             ]);
 /*             return redirect('/login')->with('status','Contraseña cambiada con exito'); */
             //Auth::logout(); //cierra sesion primero (esto hace uso de la ruta logout en web.php)
-            return redirect('/home')->with('status','Contraseña cambiada con exito');
+            return response()->json([
+                'message'=>'Su contraseña ha sido modificada satisfactoriamente.'
+            ]);
             //return "Hola";
             }
         }
@@ -376,8 +378,9 @@ class Authcontroller extends Controller
         $egresados->id_academico=$request->input('id_academico');
 
         $egresados->save();
-
-        return "Los cambios se han realizado satisfactoriamente.";
+        return response()->json([
+            'message'=>'Los cambios se han realizado satisfactoriamente.'
+        ]);
     }
 
 }
