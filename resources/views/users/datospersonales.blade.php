@@ -1,7 +1,6 @@
 @extends('layouts.egresado')
 @section('title', 'Datos personales')
 @section('content')
-
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-xl-12 ">
@@ -14,6 +13,7 @@
                 </div>
             </div>
         </div>
+
                 @foreach ($egresados as $egresado)
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-6">
@@ -137,11 +137,15 @@
                             <input type="hidden" class="form-control" id="matricula" name="matricula"
                              value="{{$egresado->matricula}}">
                             @include('users.modalEgresados.datos_personales.datos_personales_edit')
-                            @include('users.modalEgresados.datos_personales.datos_personales_foto_edit')
+
                         @endforeach
+
                     </div>
                 </div>
                 </div>
+                @include('users.modalEgresados.datos_personales.datos_personales_foto_edit')
+
+
             </div>
                     </tbody>
                 </table>
