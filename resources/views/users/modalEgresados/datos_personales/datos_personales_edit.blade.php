@@ -21,7 +21,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="correoUpdate{{$egresado->matricula}}" name="email" maxlength="20" value="{{$egresado->email}}">
+                            <input type="text" class="form-control" id="correoUpdate{{$egresado->matricula}}" name="email" maxlength="50" value="{{$egresado->email}}">
                             <span class="text-danger" id="emailUpdateError{{$egresado->matricula}}"></span>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <label for="linkedin">Linkedin</label>
                             <input type="text" class="form-control" id="linkedinUpdate{{$egresado->matricula}}" name="linkedin" maxlength="50" value="{{$egresado->linkedin}}">
-                            <span class="text-danger" id="linkedinUpdateError{{$egresado->matricula}}"></span>
+                            <span class="text-danger" id="linkedinUpdateError{{$egresado->matricula}}"50
                         </div>
                     </div>
                 </div>
