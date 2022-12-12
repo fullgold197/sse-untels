@@ -14,7 +14,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="celular">Celular</label>
-                            <input type="number" class="form-control" id="celularUpdate{{$egresado->matricula}}" name="celular" maxlength="9" value="{{$egresado->celular}}">
+                            <input type="text" class="form-control" id="celularUpdate{{$egresado->matricula}}" name="celular" maxlength="9" value="{{$egresado->celular}}">
                             <span class="text-danger" id="celularUpdateError{{$egresado->matricula}}"></span>
                         </div>
                     </div>
