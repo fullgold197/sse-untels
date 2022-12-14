@@ -207,7 +207,7 @@
                                 {{--  Ver lista completa de datos de egresado  --}}
                                 <form action="{{route('academico-profesional.index')}}" method="GET">
                                 <button type="submit" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modal">
-                                <i class="fa fa-eye " aria-hidden="true"></i>
+                                <i class="fa fa-eye " aria-hidden="true" title="Ver detalles del egresado"></i>
                                 </button>
 
                                 <input type="hidden" name="matricula_id" value="{{$egresado->matricula}}">
@@ -215,29 +215,33 @@
                                 </form>
 
                                 {{--  Crear usuario de egresado automaticamente.  --}}
-                                @if ($egresado->habilitado=='0')
-                                <form action="{{route('usuario.store')}}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-dark btn-sm my-1" data-bs-toggle="modal" data-bs-target="#modal">
-                                <i class="fas fa-user-plus"></i>
-                                </button>
-                                <input type="hidden" name="name" value="{{$egresado->nombres}}">
-                                <input type="hidden" name="email" value="{{$egresado->matricula.'@untels.edu.pe'}}">
-                                <input type="hidden" name="dni" value="{{$egresado->dni}}">
-                                <input type="hidden" name="egresado_matricula" value="{{$egresado->matricula}}">
-                                <input type="hidden" name="regresar" value="1">
-                                </form>
+                                @if ($egresado->habilitado=='0' and $egresado->dni != NULL)
+                                    <form action="{{route('usuario.store')}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-dark btn-sm my-1" data-bs-toggle="modal" data-bs-target="#modal" title="Crear usuario">
+                                    <i class="fas fa-user-plus"></i>
+                                    </button>
+                                    <input type="hidden" name="name" value="{{$egresado->nombres}}">
+                                    <input type="hidden" name="email" value="{{$egresado->matricula.'@untels.edu.pe'}}">
+                                    <input type="hidden" name="dni" value="{{$egresado->dni}}">
+                                    <input type="hidden" name="egresado_matricula" value="{{$egresado->matricula}}">
+                                    <input type="hidden" name="regresar" value="1">
+                                    </form>
+                                @elseif ($egresado->dni == NULL)
+                                <button type="submit" class="btn btn-dark btn-sm my-1" data-bs-toggle="modal" data-bs-target="#modal" title="No se puede crear usuario sin DNI" disabled>
+                                    <i class="fas fa-user-plus"></i>
+                                    </button>
                                 @endif
 
                                 </td>
 
                                 <td>
                                 {{--  Editar egresado --}}
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->matricula}}" data-id="{{$egresado->matricula}}" id="editIdBtn">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit-{{$egresado->matricula}}" data-id="{{$egresado->matricula}}" id="editIdBtn" title="Editar egresado">
                                 <i class="fas fa-edit"></i>
                                 </button>
                                 {{--  Eliminar egresado --}}
-                                <button type="button" class="btn btn-danger btn-sm my-1" data-bs-toggle="modal" data-bs-target="#modal-delete-{{$egresado->matricula}}">
+                                <button type="button" class="btn btn-danger btn-sm my-1" data-bs-toggle="modal" data-bs-target="#modal-delete-{{$egresado->matricula}}" title="Eliminar egresado">
                                 <i class="fas fa-trash-alt"></i>
                                 </button>
                                 </td>

@@ -173,16 +173,15 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="linkedin">Linkedin</label>
                                 <input type="text" class="form-control" id="linkedinUpdate{{$egresado->matricula}}" name="linkedin"  maxlength="50" value="{{$egresado->linkedin}}">
                                 <span class="text-danger" id="linkedinUpdateError{{$egresado->matricula}}"></span>
                             </div>
                         </div>
-                        <div class="col-md-6">
+{{--                         <div class="col-md-6">
                             <div class="form-group">
-                                {{-- <input type="text" class="form-control" id="genero" name="genero" required maxlength="50" value="{{$egresado->genero}}"> --}}
                                 <label for="id_academico">Carrera</label>
                                 <select id="id_academicoUpdate{{$egresado->matricula}}" class="form-control" name="id_academico">
                                     <option value="1" {{$egresado->id_academico=="1" ? 'selected' : '' }}>Ingeniería de Sistemas</option>
@@ -193,7 +192,7 @@
                                 </select>
                                 <span class="text-danger" id="id_academicoUpdateError{{$egresado->matricula}}"></span>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -233,7 +232,7 @@
         var ciudad_residenciaUpdate = $('#ciudad_residenciaUpdate'+idEdit).val();
         var lugar_residenciaUpdate = $('#lugar_residenciaUpdate'+idEdit).val();
         var linkedinUpdate = $('#linkedinUpdate'+idEdit).val();
-        var id_academicoUpdate = $('#id_academicoUpdate'+idEdit).val();
+        /* var id_academicoUpdate = $('#id_academicoUpdate'+idEdit).val(); */
         var x="egresado/";
         var y=idEdit;
 
@@ -259,7 +258,7 @@
             $('#ciudad_residenciaUpdateError'+idEdit).addClass('d-none');
             $('#lugar_residenciaUpdateError'+idEdit).addClass('d-none');
             $('#linkedinUpdateError'+idEdit).addClass('d-none');
-            $('#id_academicoUpdateError'+idEdit).addClass('d-none');
+            /* $('#id_academicoUpdateError'+idEdit).addClass('d-none'); */
 
         $.ajax({
             type: 'PUT',
@@ -284,7 +283,7 @@
                 ciudad_residencia:ciudad_residenciaUpdate,
                 lugar_residencia:lugar_residenciaUpdate,
                 linkedin:linkedinUpdate,
-                id_academico:id_academicoUpdate,
+                /* id_academico:id_academicoUpdate, */
             },
             success: function (data) {
                 $('#modal-edit-'+idEdit).modal('hide');

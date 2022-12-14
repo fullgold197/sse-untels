@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Academico;
 use App\Models\Egresado;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
@@ -63,21 +64,21 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
             'ap_paterno'            => $row['1'],
             'ap_materno'            => $row['2'],
             'nombres'               => $row['3'],
-            'id_academico'          => $this->carr_profesional[$row['4']],
-            'grado_academico'       => $row['5'],
-            'dni'                   => $row['6'],
-            'genero'                => $row['7'],
-            'fecha_nacimiento'      => $row['8'],
-            'año_ingreso'           => $row['9'],
-            'semestre_ingreso'      => $row['10'],
-            'año_egreso'            => $row['11'],
-            'semestre_egreso'       => $row['12'],
-            'celular'               => $row['13'],
-            'pais_origen'           => $row['14'],
-            'departamento_origen'   => $row['15'],
-            'pais_residencia'       => $row['16'],
-            'ciudad_residencia'     => $row['17'],
-            'lugar_residencia'      => $row['18'],
+            'id_academico'          => Auth::user()->id_academico,
+            'grado_academico'       => $row['4'],
+            'dni'                   => $row['5'],
+            'genero'                => $row['6'],
+            'fecha_nacimiento'      => $row['7'],
+            'año_ingreso'           => $row['8'],
+            'semestre_ingreso'      => $row['9'],
+            'año_egreso'            => $row['10'],
+            'semestre_egreso'       => $row['11'],
+            'celular'               => $row['12'],
+            'pais_origen'           => $row['13'],
+            'departamento_origen'   => $row['14'],
+            'pais_residencia'       => $row['15'],
+            'ciudad_residencia'     => $row['16'],
+            'lugar_residencia'      => $row['17'],
 
             //'id_academico'          => $row['18'],
             //'id_academico'          => $qqr2,
@@ -110,20 +111,23 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
             '3' => [
                 'string', 'required','nullable'
             ],
-            '4' => [
+            /* '4' => [
                 'required'
+            ], */
+            '4' => [
+                'string', 'nullable'
             ],
             '5' => [
-                'string', 'nullable'
-            ],
-            '6' => [
                 'integer', 'unique:egresado,dni', 'digits:8', 'nullable'
             ],
-            '7' => [
+            '6' => [
                 'string', 'nullable'
             ],
-            '8' => [
+            '7' => [
                 'date', 'nullable'
+            ],
+            '8' => [
+                'integer', 'nullable'
             ],
             '9' => [
                 'integer', 'nullable'
@@ -138,7 +142,7 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
                 'integer', 'nullable'
             ],
             '13' => [
-                'integer', 'nullable'
+                'string', 'nullable'
             ],
             '14' => [
                 'string', 'nullable'
@@ -150,9 +154,6 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
                 'string', 'nullable'
             ],
             '17' => [
-                'string', 'nullable'
-            ],
-            '18' => [
                 'string', 'nullable'
             ],
 
@@ -170,21 +171,21 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
             '1' => 'apellidos paternos',
             '2' => 'apellidos maternos',
             '3' => 'nombres',
-            '4' => 'carrera profesional',
-            '5' => 'grado académico',
-            '6' => 'DNI',
-            '7' => 'género',
-            '8' => 'fecha de nacimiento',
-            '9' => 'año de ingreso',
-            '10' => 'semestre de ingreso',
-            '11' => 'año de egreso',
-            '12' => 'semestre de egreso',
-            '13' => 'celular',
-            '14' => 'país de origen',
-            '15' => 'departamento de origen',
-            '16' => 'país de residencia',
-            '17' => 'ciudad de residencia',
-            '18' => 'lugar de residencia',
+            /* '4' => 'carrera profesional', */
+            '4' => 'grado académico',
+            '5' => 'DNI',
+            '6' => 'género',
+            '7' => 'fecha de nacimiento',
+            '8' => 'año de ingreso',
+            '9' => 'semestre de ingreso',
+            '10' => 'año de egreso',
+            '11' => 'semestre de egreso',
+            '12' => 'celular',
+            '13' => 'país de origen',
+            '14' => 'departamento de origen',
+            '15' => 'país de residencia',
+            '16' => 'ciudad de residencia',
+            '17' => 'lugar de residencia',
         ];
 
     }

@@ -90,6 +90,8 @@ class UsuariosAdministradoresController extends Controller
         /* $usuarios->egresado_matricula = $request->input('egresado_matricula'); */
         $usuarios->role_as = 1;
         $usuarios->estado = $request->input('estado');
+        $usuarios->id_academico = Auth::user()->id_academico;
+        $usuarios->estadocontrasena = 'modificado';
         $usuarios->save();
         return back()->withInput();
 

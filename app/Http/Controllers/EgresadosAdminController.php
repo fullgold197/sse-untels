@@ -135,10 +135,10 @@ class EgresadosAdminController extends Controller
             'pais_residencia' => ['nullable','string',],
             'ciudad_residencia' => ['nullable','string',],
             'lugar_residencia' => ['nullable','string',],
-            'id_academico' => ['required'],
+            /* 'id_academico' => ['required'], */
         ],
             [
-                'id_academico.required' => 'El campo carrera es obligatorio.',
+                /* 'id_academico.required' => 'El campo carrera es obligatorio.', */
             ]);
         $egresados=new Egresado;
 
@@ -164,7 +164,7 @@ class EgresadosAdminController extends Controller
         $egresados->ciudad_residencia = $request->input('ciudad_residencia');
         $egresados->lugar_residencia = $request->input('lugar_residencia');
 
-        $egresados->id_academico =$request->input('id_academico');
+        $egresados->id_academico = Auth::user()->id_academico;
         $egresados->habilitado = 0;
         $egresados->save();
 
@@ -223,26 +223,26 @@ class EgresadosAdminController extends Controller
             'ap_paterno' => ['required','string'],
             'ap_materno' => ['required','string'],
             'nombres' => ['required','string'],
-            'grado_academico' => ['required','string'],
-            'dni' => ['required',
+            'grado_academico' => ['string'],
+            'dni' => ['nullable',
                     'numeric',
                     'digits:8',
                     Rule::unique(Egresado::class)->ignore(Egresado::findOrFail($matricula))
                     ],
-            'genero' => ['required'],
-            'fecha_nacimiento' => ['required'],
-            'año_ingreso' => ['required','numeric','digits:4'],
-            'semestre_ingreso' => ['required','numeric','digits:1'],
-            'año_egreso' => ['required','numeric','digits:4'],
-            'semestre_egreso' => ['required','numeric','digits:1'],
-            'celular' => ['required','numeric','digits:9'],
-            'pais_origen' => 'required|string',
-            'departamento_origen' => 'required|string',
-            'pais_residencia' => 'required|string',
-            'ciudad_residencia' => 'required|string',
-            'lugar_residencia' => 'required|string',
-            'linkedin' => ['required','string'],
-            'id_academico' => ['required'],
+            'genero' => ['nullable'],
+            'fecha_nacimiento' => ['nullable'],
+            'año_ingreso' => ['nullable','numeric','digits:4'],
+            'semestre_ingreso' => ['nullable','numeric','digits:1'],
+            'año_egreso' => ['nullable','numeric','digits:4'],
+            'semestre_egreso' => ['nullable','numeric','digits:1'],
+            'celular' => ['nullable','numeric','digits:9'],
+            'pais_origen' => 'nullable|string',
+            'departamento_origen' => 'nullable|string',
+            'pais_residencia' => 'nullable|string',
+            'ciudad_residencia' => 'nullable|string',
+            'lugar_residencia' => 'nullable|string',
+            'linkedin' => ['nullable','string'],
+            /* 'id_academico' => ['required'], */
         ],
             [
 
@@ -267,7 +267,7 @@ class EgresadosAdminController extends Controller
         $egresados->ciudad_residencia = $request->input('ciudad_residencia');
         $egresados->lugar_residencia = $request->input('lugar_residencia');
         $egresados->linkedin = $request->input('linkedin');
-        $egresados->id_academico=$request->input('id_academico');
+       /*  $egresados->id_academico = Auth::user()->id_academico; */
 
         $egresados->save();
         return 0;

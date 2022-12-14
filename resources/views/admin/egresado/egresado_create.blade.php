@@ -48,14 +48,14 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nombres">Nombres</label>
                                 <input type="text" class="form-control" id="nombres" name="nombres" value="{{ old('nombres')}}" required maxlength="30" >
                                 <span class="text-danger" id="nombresError"></span>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <div class="form-group">
                                 <label for="id_academico">Carrera</label>
                                 <select name="id_academico" class="form-control"  id="id_academico" required>
@@ -68,8 +68,8 @@
                                 </select>
                                 <span class="text-danger" id="id_academicoError"></span>
                             </div>
-                        </div>
-                        <div class="col-md-4">
+                        </div> --}}
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="genero">Género</label>
                                 <select name="genero" class="form-control"  id="genero" required>
