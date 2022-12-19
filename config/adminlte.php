@@ -259,13 +259,17 @@ return [
             'text' => 'Inicio',
             'url'  => 'admin',
             'icon' => 'fas fa-fw fa-home',
+
         ],
         /* [
             'text' => 'Datos estadísticos',
             'url'  => 'admin/egresado/GraficoVistaEgresados',
             'icon' => 'fas fa-table',
         ], */
+
+
         [
+
             'text'    => 'Datos estadísticos',
             'icon'    => 'fas fa-table',
             'submenu' => [
@@ -281,11 +285,14 @@ return [
                     'icon' => 'fas fa-chart-pie',
                 ],
             ],
+            'can'  => 'admin',
         ],
+
         [
             'text' => 'Egresados',
             'url'  => 'admin/egresado',
             'icon' => 'fas fa-fw fa-graduation-cap',
+            'can'  => 'admin',
         ],
         /* [
             'text' => 'Ofertas Laborales',

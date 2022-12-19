@@ -29,19 +29,26 @@ class UsuarioController extends Controller
         }
         $texto = $request->get('texto');
         //Trae de la tabla $egresados todo los campos. Aqui se está filtrando y solo muestra los usuarios que contengan un codigo de egresado y su matricula,
-        $usuarios = DB::table('users')
-        ->join('egresado','users.egresado_matricula','=','egresado.matricula')
-        ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula')
-        ->where('name', 'LIKE', '%' . $texto . '%')
-        /* ->orWhere('email', 'LIKE', '%' . $texto . '%')
-        ->orWhere('role_as', 'LIKE', '%' . $texto . '%')
-        ->orWhere('ap_paterno', 'LIKE', '%' . $texto . '%')
-        ->orWhere('ap_materno', 'LIKE', '%' . $texto . '%')
-        ->orWhere('nombres', 'LIKE', '%' . $texto . '%')
-        ->orWhere('matricula', 'LIKE', '%' . $texto . '%') */
-        ->Where('egresado.id_academico', Auth::user()->id_academico)
-        ->orderBy('name', 'asc')
-        ->paginate(5);
+
+        if (Auth::user()->role_as == 1) {
+            $usuarios = DB::table('users')
+            ->join('egresado','users.egresado_matricula','=','egresado.matricula')
+            ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula')
+            ->where('name', 'LIKE', '%' . $texto . '%')
+            ->Where('egresado.id_academico', Auth::user()->id_academico)
+            ->orderBy('name', 'asc')
+            ->paginate(5);
+        } elseif (Auth::user()->role_as == 2) {
+            $usuarios = DB::table('users')
+            ->join('egresado','users.egresado_matricula','=','egresado.matricula')
+            ->join('academico','users.id_academico','=','academico.id_academico')
+            ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula','academico.carr_profesional')
+            ->where('name', 'LIKE', '%' . $texto . '%')
+            ->orderBy('name', 'asc')
+            ->paginate(5);
+        }
+
+
        /*  return $usuarios; */
         return view('admin.usuarios.egresados.index', compact('usuarios', 'texto'), ['valor' => $string]);
     }
@@ -83,17 +90,9 @@ class UsuarioController extends Controller
         /* return $usuarios; */
         if($regresar=='1'){
             return back()->withInput();
-            /* return redirect()->route('egresado.index'); */
-            /* $path = $_SERVER['HTTP_REFERER'];
-            return redirect($path); */
-
-
         }
         else{
             return back()->withInput();
-            /* return redirect()->route('usuario.index'); */
-            /* $path = $_SERVER['HTTP_REFERER'];
-            return redirect($path); */
         }
 
     }

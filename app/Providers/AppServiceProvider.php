@@ -41,6 +41,16 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
 
+        \Gate::define('admin', function ($user) {
+            if (Auth::user()->role_as == 2) {
+                return false;
+            }
+            else{
+                return true;
+            }
+
+        });
+
 
 
 

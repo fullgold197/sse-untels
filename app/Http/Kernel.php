@@ -44,7 +44,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
-        
+
     ];
 
     /**
@@ -68,5 +68,7 @@ class Kernel extends HttpKernel
         'isAdminApi'  => \App\Http\Middleware\AdminApiMiddleware::class,  // Este 'isAdmin' sirve para que solo tenga acceso a las vistas del admin. Se declara la direccion de middleware más el nombre que se desea que tenga. En este caso se va a llamar 'isAdmin'.
         'isUser'  => \App\Http\Middleware\UserMiddleware::class,  // Este 'isUser' sirve para que solo tenga acceso a las vistas del user. Se declara la direccion de middleware más el nombre que se desea que tenga. En este caso se va a llamar 'isUser'.
         'isCambiarcontrasena' => \App\Http\Middleware\Cambiarcontrasenapordefecto::class,
+        'isSuperAdmin' => \App\Http\Middleware\SuperAdminMiddleware::class,
+
     ];
 }

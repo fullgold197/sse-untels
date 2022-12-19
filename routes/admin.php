@@ -10,24 +10,21 @@ use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\UsuariosAdministradoresController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 
 //En este grupo de funciones se hacen dos operaciones. Primero va hacia el middleware 'auth' para saber si el usuario está logueado, despues de esto va hacia el middleware 'isAdmin'. Aqui verifica si tiene el rol de admin.
 Route::middleware(['auth', 'isAdmin'])->group(function () {
 
-    Route::get('/admin', function () {
+/*     Route::get('/admin', function () {
         return view('admin.inicio.home');
     });
-
-    //Ruta para la vista de usuarios de egresados
-    Route::resource('/admin/usuario', UsuarioController::class);
-
-    //Ruta para la vista de usuarios de administradores
-    Route::resource('/admin/administradores', UsuariosAdministradoresController::class);
+ */
 
     //Ruta para las gráficas de maestrias
-    Route::get('/admin/egresado/GraficoVistaEgresados', [App\Http\Controllers\GraficosEgresadosAdminController::class, 'index'])->name('egresados.graficos');
+    Route::get('/admin/egresado/GraficoVistaEgresados',
+    [App\Http\Controllers\GraficosEgresadosAdminController::class, 'index'])->name('egresados.graficos');
 
     //Ruta para las gráficas de doctorados
     Route::get('/admin/egresado/GraficoVistaEgresadosDoctorados', [App\Http\Controllers\PorcentajeDoctoradoController::class, 'index'])->name('egresadosdoctorados.graficos');
@@ -52,8 +49,25 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     //Ruta para ver ofertas laborales
     Route::resource('/admin/ofertas-laborales',OfertasLaboralesController::class);
+/*
+    //Ruta para la vista de usuarios de egresados
+    Route::resource('/admin/usuario', UsuarioController::class);
 
+    //Ruta para la vista de usuarios de administradores
+    Route::resource('/admin/administradores', UsuariosAdministradoresController::class); */
 });
 
+//Rutas de superadmin y admin
+Route::middleware(['auth', 'isSuperAdmin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.inicio.home');
+        /* $role = Auth::user()->role_as; */
+    });
+    //Ruta para la vista de usuarios de egresados
+    Route::resource('/admin/usuario', UsuarioController::class);
+
+    //Ruta para la vista de usuarios de administradores
+    Route::resource('/admin/administradores', UsuariosAdministradoresController::class);
+});
 
 

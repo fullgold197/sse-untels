@@ -24,7 +24,6 @@ class EgresadosAdminController extends Controller
      */
     public function index(Request $request)
     {
-        //
         if( $request->texto == "" ){
         $string = "empty";
 
@@ -44,19 +43,11 @@ class EgresadosAdminController extends Controller
             $tipo_filtrado = $request->get('tipo_filtrado');
             $orden = $request->get('orden');
         }
-        /* return $orden; */
+
         $egresados=DB::table('egresado')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
         ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero','egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso','egresado.año_egreso' ,'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin','egresado.url','egresado.habilitado', 'egresado.created_at', 'egresado.updated_at', 'academico.id_academico', 'academico.carr_profesional')
         ->where('matricula', 'LIKE', '%' . $texto . '%')
-        /* ->orwhere('ap_paterno','LIKE','%'.$texto.'%')
-        ->orwhere('ap_materno', 'LIKE', '%' . $texto . '%')
-        ->orWhere('nombres', 'LIKE', '%'.$texto.'%')
-        ->orWhere('semestre_ingreso', 'LIKE', '%'.$texto.'%')
-        ->orwhere('semestre_egreso', 'LIKE', '%' . $texto . '%')
-        ->orWhere('carr_profesional', 'LIKE', '%'. $texto.'%')
-        ->orWhere('dni', 'LIKE', '%' . $texto . '%')
-        ->orWhere('celular', 'LIKE', '%' . $texto . '%') */
         ->Where('egresado.id_academico', Auth::user()->id_academico)
         ->orderBy($tipo_filtrado, $orden)
         ->paginate(5);

@@ -76,7 +76,7 @@ Route::resource('/cambiarcontrasenapordefecto', Cambiarcontrasenapordefecto::cla
  /*    Route::resource('/home/ofertas-laborales-egresado', OfertasLaboralesEgresadoController::class); */
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('logout', 'AppHttpControllersAuthLoginController@logout');
+/* Route::get('logout', 'AppHttpControllersAuthLoginController@logout'); */
 /* Route::get('/alumnos', [App\Http\Controllers\AlumnoController::class, 'index']);
 Route::get('/alumnos/crear', [AlumnoController::class, 'create']);
 Route::post('/alumnos/crear',  [AlumnoController::class, 'store']); */

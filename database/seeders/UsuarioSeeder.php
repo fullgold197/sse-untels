@@ -139,6 +139,18 @@ class UsuarioSeeder extends Seeder
 
             ]
         );
+        User::create(
+            [
+                'name' => 'Admin',
+                'email' => 'admin@untels.edu.pe',
+                'password' => bcrypt('12345678'),
+                'role_as' => '2',
+                'estado' => '1',
+                'estadocontrasena' => 'modificado',
+                
+
+            ]
+        );
 
     }
 }

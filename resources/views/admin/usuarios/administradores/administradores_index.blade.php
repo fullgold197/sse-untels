@@ -49,6 +49,7 @@
 
                             <tr class="text-center">
                                 <th>N°</th>
+                                <th>Carrera</th>
                                 <th>Usuario</th>
                                 <th>Correo</th>
                                 <th>Nivel de acceso</th>
@@ -69,13 +70,19 @@
 
                             <tr class="text-center">
                                 <td>{{++$n}}</td>
+                                @if ($usuario->carr_profesional == NULL)
+                                <td>Todas las carreras</td>
+                                @else
+                                <td>{{$usuario->carr_profesional}}</td>
+                                @endif
                                 <td>{{$usuario->name}}</td>
                                 <td>{{$usuario->email}}</td>
 
                                 @if ($usuario->role_as==1)
                                 <td>Administrador</td>
-                                @else
-                                <td>Usuario</td>
+                                @elseif ($usuario->role_as==2)
+                                <td>Super Administrador</td>
+                                @elseif ($usuario->role_as==0)
                                 @endif
 
                                 @if ($usuario->estado==1)

@@ -30,24 +30,27 @@ class UsuariosAdministradoresController extends Controller
             $string = '$request->texto';
         }
         $texto = $request->get('texto');
-        //trae de la tabla $egresados todo los campos. Debid
-        $usuarios = DB::table('users')
-        ->select('id', 'name', 'email', 'role_as', 'password','estado')
-        ->where('role_as', 1)
-       /*  ->where('name', 'LIKE', '%' . $texto . '%')
-        ->where('email', 'LIKE', '%' . $texto . '%')
-        ->where('role_as', 'LIKE', '%' . $texto . '%') */
-        ->Where('id_academico', Auth::user()->id_academico)
-        ->orderBy('name', 'asc')
-        ->paginate(5);
-        /* if(){
-
+        //trae de la tabla $egresados todo los campos.
+        if (Auth::user()->role_as == 1) {
+            $usuarios = DB::table('users')
+            ->leftjoin('academico', 'academico.id_academico', '=', 'users.id_academico')
+            ->select('users.id', 'users.name', 'users.email', 'users.role_as', 'users.password','users.estado','academico.carr_profesional')
+            ->where('role_as', 1)
+            ->Where('id_academico', Auth::user()->id_academico)
+            ->orderBy('name', 'asc')
+            ->paginate(5);
+            return view('admin.usuarios.administradores.administradores_index', compact('usuarios','texto'), ['valor' => $string]);
+        } elseif(Auth::user()->role_as == 2) {
+            $usuarios = DB::table('users')
+            ->leftjoin('academico', 'academico.id_academico', '=', 'users.id_academico')
+            ->select('users.id', 'users.name', 'users.email', 'users.role_as', 'users.password','users.estado','academico.carr_profesional')
+            ->whereBetween('role_as', [1, 2])
+            ->orderBy('name', 'asc')
+            ->paginate(5);
+            return view('admin.usuarios.administradores.administradores_index', compact('usuarios','texto'), ['valor' => $string]);
         }
-        else if(){
 
-        } */
-         /* return $usuarios; */
-        return view('admin.usuarios.administradores.administradores_index', compact('usuarios','texto'), ['valor' => $string]);
+
     }
 
     /**
