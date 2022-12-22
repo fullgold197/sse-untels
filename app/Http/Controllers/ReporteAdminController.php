@@ -25,7 +25,7 @@ class ReporteAdminController extends Controller
         $egresados = DB::table('egresado')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
         ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.grado_academico', 'egresado.dni', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso', 'egresado.año_egreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin', 'academico.carr_profesional')
-        ->where('habilitado', '=', 1)
+        /* ->where('habilitado', '=', 1) */
         ->where('egresado.id_academico',Auth::user()->id_academico)
         ->orderBy('ap_paterno', 'desc')
         ->get();

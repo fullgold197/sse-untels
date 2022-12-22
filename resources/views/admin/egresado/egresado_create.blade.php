@@ -87,7 +87,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="dni">DNI</label>
-                                <input type="number" class="form-control" id="dni" name="dni" value="{{ old('dni')}}" maxlength="8">
+                                <input type="text" class="form-control" id="dni" name="dni" value="{{ old('dni')}}" maxlength="8">
                                 <span class="text-danger" id="dniError"></span>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="año_ingreso">Año de ingreso</label>
-                                <input type="number" id="año_ingreso" name="año_ingreso" class="form-control" min="2000" max="2099" step="1" value="{{old('año_ingreso')}}" maxlength="4"/>
+                                <input type="text" id="año_ingreso" name="año_ingreso" class="form-control" min="2000" max="2099" step="1" value="{{old('año_ingreso')}}" maxlength="4"/>
                                 <span class="text-danger" id="año_ingresoError"></span>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="año_egreso">Año de egreso</label>
-                                <input type="number" name="año_egreso"  class="form-control" min="2000" max="2099" step="1" value="{{old('año_egreso')}}" maxlength="4"/>
+                                <input type="text" name="año_egreso"  class="form-control" min="2000" max="2099" step="1" value="{{old('año_egreso')}}" maxlength="4"/>
                                 <span class="text-danger" id="año_egresoError"></span>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="celular">Celular</label>
-                                <input type="number" class="form-control" id="celular" name="celular" value="{{ old('celular')}}" maxlength="9">
+                                <input type="text" class="form-control" id="celular" name="celular" value="{{ old('celular')}}" maxlength="9">
                                 <span class="text-danger" id="celularError"></span>
                             </div>
                         </div>

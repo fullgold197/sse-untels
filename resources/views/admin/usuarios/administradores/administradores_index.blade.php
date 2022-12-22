@@ -15,14 +15,14 @@
             <div class="col-xl-12">
                 <form action="{{route('administradores.index')}}" method="GET">
 
-                    {{--  <div class="form-row">
+                     <div class="form-row">
                         <div class="col-sm-4 my-2">
-                            <input type="text" class="form-control" placeholder="Buscar"  name="texto" value="{{$texto}}">
+                            <input type="text" class="form-control" placeholder="Buscar"  name="texto" value="{{$texto}}" id="texto">
                         </div>
                         <div class="col-sm-8 my-2">
-                            <input type="submit" class="btn btn-dark" value="Buscar">
+                            <input type="submit" class="btn btn-dark" value="Buscar" id="buscarUsuario">
                         </div>
-                    </div>  --}}
+                    </div>
                     <div class="form-row">
                         <div class="col-auto my-2">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-administradores-create">Nuevo</button>
@@ -100,10 +100,12 @@
                                 </button>
 
 
-
+                                @if ($usuario->role_as == 1)
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-administradores-delete-{{$usuario->id}}">
-                                <i class="fas fa-trash-alt"></i>
-                                </button>
+                                    <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                @endif
+
 
 
                             </td>
@@ -151,9 +153,21 @@
                 document.getElementById('resultado').value = editIdBtn;
                 console.log(editIdBtn);
             });
+    //Busqueda
+    window.addEventListener("load", function(){
+        let inputValue = document.getElementById("texto").value;
+        document.getElementById("texto").addEventListener("keyup",function(){
+            let texto = document.getElementById("texto").value
+            if(texto === ''){
+                console.log("Vacio")
+                $("#buscarUsuario").click();
+            }
+        })
 
+    })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
     </html>
 @stop
 

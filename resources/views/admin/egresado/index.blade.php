@@ -21,10 +21,10 @@
                     <div class="form-row" >
                         {{--  class="col-sm-3 my-2" para indicar que va a tomar 3 columnas  --}}
                         <div class="col-sm-3 my-2" >
-                            <input type="text" placeholder="Buscar" class="form-control" name="texto" value="{{$texto}}">
+                            <input type="text" placeholder="Buscar" class="form-control" name="texto" value="{{$texto}}" id="texto">
                         </div>
                         <div class="col-sm-3 my-2" >
-                            <input type="submit" class="btn btn-dark"  value="Buscar">
+                            <input type="submit" class="btn btn-dark"  value="Buscar" id="buscarUsuario">
                         </div>
                     </div>
 
@@ -43,7 +43,7 @@
             <div class="col-xl-12" >
                 <form action="{{route('egresado.index')}}" method="GET">
                     <div class="form-row" >
-                    <div class="col-sm-3 my-2">
+                    {{-- <div class="col-sm-3 my-2">
                         <select name="texto" class="form-control"  id="texto" required>
                             <option selected disabled value="">Seleccione filtro</option>
                             <option value="">Todas las carreras</option>
@@ -53,7 +53,7 @@
                             <option value="Ingeniería Mecánica y Eléctrica" {{$texto=="Ingeniería Mecánica y Eléctrica" ? 'selected' : '' }}>Ingeniería Mecánica y Eléctrica</option>
                             <option value="Administración de Empresas" {{$texto=="Administración de Empresas" ? 'selected' : '' }}>Administración de Empresas</option>
                             </select>
-                    </div>
+                    </div> --}}
 
                     {{--  Ordenar por el campo seleccionado  --}}
                     <div class="col-sm-3 my-2">
@@ -64,9 +64,9 @@
                             <option value="matricula" {{$tipo_filtrado=="matricula" ? 'selected' : '' }}>Código de matricula</option>
                             <option value="ap_paterno" {{$tipo_filtrado=="ap_paterno" ? 'selected' : '' }}>Apellidos y nombres</option>
                             <option value="dni" {{$tipo_filtrado=="dni" ? 'selected' : '' }}>DNI</option>
-                            <option value="año_ingreso" {{$tipo_filtrado=="año_ingreso" ? 'selected' : '' }}>Año de ingreso</option>
-                            <option value="año_egreso" {{$tipo_filtrado=="año_egreso" ? 'selected' : '' }}>Año de egreso</option>
-                            <option value="carr_profesional" {{$tipo_filtrado=="carr_profesional" ? 'selected' : '' }}>Carrera profesional</option>
+                            {{-- <option value="año_ingreso" {{$tipo_filtrado=="año_ingreso" ? 'selected' : '' }}>Año de ingreso</option>
+                            <option value="año_egreso" {{$tipo_filtrado=="año_egreso" ? 'selected' : '' }}>Año de egreso</option> --}}
+                            {{-- <option value="carr_profesional" {{$tipo_filtrado=="carr_profesional" ? 'selected' : '' }}>Carrera profesional</option> --}}
                             <option value="created_at" {{$tipo_filtrado=="created_at" ? 'selected' : '' }}>Fecha de creación</option>
                             <option value="updated_at" {{$tipo_filtrado=="updated_at" ? 'selected' : '' }}>Fecha de modificación</option>
                             </select>
@@ -296,5 +296,17 @@
                 console.log(editIdBtn);
             });
 
+    //Busqueda
+    window.addEventListener("load", function(){
+        let inputValue = document.getElementById("texto").value;
+        document.getElementById("texto").addEventListener("keyup",function(){
+            let texto = document.getElementById("texto").value
+            if(texto === ''){
+                console.log("Vacio")
+                $("#buscarUsuario").click();
+            }
+        })
+
+    })
     </script>
 @stop

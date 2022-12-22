@@ -25,7 +25,20 @@
                         <input type="password" class="form-control" id="password" name="password" required maxlength="20" >
                         <span class="text-danger" id="passwordError"></span>
                     </div>
-
+                    @if (Auth::user()->role_as == 2)
+                    <div class="form-group">
+                        <label for="id_academico">Carrera</label>
+                        <select name="id_academico" class="form-control"  id="id_academico" required>
+                            <option selected disabled value="">Seleccione carrera</option>
+                                <option value="1" {{ old('id_academico') == 1 ? 'selected' : '' }}>Ingeniería de Sistemas</option>
+                                <option value="2" {{ old('id_academico') == 2 ? 'selected' : '' }}>Ingeniería Electrónica y Telecomunicaciones</option>
+                                <option value="3" {{ old('id_academico') == 3 ? 'selected' : '' }}>Ingeniería Ambiental</option>
+                                <option value="4" {{ old('id_academico') == 4 ? 'selected' : '' }}>Ingeniería Mecánica y Eléctrica</option>
+                                <option value="5" {{ old('id_academico') == 5 ? 'selected' : '' }}>Administración de Empresas</option>
+                        </select>
+                        <span class="text-danger" id="id_academicoError"></span>
+                    </div>
+                    @endif
                     <div class="form-group">
                         <label for="estado">Estado</label>
                         <select name="estado" class="form-control"  id="estado" required>
@@ -55,10 +68,13 @@
         var email = $('#email').val();
         var password = $('#password').val();
         var estado = $('#estado').val();
-            $('#nameError').addClass('d-none');
-            $('#emailError').addClass('d-none');
-            $('#passwordError').addClass('d-none');
-            $('#estadoError').addClass('d-none');
+        var id_academico = $('#id_academico').val();
+        
+        $('#nameError').addClass('d-none');
+        $('#emailError').addClass('d-none');
+        $('#passwordError').addClass('d-none');
+        $('#estadoError').addClass('d-none');
+        $('#id_academicoError').addClass('d-none');
 
         $.ajax({
             type: 'POST',
@@ -68,6 +84,7 @@
                 email: email,
                 password: password,
                 estado: estado,
+                id_academico: id_academico
 
             },
             success: function (data) {

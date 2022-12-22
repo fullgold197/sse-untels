@@ -20,9 +20,19 @@
             <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <td colspan="2">
+                        {{-- <td colspan="2">
                             <img src="{{asset($egresado->url)}}" alt="{{$egresado->url}}" style="width:80%;max-height:400px" class="img-fluid img-thumbnail mx-auto d-block my-4 card-img-top" >
-                        </td>
+                        </td> --}}
+                        @if ($egresado->url == NULL)
+                                <td colspan="2">
+                                    <img src="{{asset('images/user_egresado.png')}}"
+                                    style="width:80%;max-height:400px" class="img-fluid img-thumbnail mx-auto d-block my-4 card-img-top">
+                                </td>
+                                @else
+                                <td colspan="2">
+                                    <img src="{{asset($egresado->url)}}" alt="{{$egresado->url}}" style="width:80%;max-height:400px" class="img-fluid img-thumbnail mx-auto d-block my-4 card-img-top">
+                                </td>
+                                @endif
                     </tr>
                     <tr>
                         <th>NOMBRES</th>

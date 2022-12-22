@@ -25,7 +25,7 @@ class UsuarioController extends Controller
         if ($request->texto == "") {
             $string = "empty";
         } else {
-            $string = '$request->texto';
+            $string = $request->texto;
         }
         $texto = $request->get('texto');
         //Trae de la tabla $egresados todo los campos. Aqui se está filtrando y solo muestra los usuarios que contengan un codigo de egresado y su matricula,
@@ -33,9 +33,17 @@ class UsuarioController extends Controller
         if (Auth::user()->role_as == 1) {
             $usuarios = DB::table('users')
             ->join('egresado','users.egresado_matricula','=','egresado.matricula')
-            ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula')
-            ->where('name', 'LIKE', '%' . $texto . '%')
-            ->Where('egresado.id_academico', Auth::user()->id_academico)
+            ->join('academico','users.id_academico','=','academico.id_academico')
+            ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula','academico.carr_profesional')
+            /* ->where('name', 'LIKE', '%' . $texto . '%') */
+            ->where('egresado.id_academico', Auth::user()->id_academico)
+            ->where(function($query) use ($texto){
+                $query
+                    ->Where('users.name', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('users.email', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('users.egresado_matricula', 'LIKE', '%' . $texto . '%')
+                    ;
+            })
             ->orderBy('name', 'asc')
             ->paginate(5);
         } elseif (Auth::user()->role_as == 2) {
@@ -43,13 +51,20 @@ class UsuarioController extends Controller
             ->join('egresado','users.egresado_matricula','=','egresado.matricula')
             ->join('academico','users.id_academico','=','academico.id_academico')
             ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula','academico.carr_profesional')
-            ->where('name', 'LIKE', '%' . $texto . '%')
+            ->where(function($query) use ($texto){
+                $query
+                    ->Where('users.name', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('users.email', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('users.egresado_matricula', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('academico.carr_profesional', 'LIKE', '%' . $texto . '%')
+                    ;
+            })
             ->orderBy('name', 'asc')
             ->paginate(5);
         }
 
 
-       /*  return $usuarios; */
+        /* return $usuarios; */
         return view('admin.usuarios.egresados.index', compact('usuarios', 'texto'), ['valor' => $string]);
     }
 

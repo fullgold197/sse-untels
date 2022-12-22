@@ -27,7 +27,7 @@ class UsuariosAdministradoresController extends Controller
             $texto = $request->get('texto');
 
         } else {
-            $string = '$request->texto';
+            $string = $request->texto;
         }
         $texto = $request->get('texto');
         //trae de la tabla $egresados todo los campos.
@@ -36,20 +36,32 @@ class UsuariosAdministradoresController extends Controller
             ->leftjoin('academico', 'academico.id_academico', '=', 'users.id_academico')
             ->select('users.id', 'users.name', 'users.email', 'users.role_as', 'users.password','users.estado','academico.carr_profesional')
             ->where('role_as', 1)
-            ->Where('id_academico', Auth::user()->id_academico)
+            ->where('users.id_academico', Auth::user()->id_academico)
+            ->where(function($query) use ($texto){
+                $query
+                    ->Where('users.name', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('users.email', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('academico.carr_profesional', 'LIKE', '%' . $texto . '%')
+                    ;
+            })
             ->orderBy('name', 'asc')
             ->paginate(5);
-            return view('admin.usuarios.administradores.administradores_index', compact('usuarios','texto'), ['valor' => $string]);
         } elseif(Auth::user()->role_as == 2) {
             $usuarios = DB::table('users')
             ->leftjoin('academico', 'academico.id_academico', '=', 'users.id_academico')
-            ->select('users.id', 'users.name', 'users.email', 'users.role_as', 'users.password','users.estado','academico.carr_profesional')
+            ->select('users.id', 'users.name', 'users.email', 'users.role_as', 'users.password','users.estado','academico.carr_profesional','academico.id_academico')
             ->whereBetween('role_as', [1, 2])
+            ->where(function($query) use ($texto){
+                $query
+                    ->Where('users.name', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('users.email', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('academico.carr_profesional', 'LIKE', '%' . $texto . '%')
+                    ;
+            })
             ->orderBy('name', 'asc')
             ->paginate(5);
-            return view('admin.usuarios.administradores.administradores_index', compact('usuarios','texto'), ['valor' => $string]);
         }
-
+        return view('admin.usuarios.administradores.administradores_index', compact('usuarios','texto'), ['valor' => $string]);
 
     }
 
@@ -71,29 +83,53 @@ class UsuariosAdministradoresController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'name' => ['required','string'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique(User::class),
+        if (Auth::user()->role_as == 1) {
+            request()->validate([
+                'name' => ['required','string'],
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique(User::class),
+                ],
+                'password' => 'required|min:6',
+                'estado' => 'required',
             ],
-            'password' => 'required|min:6',
-            'estado' => 'required'
-        ],
-            [
-                'name.required' => 'El campo usuario es obligatorio.',
-            ]);
+                [
+                    'name.required' => 'El campo usuario es obligatorio.',
+                ]);
+        } elseif(Auth::user()->role_as == 2){
+            request()->validate([
+                'name' => ['required','string'],
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique(User::class),
+                ],
+                'password' => 'required|min:6',
+                'estado' => 'required',
+                'id_academico' => ['required','string'],
+            ],
+                [
+                    'name.required' => 'El campo usuario es obligatorio.',
+                    'id_academico.required' => 'El campo carrera es obligatorio.',
+                ]);
+        }
+
         $usuarios = new User();
         $usuarios->name = $request->input('name');
         $usuarios->email = $request->input('email');
         $usuarios->password = Hash::make($request->input('password'));
-        /* $usuarios->egresado_matricula = $request->input('egresado_matricula'); */
         $usuarios->role_as = 1;
         $usuarios->estado = $request->input('estado');
-        $usuarios->id_academico = Auth::user()->id_academico;
+        if (Auth::user()->role_as == 1) {
+            $usuarios->id_academico = Auth::user()->id_academico;
+        } elseif(Auth::user()->role_as == 2){
+            $usuarios->id_academico = $request->input('id_academico');
+        }
         $usuarios->estadocontrasena = 'modificado';
         $usuarios->save();
         return back()->withInput();
@@ -132,25 +168,51 @@ class UsuariosAdministradoresController extends Controller
     public function update(Request $request, $id)
     {
         $role_as = "1";
-        request()->validate([
-            'name' => ['required','string'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique(User::class)->ignore(User::findOrFail($id)),
-                    ],
-        ],
-            [
-                'name.required' => 'El campo usuario es obligatorio.',
-            ]);
+        if (Auth::user()->id_academico = 2) {
+            request()->validate([
+                'name' => ['required','string'],
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique(User::class)->ignore(User::findOrFail($id)),
+                        ],
+                'id_academico' => ['required','string'],
+            ],
+                [
+                    'name.required' => 'El campo usuario es obligatorio.',
+                    'id_academico' => 'El campo carrera es obligatorio.',
+                ]);
+        } elseif(Auth::user()->id_academico = 1){
+            request()->validate([
+                'name' => ['required','string'],
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    Rule::unique(User::class)->ignore(User::findOrFail($id)),
+                        ],
+            ],
+                [
+                    'name.required' => 'El campo usuario es obligatorio.',
+                ]);
+        }
+
+
         $usuario = User::findOrFail($id);
         if (trim($request->password) == '') {
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
             $usuario->role_as = $role_as;
             $usuario->estado = $request->input('estado');
+            if (Auth::user()->role_as == 1) {
+                $usuario->id_academico = Auth::user()->id_academico;
+            } elseif(Auth::user()->role_as == 2){
+                $usuario->id_academico = $request->input('id_academico');
+            }
+
             $usuario->save();
         } else {
             $usuario->name = $request->input('name');
@@ -158,12 +220,13 @@ class UsuariosAdministradoresController extends Controller
             $usuario->role_as = $role_as;
             $usuario->estado = $request->input('estado');
             $usuario->password = Hash::make($request->input('password'));
+            if (Auth::user()->role_as == 1) {
+                $usuario->id_academico = Auth::user()->id_academico;
+            } elseif(Auth::user()->role_as == 2){
+                $usuario->id_academico = $request->input('id_academico');
+            }
             $usuario->save();
         }
-        /* $path = $_SERVER['HTTP_REFERER'];
-        return redirect($path); */
-        /* return redirect()->route('administradores.index'); */
-        /* return back()->withInput(); */
     }
 
     /**
@@ -174,12 +237,11 @@ class UsuariosAdministradoresController extends Controller
      */
     public function destroy($id)
     {
-        $usuarios = User::findOrFail($id);
-        $usuarios->delete();
-        return back()->withInput();
-       /*  return redirect()->route('administradores.index'); */
-        /* $path = $_SERVER['HTTP_REFERER'];
-        return redirect($path);
- */
+            $usuarios = User::findOrFail($id);
+            if (Auth::user()->role_as == 2 and Auth::user()->id == $id) {
+                return back()->withInput();
+            }
+            $usuarios->delete();
+            return back()->withInput();
     }
 }

@@ -30,7 +30,9 @@ class PorcentajeDoctoradoController extends Controller
                 ->where('cant_doctorados','>',0)
                 ->where('id_academico', Auth::user()->id_academico)
                 ->count();
-
+        if ($total_egresados == 0) {
+            $total_egresados = 1;
+        }
         $porc_doctorados = ($doctorados / $total_egresados) * 100;
         $puntos = [];
 

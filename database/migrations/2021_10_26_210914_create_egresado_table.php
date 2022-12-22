@@ -31,13 +31,13 @@ class CreateEgresadoTable extends Migration
             $table->string('semestre_egreso', 1)->nullable();
             $table->string('celular', 9)->nullable();
             $table->string('pais_origen', 50)->nullable();
-            $table->string('departamento_origen', 200)->nullable();
+            $table->string('departamento_origen', 50)->nullable();
             $table->string('pais_residencia', 50)->nullable();
             $table->string('ciudad_residencia', 50)->nullable();
-            $table->string('lugar_residencia', 100)->nullable();
+            $table->string('lugar_residencia')->nullable();
             $table->integer('cant_maestrias')->nullable()->default(0);
             $table->integer('cant_doctorados')->nullable()->default(0);
-            $table->string('linkedin', 100)->nullable();
+            $table->string('linkedin')->nullable();
             $table->string('url')->nullable();
             $table->boolean('habilitado')->default('0')->nullable();
             $table->integer('id_academico')->unsigned();

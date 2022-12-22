@@ -28,7 +28,9 @@ class GraficosEgresadosAdminController extends Controller
                 ->where('cant_maestrias','>',0)
                 ->where('id_academico', Auth::user()->id_academico)
                 ->count();
-
+        if ($total_egresados == 0) {
+            $total_egresados = 1;
+        }
     $porc_maestrias= ($maestrias/ $total_egresados) * 100;
 
     /* $doctorados = Egresado::where('cant_doctorados', '>', 0)->count(); */

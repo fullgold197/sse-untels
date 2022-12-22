@@ -97,19 +97,31 @@ class DatosPersonalesController extends Controller
                 'max:255',
                 Rule::unique(User::class)->ignore(User::findOrFail($id_egresado)),
             ],
-            'celular' => ['required','numeric','digits:9'],
-            'pais_origen' => 'required|string',
-            'departamento_origen' => 'required|string',
-            'pais_residencia' => 'required|string',
-            'ciudad_residencia' => 'required|string',
-            'lugar_residencia' => 'required|string',
-            'linkedin' => ['required','string'],
+            'genero' => ['nullable'],
+            'fecha_nacimiento' => ['nullable'],
+            'año_ingreso' => ['nullable','numeric','digits:4'],
+            'semestre_ingreso' => ['nullable','numeric','digits:1'],
+            'año_egreso' => ['nullable','numeric','digits:4'],
+            'semestre_egreso' => ['nullable','numeric','digits:1'],
+            'celular' => ['nullable','numeric','digits:9'],
+            'pais_origen' => 'nullable|string|max:50',
+            'departamento_origen' => 'nullable|string|max:50',
+            'pais_residencia' => 'nullable|string|max:50',
+            'ciudad_residencia' => 'nullable|string|max:50',
+            'lugar_residencia' => 'nullable|string|max:255',
+            'linkedin' => ['nullable','string'],
         ],
             [
 
             ]);
 
         $egresados = Egresado::findOrFail($matricula);
+        $egresados->genero = $request->input('genero');
+        $egresados->fecha_nacimiento = $request->input('fecha_nacimiento');
+        $egresados->año_ingreso = $request->input('año_ingreso');
+        $egresados->semestre_ingreso = $request->input('semestre_ingreso');
+        $egresados->año_egreso = $request->input('año_egreso');
+        $egresados->semestre_egreso  = $request->input('semestre_egreso');
         $egresados->celular = $request->input('celular');
         $egresados->pais_origen = $request->input('pais_origen');
         $egresados->departamento_origen = $request->input('departamento_origen');

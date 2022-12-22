@@ -13,6 +13,65 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label for="genero">Genero</label>
+                            <select name="genero" class="form-control" id="generoUpdate{{$egresado->matricula}}" >
+                                <option value="Masculino" {{$egresado->genero=="Masculino" ? 'selected' : '' }}>Masculino</option>
+                                <option value="Femenino" {{$egresado->genero=="Femenino" ? 'selected' : '' }}>Femenino</option>
+                            </select>
+                            <span class="text-danger" id="generoUpdateError{{$egresado->matricula}}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                            <input type="date" class="form-control" id="fecha_nacimientoUpdate{{$egresado->matricula}}" min="1910-01-01" max="2100-12-31" name="fecha_nacimiento" required maxlength="50" value="{{$egresado->fecha_nacimiento}}">
+                            <span class="text-danger" id="fecha_nacimientoUpdateError{{$egresado->matricula}}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="año_ingreso">Año de ingreso</label>
+                                <input type="text" id="año_ingresoUpdate{{$egresado->matricula}}" name="año_ingreso" maxlength="4" class="form-control" min="1900" max="2099" step="1" value="{{$egresado->año_ingreso}}">
+                                <span class="text-danger" id="año_ingresoUpdateError{{$egresado->matricula}}"></span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="semestre_ingreso">Semestre de ingreso</label>
+                            <select name="semestre_ingreso" class="form-control" id="semestre_ingresoUpdate{{$egresado->matricula}}" >
+                            <option value="1" {{$egresado->semestre_ingreso=="1" ? 'selected' : '' }}>1</option>
+                            <option value="2" {{$egresado->semestre_ingreso=="2" ? 'selected' : '' }}>2</option>
+                            </select>
+                            <span class="text-danger" id="semestre_ingresoUpdateError{{$egresado->matricula}}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="año_egreso">Año de egreso</label>
+                            <input type="text" name="año_egreso" id="año_egresoUpdate{{$egresado->matricula}}" maxlength="4" class="form-control" min="1900" max="2099" step="1" value="{{$egresado->año_egreso}}">
+                            <span class="text-danger" id="año_egresoUpdateError{{$egresado->matricula}}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="semestre_egreso">Semestre de egreso</label>
+                            <select name="semestre_egreso" class="form-control" id="semestre_egresoUpdate{{$egresado->matricula}}" >
+                            <option value="1" {{$egresado->semestre_egreso=="1" ? 'selected' : '' }}>1</option>
+                            <option value="2" {{$egresado->semestre_egreso=="2" ? 'selected' : '' }}>2</option>
+                            </select>
+                            <span class="text-danger" id="semestre_egresoUpdateError{{$egresado->matricula}}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label for="celular">Celular</label>
                             <input type="text" class="form-control" id="celularUpdate{{$egresado->matricula}}" name="celular" maxlength="9" value="{{$egresado->celular}}">
                             <span class="text-danger" id="celularUpdateError{{$egresado->matricula}}"></span>
@@ -76,7 +135,7 @@
                         <div class="form-group">
                             <label for="linkedin">Linkedin</label>
                             <input type="text" class="form-control" id="linkedinUpdate{{$egresado->matricula}}" name="linkedin" maxlength="50" value="{{$egresado->linkedin}}">
-                            <span class="text-danger" id="linkedinUpdateError{{$egresado->matricula}}"50
+                            <span class="text-danger" id="linkedinUpdateError{{$egresado->matricula}}"50>
                         </div>
                     </div>
                 </div>
@@ -101,6 +160,12 @@
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
     let idEdit = document.getElementById("resultado").value;
+    var generoUpdate = $('#generoUpdate'+idEdit).val();
+    var fecha_nacimientoUpdate = $('#fecha_nacimientoUpdate'+idEdit).val();
+    var año_ingresoUpdate = $('#año_ingresoUpdate'+idEdit).val();
+    var semestre_ingresoUpdate = $('#semestre_ingresoUpdate'+idEdit).val();
+    var año_egresoUpdate = $('#año_egresoUpdate'+idEdit).val();
+    var semestre_egresoUpdate = $('#semestre_egresoUpdate'+idEdit).val();
     var emailUpdate = $('#correoUpdate'+idEdit).val();
     var celularUpdate = $('#celularUpdate'+idEdit).val();
     var paisUpdate = $('#paisUpdate'+idEdit).val();
@@ -114,19 +179,31 @@
 
     var url=x+y;
 
-        $('#emailUpdateError'+idEdit).addClass('d-none');
-        $('#celularUpdateError'+idEdit).addClass('d-none');
-        $('#pais_origenUpdateError'+idEdit).addClass('d-none');
-        $('#departamento_origenUpdateError'+idEdit).addClass('d-none');
-        $('#pais_residenciaUpdateError'+idEdit).addClass('d-none');
-        $('#ciudad_residenciaUpdateError'+idEdit).addClass('d-none');
-        $('#lugar_residenciaUpdateError'+idEdit).addClass('d-none');
-        $('#linkedinUpdateError'+idEdit).addClass('d-none');
+    $('#generoUpdateError'+idEdit).addClass('d-none');
+    $('#fecha_nacimientoUpdateError'+idEdit).addClass('d-none');
+    $('#año_ingresoUpdateError'+idEdit).addClass('d-none');
+    $('#semestre_ingresoUpdateError'+idEdit).addClass('d-none');
+    $('#año_egresoUpdateError'+idEdit).addClass('d-none');
+    $('#semestre_egresoUpdateError'+idEdit).addClass('d-none');
+    $('#emailUpdateError'+idEdit).addClass('d-none');
+    $('#celularUpdateError'+idEdit).addClass('d-none');
+    $('#pais_origenUpdateError'+idEdit).addClass('d-none');
+    $('#departamento_origenUpdateError'+idEdit).addClass('d-none');
+    $('#pais_residenciaUpdateError'+idEdit).addClass('d-none');
+    $('#ciudad_residenciaUpdateError'+idEdit).addClass('d-none');
+    $('#lugar_residenciaUpdateError'+idEdit).addClass('d-none');
+    $('#linkedinUpdateError'+idEdit).addClass('d-none');
 
     $.ajax({
         type: 'PUT',
         url: url,
         data: {_token: CSRF_TOKEN,
+            genero: generoUpdate,
+            fecha_nacimiento: fecha_nacimientoUpdate,
+            año_ingreso: año_ingresoUpdate,
+            semestre_ingreso: semestre_ingresoUpdate,
+            año_egreso: año_egresoUpdate,
+            semestre_egreso: semestre_egresoUpdate,
             email: emailUpdate,
             celular:celularUpdate,
             pais_origen:paisUpdate,

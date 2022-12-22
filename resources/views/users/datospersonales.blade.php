@@ -104,7 +104,7 @@
                                 <td>{{$egresado->departamento_origen}}</td>
                             </tr>
                             <tr  >
-                                <th style="padding-left:50px;padding-bottom: 5px;">PÁÍS DE RESIDENCIA</th>
+                                <th style="padding-left:50px;padding-bottom: 5px;">PAÍS DE RESIDENCIA</th>
                                 <td>{{$egresado->pais_residencia}} </td>
                             </tr>
 
@@ -114,7 +114,7 @@
                             </tr>
                             <tr >
                                 <th style="padding-left:50px;padding-bottom: 5px;">LUGAR DE RESIDENCIA</th>
-                                <td>{{$egresado->ciudad_residencia}} </td>
+                                <td>{{$egresado->lugar_residencia}} </td>
                             </tr>
 
 

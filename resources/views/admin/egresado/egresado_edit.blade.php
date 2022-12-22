@@ -56,7 +56,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="dni">DNI</label>
-                                <input type="number" class="form-control" id="dniUpdate{{$egresado->matricula}}" name="dni" maxlength="8" value="{{$egresado->dni}}">
+                                <input type="text" class="form-control" id="dniUpdate{{$egresado->matricula}}" name="dni" maxlength="8" value="{{$egresado->dni}}">
                                 <span class="text-danger" id="dniUpdateError{{$egresado->matricula}}"></span>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                         <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="año_ingreso">Año de ingreso</label>
-                                    <input type="number" id="año_ingresoUpdate{{$egresado->matricula}}" name="año_ingreso" maxlength="4" class="form-control" min="1900" max="2099" step="1" value="{{$egresado->año_ingreso}}">
+                                    <input type="text" id="año_ingresoUpdate{{$egresado->matricula}}" name="año_ingreso" maxlength="4" class="form-control" min="1900" max="2099" step="1" value="{{$egresado->año_ingreso}}">
                                     <span class="text-danger" id="año_ingresoUpdateError{{$egresado->matricula}}"></span>
                                 </div>
                         </div>
@@ -105,7 +105,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="año_egreso">Año de egreso</label>
-                                <input type="number" name="año_egreso" id="año_egresoUpdate{{$egresado->matricula}}" maxlength="4" class="form-control" min="1900" max="2099" step="1" value="{{$egresado->año_egreso}}">
+                                <input type="text" name="año_egreso" id="año_egresoUpdate{{$egresado->matricula}}" maxlength="4" class="form-control" min="1900" max="2099" step="1" value="{{$egresado->año_egreso}}">
                                 <span class="text-danger" id="año_egresoUpdateError{{$egresado->matricula}}"></span>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="celular">Celular</label>
-                                <input type="number" class="form-control" id="celularUpdate{{$egresado->matricula}}" name="celular"  maxlength="9" value="{{$egresado->celular}}">
+                                <input type="text" class="form-control" id="celularUpdate{{$egresado->matricula}}" name="celular"  maxlength="9" value="{{$egresado->celular}}">
                                 <span class="text-danger" id="celularUpdateError{{$egresado->matricula}}"></span>
                             </div>
                         </div>
