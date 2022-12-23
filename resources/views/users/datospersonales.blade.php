@@ -77,8 +77,12 @@
                             </tr>
 
                             <tr>
-                                <th style="padding-left:50px;padding-bottom: 5px;">EMAIL</th>
+                                <th style="padding-left:50px;padding-bottom: 5px;">CORREO INSTITUCIONAL</th>
                                 <td>{{$egresado->email}} </td>
+                            </tr>
+                            <tr>
+                                <th style="padding-left:50px;padding-bottom: 5px;">CORREO PERSONAL</th>
+                                <td>{{$egresado->email_personal}} </td>
                             </tr>
                             <tr class="bg-gray-light">
                                 <th style="padding-left:50px;padding-bottom: 5px;">LINKEDIN</th>

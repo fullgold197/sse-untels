@@ -74,9 +74,7 @@ class ReporteAdminController extends Controller
             $file=$request->file('file');
 
             Excel::import(new EgresadosImport,$file);
-            Excel::import(new ImportUser, $file);
                 return redirect()->route('egresados.Import-excel')->with('success', 'Lista de egresados importados exitosamente.');
-
 
             }
             else{

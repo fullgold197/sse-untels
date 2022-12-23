@@ -23,7 +23,7 @@ class DatosPersonalesController extends Controller
     {
         $egresados = DB::table('egresado')
         ->join('users', 'egresado.matricula', '=', 'users.egresado_matricula')
-        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso', 'egresado.año_egreso', 'egresado.semestre_egreso','egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.dni', 'egresado.linkedin', 'users.email', 'egresado.url', 'egresado.grado_academico', 'users.id')->where('matricula', Auth::user()->egresado_matricula)->get();
+        ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres', 'egresado.genero', 'egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso', 'egresado.año_egreso', 'egresado.semestre_egreso','egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.dni', 'egresado.linkedin', 'users.email', 'users.email_personal','egresado.url', 'egresado.grado_academico', 'users.id')->where('matricula', Auth::user()->egresado_matricula)->get();
         /* return $users; */
         return view('users.datospersonales', compact('egresados'));
         /* return view('users.datospersonales', compact('egresados'))->share('layouts.egresado'); */
@@ -97,6 +97,13 @@ class DatosPersonalesController extends Controller
                 'max:255',
                 Rule::unique(User::class)->ignore(User::findOrFail($id_egresado)),
             ],
+            'email_personal' => [
+                'nullable',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore(User::findOrFail($id_egresado)),
+            ],
             'genero' => ['nullable'],
             'fecha_nacimiento' => ['nullable'],
             'año_ingreso' => ['nullable','numeric','digits:4'],
@@ -135,6 +142,12 @@ class DatosPersonalesController extends Controller
         ->where('egresado_matricula', Auth::user()->egresado_matricula)  // find your user by their email
         ->limit(1)  // optional - to ensure only one record is updated.
         ->update(array('email' => $request->input('email')));  // update the record in the DB.
+
+        //Correo personal
+        DB::table('users')
+        ->where('egresado_matricula', Auth::user()->egresado_matricula)  // find your user by their email
+        ->limit(1)  // optional - to ensure only one record is updated.
+        ->update(array('email_personal' => $request->input('email_personal')));  // update the record in the DB.
         return 0;
         /* return redirect()->route('datos-personales.index'); */
     }

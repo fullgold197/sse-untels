@@ -34,7 +34,7 @@ class UsuarioController extends Controller
             $usuarios = DB::table('users')
             ->join('egresado','users.egresado_matricula','=','egresado.matricula')
             ->join('academico','users.id_academico','=','academico.id_academico')
-            ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula','academico.carr_profesional')
+            ->select('users.id', 'users.name', 'users.email', 'users.email_personal','users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula','academico.carr_profesional')
             /* ->where('name', 'LIKE', '%' . $texto . '%') */
             ->where('egresado.id_academico', Auth::user()->id_academico)
             ->where(function($query) use ($texto){
@@ -42,6 +42,7 @@ class UsuarioController extends Controller
                     ->Where('users.name', 'LIKE', '%' . $texto . '%')
                     ->orWhere('users.email', 'LIKE', '%' . $texto . '%')
                     ->orWhere('users.egresado_matricula', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('users.email_personal', 'LIKE', '%' . $texto . '%')
                     ;
             })
             ->orderBy('name', 'asc')
@@ -50,13 +51,14 @@ class UsuarioController extends Controller
             $usuarios = DB::table('users')
             ->join('egresado','users.egresado_matricula','=','egresado.matricula')
             ->join('academico','users.id_academico','=','academico.id_academico')
-            ->select('users.id', 'users.name', 'users.email', 'users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula','academico.carr_profesional')
+            ->select('users.id', 'users.name', 'users.email', 'users.email_personal','users.role_as','users.password', 'users.estado','egresado.ap_paterno','egresado.ap_materno','egresado.nombres', 'egresado.matricula', 'egresado.matricula','academico.carr_profesional')
             ->where(function($query) use ($texto){
                 $query
                     ->Where('users.name', 'LIKE', '%' . $texto . '%')
                     ->orWhere('users.email', 'LIKE', '%' . $texto . '%')
                     ->orWhere('users.egresado_matricula', 'LIKE', '%' . $texto . '%')
                     ->orWhere('academico.carr_profesional', 'LIKE', '%' . $texto . '%')
+                    ->orWhere('users.email_personal', 'LIKE', '%' . $texto . '%')
                     ;
             })
             ->orderBy('name', 'asc')
@@ -91,6 +93,7 @@ class UsuarioController extends Controller
         $usuarios = new User;
         $usuarios->name = $request->input('name');
         $usuarios->email = $request->input('email');
+        $usuarios->email_personal = $request->input('email_personal');
         $usuarios->password = Hash::make($request->input('dni'));
         $usuarios->egresado_matricula = $request->input('egresado_matricula');
         $usuarios->dni = $request->input('dni');
@@ -151,7 +154,14 @@ class UsuarioController extends Controller
         request()->validate([
             'name' => ['required','string'],
             'email' => [
-                'required',
+                'nullable',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique(User::class)->ignore(User::findOrFail($id)),
+                    ],
+            'email_personal' => [
+                'nullable',
                 'string',
                 'email',
                 'max:255',
@@ -167,6 +177,7 @@ class UsuarioController extends Controller
         if(trim($request->password) == ''){
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
+            $usuario->email_personal = $request->input('email_personal');
             $usuario->role_as = $role_as;
             $usuario->estado = $request->input('estado');
             $usuario->save();
@@ -174,6 +185,7 @@ class UsuarioController extends Controller
         else{
             $usuario->name = $request->input('name');
             $usuario->email = $request->input('email');
+            $usuario->email_personal = $request->input('email_personal');
             $usuario->role_as = $role_as;
             $usuario->estado = $request->input('estado');
             $usuario->password = Hash::make($request->input('password'));

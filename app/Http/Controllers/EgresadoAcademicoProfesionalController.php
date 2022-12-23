@@ -21,9 +21,9 @@ class EgresadoAcademicoProfesionalController extends Controller
         $matricula_id = $request->input('matricula_id');
     /*     $egresado=Egresado::findOrFail($request->input('matricula_id')); */
         $egresados0 = DB::table('egresado')
-        /* ->join('users', 'users.egresado_matricula', '=', 'egresado.matricula') */
+        ->leftJoin('users', 'users.egresado_matricula', '=', 'egresado.matricula')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
-        ->select('egresado.url','egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero', 'egresado.fecha_nacimiento', 'egresado.año_ingreso' ,'egresado.semestre_ingreso', 'egresado.año_egreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin', 'academico.id_academico', 'academico.carr_profesional')
+        ->select('egresado.url','egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero', 'egresado.fecha_nacimiento', 'egresado.año_ingreso' ,'egresado.semestre_ingreso', 'egresado.año_egreso', 'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin', 'academico.id_academico', 'academico.carr_profesional','users.email','users.email_personal')
         ->where('matricula', $matricula_id)
         ->get();
 

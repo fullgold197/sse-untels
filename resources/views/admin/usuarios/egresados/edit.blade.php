@@ -35,9 +35,14 @@
                     </select>
             </div>
             <div class="form-group">
-                <label for="email">Correo electronico</label>
+                <label for="email">Correo institucional</label>
                 <input type="text" class="form-control" id="emailUpdate{{$usuario->id}}" name="email" required maxlength="50" value="{{$usuario->email}}">
                 <span class="text-danger" id="emailUpdateError{{$usuario->id}}"></span>
+            </div>
+            <div class="form-group">
+                <label for="email_personal">Correo personal</label>
+                <input type="text" class="form-control" id="email_personalUpdate{{$usuario->id}}" name="email_personal" required maxlength="50" value="{{$usuario->email_personal}}">
+                <span class="text-danger" id="email_personalUpdateError{{$usuario->id}}"></span>
             </div>
             <div class="form-group">
                 <label for="password">Contraseña</label>
@@ -62,6 +67,7 @@
     let idEdit = document.getElementById("resultado").value;
     var nameUpdate = $('#nameUpdate'+idEdit).val();
     var emailUpdate = $('#emailUpdate'+idEdit).val();
+    var email_personalUpdate = $('#email_personalUpdate'+idEdit).val();
     var estadoUpdate = $('#estadoUpdate'+idEdit).val();
     var passwordUpdate = $('#passwordUpdate'+idEdit).val();
     var x="usuario/";
@@ -69,12 +75,14 @@
     var url=x+y;
         $('#nameUpdateError'+idEdit).addClass('d-none');
         $('#emailUpdateError'+idEdit).addClass('d-none');
+        $('#email_personalUpdateError'+idEdit).addClass('d-none');
     $.ajax({
         type: 'PUT',
         url: url,
         data: {_token: CSRF_TOKEN,
             name: nameUpdate,
             email: emailUpdate,
+            email_personal: email_personalUpdate,
             estado: estadoUpdate,
             password: passwordUpdate,
         },

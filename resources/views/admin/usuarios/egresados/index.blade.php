@@ -41,7 +41,8 @@
                                 <th>Carrera</th>
                                 <th>Codigo</th>
                                 <th>Usuario</th>
-                                <th>Correo</th>
+                                <th>Correo institucional</th>
+                                <th>Correo personal</th>
                                 <th>Nivel de acceso</th>
                                 <th>Estado</th>
                                 <th>Opciones</th>
@@ -64,7 +65,7 @@
                                 <td>{{$usuario->matricula}}</td>
                                 <td>{{$usuario->name}}</td>
                                 <td>{{$usuario->email}}</td>
-
+                                <td>{{$usuario->email_personal}}</td>
                                 @if ($usuario->role_as==1)
                                 <td>Administrador</td>
                                 @else

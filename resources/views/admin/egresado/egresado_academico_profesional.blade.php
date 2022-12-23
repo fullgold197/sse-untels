@@ -54,6 +54,14 @@
                             <th>GÉNERO</th>
                             <td>{{$egresado->genero}}</td>
                         </tr>
+                        <tr>
+                            <th>CORREO INSTITUCIONAL</th>
+                            <td>{{$egresado->email}}</td>
+                        </tr>
+                        <tr>
+                            <th>CORREO PERSONAL</th>
+                            <td>{{$egresado->email_personal}}</td>
+                        </tr>
                             <tr>
                                 <th>FECHA DE NACIMIENTO</th>
                                 <td>{{$egresado->fecha_nacimiento}}</td>

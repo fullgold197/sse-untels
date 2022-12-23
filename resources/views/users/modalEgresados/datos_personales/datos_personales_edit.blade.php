@@ -79,11 +79,23 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">Correo institucional</label>
                             <input type="text" class="form-control" id="correoUpdate{{$egresado->matricula}}" name="email" maxlength="50" value="{{$egresado->email}}">
                             <span class="text-danger" id="emailUpdateError{{$egresado->matricula}}"></span>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="email_personal">Correo personal</label>
+                            <input type="text" class="form-control" id="correo_personalUpdate{{$egresado->matricula}}" name="email_personal" maxlength="50" value="{{$egresado->email_personal}}">
+                            <span class="text-danger" id="email_personalUpdateError{{$egresado->matricula}}"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="pais_origen">País de origen</label>
@@ -91,10 +103,6 @@
                             <span class="text-danger" id="pais_origenUpdateError{{$egresado->matricula}}"></span>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="departamento_origen">Departamento de origen</label>
@@ -111,6 +119,11 @@
                             <span class="text-danger" id="pais_residenciaUpdateError{{$egresado->matricula}}"></span>
                         </div>
                     </div>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="ciudad_residencia">Ciudad de residencia</label>
@@ -119,11 +132,7 @@
                             <span class="text-danger" id="ciudad_residenciaUpdateError{{$egresado->matricula}}"></span>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="lugar_residencia">Lugar de residencia</label>
                             <input type="text" class="form-control" id="lugar_residenciaUpdate{{$egresado->matricula}}" name="lugar_residencia" maxlength="50"
@@ -131,7 +140,7 @@
                             <span class="text-danger" id="lugar_residenciaUpdateError{{$egresado->matricula}}"></span>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="linkedin">Linkedin</label>
                             <input type="text" class="form-control" id="linkedinUpdate{{$egresado->matricula}}" name="linkedin" maxlength="50" value="{{$egresado->linkedin}}">
@@ -167,6 +176,7 @@
     var año_egresoUpdate = $('#año_egresoUpdate'+idEdit).val();
     var semestre_egresoUpdate = $('#semestre_egresoUpdate'+idEdit).val();
     var emailUpdate = $('#correoUpdate'+idEdit).val();
+    var email_personalUpdate = $('#correo_personalUpdate'+idEdit).val();
     var celularUpdate = $('#celularUpdate'+idEdit).val();
     var paisUpdate = $('#paisUpdate'+idEdit).val();
     var departamento_origenUpdate = $('#departamento_origenUpdate'+idEdit).val();
@@ -186,6 +196,7 @@
     $('#año_egresoUpdateError'+idEdit).addClass('d-none');
     $('#semestre_egresoUpdateError'+idEdit).addClass('d-none');
     $('#emailUpdateError'+idEdit).addClass('d-none');
+    $('#email_personalUpdateError'+idEdit).addClass('d-none');
     $('#celularUpdateError'+idEdit).addClass('d-none');
     $('#pais_origenUpdateError'+idEdit).addClass('d-none');
     $('#departamento_origenUpdateError'+idEdit).addClass('d-none');
@@ -205,6 +216,7 @@
             año_egreso: año_egresoUpdate,
             semestre_egreso: semestre_egresoUpdate,
             email: emailUpdate,
+            email_personal: email_personalUpdate,
             celular:celularUpdate,
             pais_origen:paisUpdate,
             departamento_origen:departamento_origenUpdate,

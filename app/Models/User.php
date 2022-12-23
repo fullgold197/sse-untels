@@ -33,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'id_academico',
         'dni',
         'url',
+        'email_personal'
 
     ];
     //protected $guarded =[];

@@ -7,6 +7,7 @@ use App\Models\Egresado;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
@@ -55,7 +56,7 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
         else{
             $habilitado = 0;
         }
-        return new Egresado([
+        Egresado::create([
             'matricula'             => $row['0'],
             'ap_paterno'            => $row['1'],
             'ap_materno'            => $row['2'],
@@ -77,6 +78,21 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
             'lugar_residencia'      => $row['17'],
             'habilitado'            => $habilitado,
         ]);
+
+        User::create([
+            'name'   => $row['3'],
+            'email'  => $row['0']."@untels.edu.pe",
+            'password' => Hash::make($row['5']),
+            'role_as'  => "0",
+            'estado'  => "1",
+            'estadocontrasena'  => "null",
+            'egresado_matricula'  => $row['0'],
+            'id_academico'  => Auth::user()->id_academico,
+            'dni'  => $row['5'],
+            'email_personal' => $row['18'],
+        ]);
+
+
 
     }
     //Importar desde fila 2 del excel
@@ -151,10 +167,9 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
             '17' => [
                 'string', 'nullable','max:255'
             ],
-
-            /* 'qqr2' => [
-                'required','digits_between:1,5'
-            ], */
+            '18' => [
+                'string', 'nullable','unique:users,email_personal'
+            ],
 
         ];
     }
@@ -181,6 +196,7 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
             '15' => 'país de residencia',
             '16' => 'ciudad de residencia',
             '17' => 'lugar de residencia',
+            '18' => 'email personal',
         ];
 
     }
