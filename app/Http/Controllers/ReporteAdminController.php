@@ -8,6 +8,7 @@ use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\EgresadosExport;
 use App\Imports\EgresadosImport;
+use App\Imports\ImportUser;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,7 +74,10 @@ class ReporteAdminController extends Controller
             $file=$request->file('file');
 
             Excel::import(new EgresadosImport,$file);
+            Excel::import(new ImportUser, $file);
                 return redirect()->route('egresados.Import-excel')->with('success', 'Lista de egresados importados exitosamente.');
+
+
             }
             else{
                 return redirect()->route('egresados.Import-excel');

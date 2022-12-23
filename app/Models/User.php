@@ -25,12 +25,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
-        'egresado_matricula',
         'password',
-        'url',
         'role_as',
         'estado',
         'estadocontrasena',
+        'egresado_matricula',
+        'id_academico',
+        'dni',
+        'url',
 
     ];
     //protected $guarded =[];

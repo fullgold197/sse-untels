@@ -95,6 +95,7 @@ class UsuarioController extends Controller
         $usuarios->egresado_matricula = $request->input('egresado_matricula');
         $usuarios->dni = $request->input('dni');
         $usuarios->estado = 1;
+        $usuarios->id_academico = Auth::user()->id_academico;
         $usuarios->save();
 
         DB::table('egresado')

@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Academico;
 use App\Models\Egresado;
+use App\Models\User;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\Importable;
@@ -48,17 +49,12 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
 
     public function model(array $row)
     {
-        //$id_academico = "Ingeniería de Sistemas";
-        //$id_academico = $row['18'];
-        /* $id_academico = 5; */
-        /* if ($id_academico <> "Administración de Empresas") {
-            $id_academico = [5,5,5,5,5];
+        if ($row['5']) {
+            $habilitado = 1;
         }
         else{
-            $id_academico  = $this->carr_profesional[$id_academico];
-
-        } */
-
+            $habilitado = 0;
+        }
         return new Egresado([
             'matricula'             => $row['0'],
             'ap_paterno'            => $row['1'],
@@ -79,10 +75,9 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
             'pais_residencia'       => $row['15'],
             'ciudad_residencia'     => $row['16'],
             'lugar_residencia'      => $row['17'],
-
-            //'id_academico'          => $row['18'],
-            //'id_academico'          => $qqr2,
+            'habilitado'            => $habilitado,
         ]);
+
     }
     //Importar desde fila 2 del excel
     public function startRow(): int
