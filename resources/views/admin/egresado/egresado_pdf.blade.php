@@ -51,6 +51,7 @@
             <th>Ciudad de residencia</th>
             <th>Lugar de residencias</th>
             <th>Linkendin</th>
+            <th>Email personal</th>
 
         </tr>
     </thead>
@@ -82,6 +83,7 @@
             <td>{{$egresado->ciudad_residencia}}</td>
             <td>{{$egresado->lugar_residencia}}</td>
             <td>{{$egresado->linkedin}}</td>
+            <td>{{$egresado->email_personal}}</td>
             {{--  <td>{{$egresado->carr_profesional}}</td>
             <td>{{$egresado->carr_profesional}}</td>  --}}
         </tr>
