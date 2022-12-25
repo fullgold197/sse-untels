@@ -138,34 +138,34 @@ class EgresadosImport implements ToModel, WithValidation, WithStartRow
                 'date', 'nullable'
             ],
             '8' => [
-                'integer', 'nullable', 'digits:4'
+                'integer', 'nullable'
             ],
             '9' => [
-                'integer', 'nullable', 'digits:1'
+                'integer', 'nullable'
             ],
             '10' => [
-                'integer', 'nullable', 'digits:4'
+                'integer', 'nullable'
             ],
             '11' => [
-                'integer', 'nullable', 'digits:1'
+                'integer', 'nullable'
             ],
             '12' => [
-                'integer', 'nullable', 'digits:9'
+                'integer', 'nullable'
             ],
             '13' => [
-                'string', 'nullable','max:50'
+                'string', 'nullable'
             ],
             '14' => [
-                'string', 'nullable','max:50'
+                'string', 'nullable'
             ],
             '15' => [
-                'string', 'nullable','max:50'
+                'string', 'nullable'
             ],
             '16' => [
-                'string', 'nullable','max:50'
+                'string', 'nullable'
             ],
             '17' => [
-                'string', 'nullable','max:255'
+                'string', 'nullable'
             ],
             '18' => [
                 'string', 'nullable','unique:users,email_personal'

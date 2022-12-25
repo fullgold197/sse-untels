@@ -47,6 +47,7 @@ class EgresadosAdminController extends Controller
         $egresados=DB::table('egresado')
         ->join('academico', 'academico.id_academico', '=', 'egresado.id_academico')
         ->select('egresado.matricula', 'egresado.ap_paterno', 'egresado.ap_materno', 'egresado.nombres','egresado.grado_academico' , 'egresado.dni','egresado.genero','egresado.fecha_nacimiento', 'egresado.año_ingreso', 'egresado.semestre_ingreso','egresado.año_egreso' ,'egresado.semestre_egreso', 'egresado.celular', 'egresado.pais_origen', 'egresado.departamento_origen', 'egresado.pais_residencia', 'egresado.ciudad_residencia', 'egresado.lugar_residencia', 'egresado.linkedin','egresado.url','egresado.habilitado', 'egresado.created_at', 'egresado.updated_at', 'academico.id_academico', 'academico.carr_profesional')
+        ->where('matricula', 'LIKE', '%' . $texto . '%')
         ->Where('egresado.id_academico', Auth::user()->id_academico)
         ->where(function($query) use ($texto){
             $query
@@ -68,7 +69,10 @@ class EgresadosAdminController extends Controller
         ->orderBy('egresado.habilitado', 'asc')
         ->orderBy($tipo_filtrado, $orden)
         ->paginate(5);
-        /* return $egresados; */
+
+
+       /*  */
+
          return view('admin.egresado.index',compact('egresados','texto', 'tipo_filtrado', 'orden'),[ 'valor2' => $string ]);
 
 
@@ -228,7 +232,7 @@ class EgresadosAdminController extends Controller
             'ap_paterno' => ['required','string'],
             'ap_materno' => ['required','string'],
             'nombres' => ['required','string'],
-            'grado_academico' => ['string','nullable'],
+            'grado_academico' => ['string'],
             'dni' => ['nullable',
                     'numeric',
                     'digits:8',

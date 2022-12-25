@@ -6,7 +6,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar usuarios</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -19,19 +19,6 @@
                 <label for="role_as">Rol</label>
                 <input type="text" class="form-control" id="role_asUpdate{{$usuario->id}}" role_as="role_as" required maxlength="20" value="Administrador" disabled>
             </div>
-            @if (Auth::user()->role_as == 2)
-            <div class="form-group">
-                <label for="id_academico">Carrera</label>
-                <select name="id_academico" class="form-control" id="id_academicoUpdate{{$usuario->id}}" required>
-                        <option value="1" {{$usuario->id_academico=="1" ? 'selected' : '' }}>Ingeniería de Sistemas</option>
-                        <option value="2" {{$usuario->id_academico=="2" ? 'selected' : '' }}>Ingeniería Electrónica y Telecomunicaciones</option>
-                        <option value="3" {{$usuario->id_academico=="3" ? 'selected' : '' }}>Ingeniería Ambiental</option>
-                        <option value="4" {{$usuario->id_academico=="4" ? 'selected' : '' }}>Ingeniería Mecánica y Eléctrica</option>
-                        <option value="5" {{$usuario->id_academico=="5" ? 'selected' : '' }}>Administración de Empresas</option>
-                </select>
-                <span class="text-danger" id="id_academicoUpdateError{{$usuario->id}}"></span>
-            </div>
-            @endif
              <div class="form-group">
                 <label for="estado">Estado</label>
                     <select name="estado" class="form-control" id="estadoUpdate{{$usuario->id}}" >
@@ -70,14 +57,11 @@
     var emailUpdate = $('#emailUpdate'+idEdit).val();
     var estadoUpdate = $('#estadoUpdate'+idEdit).val();
     var passwordUpdate = $('#passwordUpdate'+idEdit).val();
-    var id_academicoUpdate = $('#id_academicoUpdate'+idEdit).val();
-
     var x="administradores/";
     var y=idEdit;
     var url=x+y;
         $('#nameUpdateError'+idEdit).addClass('d-none');
         $('#emailUpdateError'+idEdit).addClass('d-none');
-        $('#id_academicoUpdateError'+idEdit).addClass('d-none');
     $.ajax({
         type: 'PUT',
         url: url,
@@ -86,7 +70,6 @@
             email: emailUpdate,
             estado: estadoUpdate,
             password: passwordUpdate,
-            id_academico: id_academicoUpdate,
         },
         success: function (data) {
             $('#modal-administradores-edit-'+idEdit).modal('hide');

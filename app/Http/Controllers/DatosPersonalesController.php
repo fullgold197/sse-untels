@@ -123,12 +123,6 @@ class DatosPersonalesController extends Controller
             ]);
 
         $egresados = Egresado::findOrFail($matricula);
-        $egresados->genero = $request->input('genero');
-        $egresados->fecha_nacimiento = $request->input('fecha_nacimiento');
-        $egresados->año_ingreso = $request->input('año_ingreso');
-        $egresados->semestre_ingreso = $request->input('semestre_ingreso');
-        $egresados->año_egreso = $request->input('año_egreso');
-        $egresados->semestre_egreso  = $request->input('semestre_egreso');
         $egresados->celular = $request->input('celular');
         $egresados->pais_origen = $request->input('pais_origen');
         $egresados->departamento_origen = $request->input('departamento_origen');

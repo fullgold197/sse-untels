@@ -25,7 +25,7 @@ class UsuarioController extends Controller
         if ($request->texto == "") {
             $string = "empty";
         } else {
-            $string = $request->texto;
+            $string = '$request->texto';
         }
         $texto = $request->get('texto');
         //Trae de la tabla $egresados todo los campos. Aqui se está filtrando y solo muestra los usuarios que contengan un codigo de egresado y su matricula,
@@ -66,7 +66,7 @@ class UsuarioController extends Controller
         }
 
 
-        /* return $usuarios; */
+       /*  return $usuarios; */
         return view('admin.usuarios.egresados.index', compact('usuarios', 'texto'), ['valor' => $string]);
     }
 
