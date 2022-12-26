@@ -33,6 +33,7 @@
     <!-- Style -->
     <link rel="stylesheet" href="assets/css/styles1.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
 </head>
 <!-- Da espacio entre div-->
 <link rel="stylesheet" href="{{asset('css/letras.css')}}">

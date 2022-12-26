@@ -14,7 +14,7 @@
                         Iniciar Sesión
                     </div>
 
-                    <div id="azul">
+                    <div id="azul" class="text-center">
                         Por favor, ingrese los datos solicitados
                     </div>
                 </div>
@@ -77,12 +77,12 @@
                             </div>
                         </div> --}}
 
-                        <div class="form-group row mb-0" id="azul" align="center">
+                        <div class="form-group row mb-0 " align="center">
                             <div class="col-md-8 offset-md-2">
-                                <button type="submit" class="btn btn-primary" style="background-color: #004A98;">
+                                <button type="submit" class="btn3 btn-primary2 full-width2"
+                                    style="background-color: #004A98;margin-top:5px;margin-left:-50px">
                                     {{ __('Iniciar Sesión') }}
                                 </button>
-
                             </div>
                         </div>
 
