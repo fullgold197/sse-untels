@@ -17,7 +17,7 @@
 
                      <div class="form-row">
                         <div class="col-sm-4 my-2">
-                            <input type="text" class="form-control" placeholder="Buscar"  name="texto" value="{{$texto}}" id="texto">
+                            <input type="search" class="form-control" placeholder="Buscar"  name="texto" value="{{$texto}}" id="texto">
                         </div>
                         <div class="col-sm-8 my-2">
                             <input type="submit" class="btn btn-dark" value="Buscar" id="buscarUsuario">
